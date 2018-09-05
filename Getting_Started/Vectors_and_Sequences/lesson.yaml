@@ -381,8 +381,8 @@
     multi-purpose tool that does many things poorly. 
     
 - Class: text
-  Output: This approach is like having a seperate knife, fork, and spoon, rather than 
-    a Spork ... In most situations, cutlery (US: "silverware") is superior to the Spork.
+  Output: "This approach is like having a seperate knife, fork, and spoon, rather than 
+    a Spork ... In most situations, cutlery (US: 'silverware') is superior to the Spork."
     
 - Class: text
   Output: As you become a
