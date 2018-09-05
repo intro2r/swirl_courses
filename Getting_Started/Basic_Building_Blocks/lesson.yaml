@@ -131,7 +131,7 @@
       text! Anything can be converted into a character in R by surrounding it with quotes, for example "text". 
 
 - Class: cmd_question
-  Output: Try re-assigning the variable `x` to the word 'hello'. 
+  Output: Try re-assigning the variable `x` to give it the word 'hello'. 
   CorrectAnswer: x <- "hello"
   AnswerTests: omnitest(correctExpr='x <- "hello"')
   Hint: Remember that you need to surround your expression with " "
