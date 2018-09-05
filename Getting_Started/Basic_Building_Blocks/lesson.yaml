@@ -160,6 +160,42 @@
   types in R---characters don't play well with numbers for example, and there are other more subtle situations we'll get to 
   where this can be problematic."
   
+  
+- Class: text
+  Output: ## Moving around inside your computer"
+  
+- Class: text
+  Output: "When you work with your computer, most of the time I expect it has been with a Graphical User Interface 
+      (or *GUI*). This way is a very easy and intuitive way of interacting with a computer. You can open folders 
+      (*directories*) and files and view them, move folders and files around, etc, etc."
+      
+- Class: text
+  Output: "Doing similar tasks with the command-line is a tiny bit more complex, but still the same idea.
+      The first thing we want to know when we start RStudio is where exactly in the computer we are."
+      
+- Class: cmd_question
+  Output: "RStudio has a default directory where it always starts as looking at. Usually this is your user 
+      home directory. You can check this using the function `getwd()`. Try that now."
+  CorrectAnswer: getwd()
+  AnswerTests: omnitest(correctExpr='getwd()')
+  Hint: Type: getwd() into the console.
+  
+- Class: text
+  Output: "'wd' stands for 'working diretory'. Typing `getwd()` will return a PATH. This is the hierarchical 'address' of the folder. It will usually start 
+      at the drive (often 'C:' in windows) and go down and down to get to your user directory."
+      
+- Class: text
+  Output: "You can change the default directory for RStudio by going to Tools > global options. But, there is really 
+      no need to. You can easily change the working directory for each project you want to work on using the function
+      `setwd()` and specifying a PATH to the folder you want."
+      
+- Class: video
+  Output: "For more information on working directories, RStudio has a great help page. Do you want to look at it now?"
+  VideoLink: https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces
+      
+- Class: text
+  Output: "We will come back to using directories and PATHs later in the course when we start reading and writing data."
+    
 - Class: text
   Output: "You have now learned how to do basic operations in R, assign variables, and learned the difference between two 
   common variable types. You are on your way to becoming an R wizard!"
