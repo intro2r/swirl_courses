@@ -178,7 +178,7 @@
       home directory. You can check this using the function `getwd()`. Try that now."
   CorrectAnswer: getwd()
   AnswerTests: omnitest(correctExpr='getwd()')
-  Hint: Type getwd() into the console.
+  Hint: "Type getwd() into the console"
   
 - Class: text
   Output: "'wd' stands for 'working diretory'. Typing `getwd()` will return a PATH. This is the hierarchical 'address' of the folder. It will usually start 
