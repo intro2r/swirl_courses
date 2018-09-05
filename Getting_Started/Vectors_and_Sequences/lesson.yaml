@@ -150,9 +150,10 @@
     of different length. Don't assign the result to a variable.
 
 - Class: text
-  Output: If the length of the shorter vector does not divide evenly into the length
+  Output: "If the length of the shorter vector does not divide evenly into the length
     of the longer vector, R will still apply the 'recycling' method, but will throw
-    a warning to let you know something fishy might be going on.
+    a warning to let you know something fishy might be going on."
+   
 
 - Class: cmd_question
   Output: Try c(1, 2, 3, 4) + c(0, 10, 100) for an example.
@@ -161,6 +162,15 @@
   Hint: Type c(1, 2, 3, 4) + c(0, 10, 100) to see how R handles adding two vectors,
     when the shorter vector's length does not divide evenly into the longer vector's
     length. Don't worry about assigning the result to a variable.
+    
+- Class: text
+  Output: " This warning only appears if the longer of the two vectors is not a multiple
+    of the shorter one. In the previous example, c(1, 2, 3, 4) is length = 4, twice
+    the length of c(0, 10), which is length = 2. No warning."
+    
+- Class: text
+  Output: "However, when we add a vector of length 4 and a vector of length 3, 
+       the shorter one is not completely recycled; hence the warning."
 
 
 - Class: text
