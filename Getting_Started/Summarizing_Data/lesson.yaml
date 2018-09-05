@@ -93,6 +93,20 @@
   coefficients and significance - we will return to this in the future. "
   
 - Class: cmd_question
+  Output: "Sometimes we just want specific values - not the entire summary. The functions `max()`, 
+  `min()`, `median()`, and one we already learned (mean) do this. Use max() to find the maximum 
+  precipitation in our vector." 
+  CorrectAnswer: max(precip_mm)
+  AnswerTests: omnitest(correctExpr='max(precip_mm)')
+  Hint: The function you need is max(), and the argument is your precipitation vector (in mm)
+  
+- Class: cmd_question
+  Output: "Now find the min()"
+  CorrectAnswer: min(precip_mm)
+  AnswerTests: omnitest(correctExpr='min(precip_mm)')
+  Hint: The function you need is min(), and the argument is your precipitation vector (in mm)
+  
+- Class: cmd_question
   Output: "Now lets visualize the summary information. We can do this with `boxplot()`. Enter 
   boxplot(precip_mm) now. "
   CorrectAnswer: boxplot(precip_mm)
@@ -104,11 +118,36 @@
   mean, the extents of the box are the 1st and 3rd quartile, and farthest most points are our min 
   and max. The boxplot also shows us the standard error of our distribution - an essential metric 
   for comparing differences between groups. We will return to this when we start the first statistics unit. "
-
+  
+- Class: cmd_question
+  Output: "We can look at multiple sets of data with boxplot as well. Lets create two new objects. The first will be the first 5
+  elements of our precip_mm vector. Subset the vector for elements 1-10 and call it precip1."
+  CorrectAnswer: precip1 <- precip_mm[1:10]
+  AnswerTests: omnitest(correctExpr='precip1 <- precip_mm[1:10]')
+  Hint: Recall the subsetting vectors lesson if you don't remember how to do this. You'll need index brackets [ ], as well as your
+  index 1 through 10, which you can use the `:` operator to create. 
+  
+- Class: cmd_question
+  Output: "Now create a vector of elements 11-20 of precip_mm, and call it precip2."
+  CorrectAnswer: precip2 <- precip_mm[11:20]
+  AnswerTests: omnitest(correctExpr='precip2 <- precip_mm[11:20]')
+  Hint: Recall the subsetting vectors lesson if you don't remember how to do this. You'll need index brackets [ ], as well as your
+  index 11 through 20, which you can use the `:` operator to create. 
+  
+- Class: cmd_question
+  Output: "Now we can make our boxplot. Use the boxplot function, but give it two arguments this time: precip 1 and precip2, separated
+  by commas."
+  CorrectAnswer: boxplot(precip1, precip2)
+  AnswerTests: omnitest(correctExpr='boxplot(precip1, precip2')
+  Hint: You're command should be boxplot(precip1, precip2)
+  
+- Class: text
+  Output: "We now have a boxplot for each subset of your vector! These types of visualizations are extremely useful for comparing
+  differences between groups at a glance."
+  
 - Class: text
   Output: "We should note that these functions only work in this way for numeric data. We will 
   cover how to deal with character data when we start working with factors/categorical data. "
-
 
 - Class: mult_question
   Output: "You now know how to explore and visualize data in R! Great job! Please submit the log of 
