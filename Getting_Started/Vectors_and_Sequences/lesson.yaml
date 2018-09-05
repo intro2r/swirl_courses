@@ -293,7 +293,7 @@
   Hint: Type seq(1, 20) and press Enter. The space after the comma is not required,
     but is recommended as it tends to make your code appear less cluttered.
     
-- Class: text    
+- Class: cmd_question
   Output: This gives us the same output as 1:20. Check the help file for `seq()`.
   CorrectAnswer: ?seq
   AnswerTests: omnitest(correctExpr='?seq')
@@ -467,7 +467,7 @@
   categories of data, like brown or blue eyes). Using rep is often useful in this way for giving factors to your data. 
   Try repeating the vector `c('a','b','c')` 5 times." 
   CorrectAnswer: rep(c("a","b","c"), 5)
-  AnswerTests: omnitest(correctExpr='rep(c("a","b","c"), 5)')
+  AnswerTests: any_of_exprs('rep(c("a","b","c"), 5)', 'rep(c("a","b","c"), times = 5)')
   Hint: Remember to add quotes around each element of the vector. You can use ?rep to check what your second argument should be. 
     
 - Class: text
