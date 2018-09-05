@@ -1,0 +1,119 @@
+- Class: meta
+  Course: Getting Started
+  Lesson: Visualising Data 
+  Author: Simon A. Queenborough, Andrew Muehleiesen Nick Carchedi 
+  Type: Standard
+  Organization: Yale FES
+  Version: 2.2.0
+
+- Class: text
+  Output: "Now that you can create vectors of data, we'll learn how to explore and summarize them. 
+  In this lesson you will use functions that provide key information, statistics, or visualizations 
+  to help you better understand your data."
+
+- Class: cmd_question
+  Output: Lets start with a vector we can practice on. We have provided you a vector of average annual precipitation (in inches) in some US cities called precip. Enter precip to look at it now. Note that each element is named.
+  CorrectAnswer: precip
+  AnswerTests: omnitest(correctExpr='precip')
+  Hint: Type the name of the vector and press Enter. 
+  
+- Class: cmd_question
+  Output: Confirm that this is truly a vector (remember is.object_type). 
+  CorrectAnswer: is.vector(precip)
+  AnswerTests: omnitest(correctExpr='is.vector(precip)')
+  Hint: The function you will need is is.vector() and your argument is precip.
+  
+- Class: cmd_question
+  Output: "Rainfall in inches is foolish - the rest of the scientific community uses millimeters, so we will too! Create a new object called precip_mm by multiplying your precip vector by 25.4"
+  CorrectAnswer: precip_mm <- precip * 25.4
+  AnswerTests: any_of_exprs('precip_mm <- precip*25.4', 'precip_mm <- 25.4*precip')
+  Hint: "Remember that multiplying a vector by a single number will apply the multiplication to each 
+  element of that vector." 
+
+- Class: cmd_question
+  Output: "Nice work! This vector represents a sample, the basic unit of statistics. When working with data 
+  objects in R, its important to know their details, so lets look at them. One of the 
+  most important functions for data analysis in R is `str( )`, which stands for structure. It will 
+  tell us about our data object. Go ahead and look at the structure of precip_mm"
+  CorrectAnswer: str(precip_mm)
+  AnswerTests: omnitest(correctExpr='str(precip_mm)')
+  Hint: The function you need is str(), and the argument is your precipitation vector (in mm)
+  
+- Class: text
+  Output: "In this case, `str( )` is telling us that our vector is numeric, has 70 elements in it 
+  (meaning 70 observations), and shows us the first handful of elements in the vector. It is also 
+  telling us that each element has a name associated with it, and that those names are of the character
+  data type."
+
+- Class: cmd_question
+  Output: "But lets get to some actual statistics. something we'll often want to know about our 
+  samples is the average, or mean. Go ahead and use `mean()` to find the average precipitation"
+  CorrectAnswer: mean(precip_mm)
+  AnswerTests: omnitest(correctExpr='mean(precip_mm)')
+  Hint: The function you need is mean(), and the argument is your precipitation vector (in mm)
+  
+- Class: cmd_question
+  Output: "Fascinating. In addition to the mean, we typically want to know the standard deviation. 
+  This function is shortened to `sd()`. Find the standard deviation of precipitation now"
+  CorrectAnswer: sd(precip_mm)
+  AnswerTests: omnitest(correctExpr='sd(precip_mm)')
+  Hint: The function you need is sd(), and the argument is your precipitation vector (in mm)
+  
+- Class: text
+  Output: "Its great to know exactly what our mean and standard deviation is, but what does this 
+  look like? When getting a feel for our data, we almost always want to have a sense for the 
+  distribution of our data. The way in which our measurements are distributed is a fundamental 
+  property of any sample we might have, and many statistical tests assume data that resembles a 
+  normal distribution i.e. a bell curve."
+  
+- Class: cmd_question
+  Output: "The quickest way to assess the distribution of our data is the histogram. In R, the 
+  function is called hist`( )`. Go ahead and enter hist(precip_mm). "
+  CorrectAnswer: hist(precip_mm)
+  AnswerTests: omnitest(correctExpr='hist(precip_mm)')
+  Hint: The function you need is hist(), and the argument is your precipitation vector (in mm)
+
+- Class: text
+  Output: "This is one way in which we can visualize our mean and standard deviation. 
+  In this case, our data generally resemble a normal distribution (with a slight left skew), which 
+  is great! "
+
+- Class: cmd_question
+  Output: "There are other ways in which we can summarize our data as well. Conveniently, there is a 
+  function called `summary()`, which will give us a numeric breakdown of our vector. Go ahead and 
+  summarize our precipitation vector."
+  CorrectAnswer: summary(precip_mm)
+  AnswerTests: omnitest(correctExpr='summary(precip_mm)')
+  Hint: The function you need is summary(), and the argument is your precipitation vector (in mm)
+
+- Class: text
+  Output: "Summary returns to us measurements of central tendency (mean and median), spread 
+  (1st and 3rd quartile), and maximum extent (min and max). Summary also works with different R 
+  objects, such as statistical models, to summarize for us important information like model 
+  coefficients and significance - we will return to this in the future. "
+  
+- Class: cmd_question
+  Output: "Now lets visualize the summary information. We can do this with `boxplot()`. Enter 
+  boxplot(precip_mm) now. "
+  CorrectAnswer: boxplot(precip_mm)
+  AnswerTests: omnitest(correctExpr='boxplot(precip_mm)')
+  Hint: The function you need is boxplot(), and the argument is your precipitation vector (in mm)
+
+- Class: text
+  Output: "We now see much of the summary information as a graph. The middle line represents the 
+  mean, the extents of the box are the 1st and 3rd quartile, and farthest most points are our min 
+  and max. The boxplot also shows us the standard error of our distribution - an essential metric 
+  for comparing differences between groups. We will return to this when we start the first statistics unit. "
+
+- Class: text
+  Output: "We should note that these functions only work in this way for numeric data. We will 
+  cover how to deal with character data when we start working with factors/categorical data. "
+
+
+- Class: mult_question
+  Output: "You now know how to explore and visualize data in R! Great job! Please submit the log of 
+  this lesson to Google Forms so that Simon may evaluate your progress."
+  AnswerChoices: Sure, no problem
+  CorrectAnswer: Sure, no problem
+  AnswerTests: submit_log()
+  Hint: hint
