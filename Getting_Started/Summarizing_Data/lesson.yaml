@@ -1,6 +1,6 @@
 - Class: meta
   Course: Getting Started
-  Lesson: Visualising Data 
+  Lesson: Summarizing Data 
   Author: Simon A. Queenborough, Andrew Muehleiesen Nick Carchedi 
   Type: Standard
   Organization: Yale FES
@@ -37,13 +37,13 @@
   Output: "Nice work! When working with data 
   objects in R, it is important to know their details, so lets look at them. One of the 
   most important functions for data analysis in R is `str( )`, which stands for structure. It will 
-  tell us about our data object. Go ahead and look at the structure of precip_mm"
+  tell us about our data object. Go ahead and look at the structure of precip_mm. "
   CorrectAnswer: str(precip_mm)
   AnswerTests: omnitest(correctExpr='str(precip_mm)')
   Hint: The function you need is str(), and the argument is your precipitation vector (in mm)
   
 - Class: text
-  Output: "In this case, `str( )` is telling us that our vector is numeric (`num`), has 70 elements in it 
+  Output: "In this case, `str()` is telling us that our vector is numeric (`num`), has 70 elements in it 
   (`[1:70]`, meaning 70 observations), and shows us the first handful of elements in the vector. It is also 
   telling us that each element has a name associated with it, and that those names are of the character
   data type (`Named num` and `attr(*, 'names')= chr`)."
