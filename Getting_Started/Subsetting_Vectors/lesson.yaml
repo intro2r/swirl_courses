@@ -58,9 +58,9 @@
        
 - Class: cmd_question
   Output: "Count along the vector. What is the value of the fourth element? Type it out in full."
-  CorrectAnswer: -2.61517749
-  AnswerTests: omnitest(correctExpr='-2.61517749')
-  Hint: You can copy and paste from the console, or type out `-2.61517749`.
+  CorrectAnswer: -2.6151775
+  AnswerTests: omnitest(correctExpr='-2.6151775')
+  Hint: You can copy and paste from the console, or type out `-2.6151775`.
 
 - Class: text
   Output: "## How to extract elements from a vector based on position"
