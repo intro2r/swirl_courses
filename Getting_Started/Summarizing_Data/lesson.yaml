@@ -46,7 +46,7 @@
   Output: "In this case, `str( )` is telling us that our vector is numeric (`num`), has 70 elements in it 
   (`[1:70]`, meaning 70 observations), and shows us the first handful of elements in the vector. It is also 
   telling us that each element has a name associated with it, and that those names are of the character
-  data type (`Named num` and `attr(*, "names")= chr`)."
+  data type (`Named num` and `attr(*, 'names')= chr`)."
   
 - Class: text
   Output: "You will use `str()` a lot when you start working with more complex data objects such as 
