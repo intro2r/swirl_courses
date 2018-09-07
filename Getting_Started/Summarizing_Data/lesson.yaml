@@ -36,7 +36,7 @@
 - Class: cmd_question
   Output: "Nice work! When working with data 
   objects in R, it is important to know their details, so lets look at them. One of the 
-  most important functions for data analysis in R is `str( )`, which stands for structure. It will 
+  most important functions for data analysis in R is `str()`, which stands for structure. It will 
   tell us about our data object. Go ahead and look at the structure of precip_mm. "
   CorrectAnswer: str(precip_mm)
   AnswerTests: omnitest(correctExpr='str(precip_mm)')
@@ -72,11 +72,11 @@
   look like? When getting a feel for our data, we almost always want to have a sense for the 
   distribution of our data. The way in which our measurements are distributed is a fundamental 
   property of any sample we might have, and many statistical tests assume data that resembles a 
-  normal distribution i.e. a bell curve."
+  normal distribution i.e., a bell curve."
   
 - Class: cmd_question
   Output: "The quickest way to assess the distribution of our data is the histogram. In R, the 
-  function is called `hist( )`. Go ahead and enter `hist(precip_mm)`."
+  function is called `hist()`. Go ahead and enter `hist(precip_mm)`."
   CorrectAnswer: hist(precip_mm)
   AnswerTests: omnitest(correctExpr='hist(precip_mm)')
   Hint: The function you need is hist(), and the argument is your precipitation vector (in mm)
@@ -116,7 +116,7 @@
   
 - Class: cmd_question
   Output: "Now lets visualize this summary information. The function `hist()` displayed all
-    the data in 'bins' (small groups). A boxplot (or box-and-whiskerplot) displays summary
+    the data in 'bins' (small groups). A boxplot (or box-and-whisker plot) displays summary
     information based on the quartiles. R has this as the function `boxplot()`. Enter `boxplot(precip_mm)` now. "
   CorrectAnswer: boxplot(precip_mm)
   AnswerTests: omnitest(correctExpr='boxplot(precip_mm)')
@@ -130,11 +130,11 @@
 - Class: text  
   Output: "However, what the whiskers indicate can
   vary across software. In R, the whiskers display the highest and lowest value *excluding outliers*. In R, the whiskers
-  are calculated as 1.5 * the interquartile range. Values beyond this are outliers and indicated by open circles.
+  are calculated as 1.5 x the interquartile range. Values beyond this are outliers and indicated by open circles ...
   Now you know more about boxplots that most folks."
   
 - Class: cmd_question
-  Output: "We can look at multiple sets of data with boxplot as well. Lets create two new objects. 
+  Output: "We can look at multiple sets of data with a boxplot as well. Lets create two new objects. 
     The first will be the first 10 elements of our precip_mm vector. 
     Subset the vector for elements 1 to 10 and call it precip1."
   CorrectAnswer: precip1 <- precip_mm[1:10]
@@ -165,8 +165,8 @@
   cover how to deal with character data when we start working with factors/categorical data. "
 
 - Class: mult_question
-  Output: "You now know how to explore and visualize data in R! Great job! Please submit the log of 
-  this lesson to Google Forms so that Simon may evaluate your progress."
+  Output: "You now know how to briefly summarize, explore, and visualize data in R! Great job! We will expand on these
+    skills in later units. Please submit the log of this lesson to Google Forms so that Simon may evaluate your progress."
   AnswerChoices: Sure, no problem
   CorrectAnswer: Sure, no problem
   AnswerTests: submit_log()
