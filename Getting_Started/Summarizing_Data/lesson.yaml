@@ -7,12 +7,14 @@
   Version: 2.2.0
 
 - Class: text
-  Output: "Now that you can create vectors of data, we'll learn how to explore and summarize them. 
+  Output: "Now that you can create vectors of data, we will learn how to explore and summarize them. 
   In this lesson you will use functions that provide key information, statistics, or visualizations 
   to help you better understand your data."
 
 - Class: cmd_question
-  Output: Lets start with a vector we can practice on. We have provided you a vector of average annual precipitation (in inches) in some US cities called precip. Enter precip to look at it now. Note that each element is named.
+  Output: "Lets start with a vector we can practice on. We have provided you with a vector of average
+     annual precipitation (in inches) in some US cities, called `precip`. Enter `precip` to look at it now. 
+     Note that each element is named."
   CorrectAnswer: precip
   AnswerTests: omnitest(correctExpr='precip')
   Hint: Type the name of the vector and press Enter. 
@@ -24,15 +26,16 @@
   Hint: The function you will need is is.vector() and your argument is precip.
   
 - Class: cmd_question
-  Output: "Rainfall in inches is foolish - the rest of the scientific community uses millimeters, so we will too! Create a new object called precip_mm by multiplying your precip vector by 25.4"
+  Output: "Rainfall in inches is foolish---the rest of the scientific community uses millimeters, 
+      so we will too! Create a new object called 'precip_mm' by multiplying your precip vector by 25.4"
   CorrectAnswer: precip_mm <- precip * 25.4
   AnswerTests: any_of_exprs('precip_mm <- precip*25.4', 'precip_mm <- 25.4*precip')
   Hint: "Remember that multiplying a vector by a single number will apply the multiplication to each 
   element of that vector." 
 
 - Class: cmd_question
-  Output: "Nice work! This vector represents a sample, the basic unit of statistics. When working with data 
-  objects in R, its important to know their details, so lets look at them. One of the 
+  Output: "Nice work! When working with data 
+  objects in R, it is important to know their details, so lets look at them. One of the 
   most important functions for data analysis in R is `str( )`, which stands for structure. It will 
   tell us about our data object. Go ahead and look at the structure of precip_mm"
   CorrectAnswer: str(precip_mm)
@@ -40,21 +43,26 @@
   Hint: The function you need is str(), and the argument is your precipitation vector (in mm)
   
 - Class: text
-  Output: "In this case, `str( )` is telling us that our vector is numeric, has 70 elements in it 
-  (meaning 70 observations), and shows us the first handful of elements in the vector. It is also 
+  Output: "In this case, `str( )` is telling us that our vector is numeric (`num`), has 70 elements in it 
+  (`[1:70]`, meaning 70 observations), and shows us the first handful of elements in the vector. It is also 
   telling us that each element has a name associated with it, and that those names are of the character
-  data type."
+  data type (`Named num` and `attr(*, "names")= chr`)."
+  
+- Class: text
+  Output: "You will use `str()` a lot when you start working with more complex data objects such as 
+      lists and dataframes and the output of regression models."
 
 - Class: cmd_question
-  Output: "But lets get to some actual statistics. something we'll often want to know about our 
-  samples is the average, or mean. Go ahead and use `mean()` to find the average precipitation"
+  Output: "But lets get to some actual statistics. A statistic we often want to know about our 
+    samples is the average, or mean. R has a built-in function: `mean()`. Go ahead and use `mean()` 
+    to find the average precipitation across all cities in the vector."
   CorrectAnswer: mean(precip_mm)
   AnswerTests: omnitest(correctExpr='mean(precip_mm)')
   Hint: The function you need is mean(), and the argument is your precipitation vector (in mm)
   
 - Class: cmd_question
   Output: "Fascinating. In addition to the mean, we typically want to know the standard deviation. 
-  This function is shortened to `sd()`. Find the standard deviation of precipitation now"
+    In R, this function is shortened to `sd()`. Find the standard deviation of precipitation."
   CorrectAnswer: sd(precip_mm)
   AnswerTests: omnitest(correctExpr='sd(precip_mm)')
   Hint: The function you need is sd(), and the argument is your precipitation vector (in mm)
@@ -68,15 +76,15 @@
   
 - Class: cmd_question
   Output: "The quickest way to assess the distribution of our data is the histogram. In R, the 
-  function is called hist`( )`. Go ahead and enter hist(precip_mm). "
+  function is called `hist( )`. Go ahead and enter `hist(precip_mm)`."
   CorrectAnswer: hist(precip_mm)
   AnswerTests: omnitest(correctExpr='hist(precip_mm)')
   Hint: The function you need is hist(), and the argument is your precipitation vector (in mm)
 
 - Class: text
-  Output: "This is one way in which we can visualize our mean and standard deviation. 
+  Output: "This is one way in which we can visualize the mean and variance in the data. 
   In this case, our data generally resemble a normal distribution (with a slight left skew), which 
-  is great! "
+  is great!"
 
 - Class: cmd_question
   Output: "There are other ways in which we can summarize our data as well. Conveniently, there is a 
@@ -87,37 +95,43 @@
   Hint: The function you need is summary(), and the argument is your precipitation vector (in mm)
 
 - Class: text
-  Output: "Summary returns to us measurements of central tendency (mean and median), spread 
-  (1st and 3rd quartile), and maximum extent (min and max). Summary also works with different R 
+  Output: "`summary()` returns statistics of central tendency (mean and median), spread 
+  (1st and 3rd quartile), and range (min and max). Summary also works with different R 
   objects, such as statistical models, to summarize for us important information like model 
   coefficients and significance - we will return to this in the future. "
   
 - Class: cmd_question
   Output: "Sometimes we just want specific values - not the entire summary. The functions `max()`, 
-  `min()`, `median()`, and one we already learned (mean) do this. Use max() to find the maximum 
+  `min()`, `median()`, and one we already learned (`mean()`) do this. Use `max()` to find the maximum 
   precipitation in our vector." 
   CorrectAnswer: max(precip_mm)
   AnswerTests: omnitest(correctExpr='max(precip_mm)')
   Hint: The function you need is max(), and the argument is your precipitation vector (in mm)
   
 - Class: cmd_question
-  Output: "Now find the min()"
+  Output: "Now find the mininum."
   CorrectAnswer: min(precip_mm)
   AnswerTests: omnitest(correctExpr='min(precip_mm)')
   Hint: The function you need is min(), and the argument is your precipitation vector (in mm)
   
 - Class: cmd_question
-  Output: "Now lets visualize the summary information. We can do this with `boxplot()`. Enter 
-  boxplot(precip_mm) now. "
+  Output: "Now lets visualize this summary information. The function `hist()` displayed all
+    the data in 'bins' (small groups). A boxplot (or box-and-whiskerplot) displays summary
+    information based on the quartiles. R has this as the function `boxplot()`. Enter `boxplot(precip_mm)` now. "
   CorrectAnswer: boxplot(precip_mm)
   AnswerTests: omnitest(correctExpr='boxplot(precip_mm)')
   Hint: The function you need is boxplot(), and the argument is your precipitation vector (in mm)
 
 - Class: text
   Output: "We now see much of the summary information as a graph. The middle line represents the 
-  mean, the extents of the box are the 1st and 3rd quartile, and farthest most points are our min 
-  and max. The boxplot also shows us the standard error of our distribution - an essential metric 
-  for comparing differences between groups. We will return to this when we start the first statistics unit. "
+  median (*not* the mean!). The median is actually the second quartile. The extents of the box are
+  the 1st and 3rd quartiles. This is consistent across all boxplots." 
+  
+- Class: text  
+  Output: "However, what the whiskers indicate can
+  vary across software. In R, the whiskers display the highest and lowest value *excluding outliers*. In R, the whiskers
+  are calculated as 1.5 * the interquartile range. Values beyond this are outliers and indicated by open circles.
+  Now you know more about boxplots that most folks."
   
 - Class: cmd_question
   Output: "We can look at multiple sets of data with boxplot as well. Lets create two new objects. The first will be the first 5
