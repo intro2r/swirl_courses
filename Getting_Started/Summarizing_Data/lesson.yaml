@@ -131,8 +131,8 @@
   Output: "Now create a vector of elements 11-20 of precip_mm, and call it precip2."
   CorrectAnswer: precip2 <- precip_mm[11:20]
   AnswerTests: omnitest(correctExpr='precip2 <- precip_mm[11:20]')
-  Hint: Recall the subsetting vectors lesson if you don't remember how to do this. You'll need index brackets [ ], as well as your
-  index 11 through 20, which you can use the `:` operator to create. 
+  Hint: "Recall the subsetting vectors lesson if you don't remember how to do this. You'll need index brackets [ ], as well as your
+  index 11 through 20, which you can use the `:` operator to create." 
   
 - Class: cmd_question
   Output: "Now we can make our boxplot. Use the boxplot function, but give it two arguments this time: precip 1 and precip2, separated
