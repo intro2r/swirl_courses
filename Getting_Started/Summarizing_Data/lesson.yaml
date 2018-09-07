@@ -134,8 +134,9 @@
   Now you know more about boxplots that most folks."
   
 - Class: cmd_question
-  Output: "We can look at multiple sets of data with boxplot as well. Lets create two new objects. The first will be the first 5
-  elements of our precip_mm vector. Subset the vector for elements 1-10 and call it precip1."
+  Output: "We can look at multiple sets of data with boxplot as well. Lets create two new objects. 
+    The first will be the first 10 elements of our precip_mm vector. 
+    Subset the vector for elements 1 to 10 and call it precip1."
   CorrectAnswer: precip1 <- precip_mm[1:10]
   AnswerTests: omnitest(correctExpr='precip1 <- precip_mm[1:10]')
   Hint: "Recall the subsetting vectors lesson if you don't remember how to do this. You'll need index brackets [ ], as well as your
@@ -149,11 +150,11 @@
   index 11 through 20, which you can use the `:` operator to create." 
   
 - Class: cmd_question
-  Output: "Now we can make our boxplot. Use the boxplot function, but give it two arguments this time: precip 1 and precip2, separated
-  by commas."
+  Output: "Now we can make our boxplot. Use the `boxplot()` function, but give it two arguments
+    this time: precip 1 and precip2, separated by commas."
   CorrectAnswer: boxplot(precip1, precip2)
-  AnswerTests: omnitest(correctExpr='boxplot(precip1, precip2')
-  Hint: You're command should be boxplot(precip1, precip2)
+  AnswerTests: omnitest(correctExpr='boxplot(precip1, precip2)')
+  Hint: Your command should be boxplot(precip1, precip2)
   
 - Class: text
   Output: "We now have a boxplot for each subset of your vector! These types of visualizations are extremely useful for comparing
