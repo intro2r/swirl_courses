@@ -113,8 +113,8 @@
 - Class: mult_question
   Output: "You have a vector representing levels of exercise undertaken by 5 subjects: 'l', 'n', 'n', 'i', 'l', 
      where n = none, l = light, i = intense. What is the best way to represent this in R?"
-  AnswerChoices: exercise <- c(“l”, “n”, “n”, “i”, “l”);exercise <- factor(c(“l”, “n”, “n”, “i”, “l”), ordered = TRUE);exercise < -factor(c(“l”, “n”, “n”, “i”, “l”), levels = c(“n”, “l”, “i”), ordered = FALSE);exercise <- factor(c(“l”, “n”, “n”, “i”, “l”), levels = c(“n”, “l”, “i”), ordered = TRUE)
-  CorrectAnswer: exercise <- factor(c(“l”, “n”, “n”, “i”, “l”), levels = c(“n”, “l”, “i”), ordered = TRUE)
+  AnswerChoices: exercise <- c(“l”, “n”, “n”, “i”, “l”);exercise <- factor(c(“l”, “n”, “n”, “i”, “l”), ordered = TRUE);exercise <- factor(c(“l”, “n”, “n”, “i”, “l”), levels = c(“n”, “l”, “i”), ordered = FALSE);exercise <- factor(c(“l”, “n”, “n”, “i”, “l”), levels = c(“n”, “l”, “i”), ordered = TRUE)
+  CorrectAnswer:exercise <- factor(c(“l”, “n”, “n”, “i”, “l”), levels = c(“n”, “l”, “i”), ordered = TRUE)
   AnswerTests: omnitest(correctVal='exercise <- factor(c(“l”, “n”, “n”, “i”, “l”), levels = c(“n”, “l”, “i”), ordered = TRUE)')
   Hint: Check that the factor levels are ordered correctly.
 
