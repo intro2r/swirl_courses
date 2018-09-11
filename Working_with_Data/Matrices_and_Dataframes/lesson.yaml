@@ -1,1 +1,324 @@
 
+- Class: meta
+  Course: FES720 Intro to R
+  Lesson: Matrices and Data Frames
+  Author: Simon Queenborough & Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: "In this lesson, we'll cover matrices and data frames. Both represent 'rectangular' data types, meaning that they are 
+  used to store tabular data, with rows and columns. You'll also learn some more tools for looking at your data objects in R."
+
+- Class: text
+  Output: "The main difference between matrices and data frames, as you'll see, is that matrices can only contain a single class 
+  of data, while data frames can consist of many different classes of data."
+
+- Class: cmd_question
+  Output: Let's create a vector containing the numbers 1 through 20 using the `:` operator. Store the result in a variable called my_vector.
+  CorrectAnswer: my_vector <- 1:20
+  AnswerTests: omnitest(correctExpr='my_vector <- 1:20')
+  Hint: You learned about the `:` operator in the lesson on sequences. If you wanted to create a vector containing the numbers 1, 2, and 3 (in that order), you could use either c(1, 2, 3) or 1:3. In this case, we want the numbers 1 through 20 stored in a variable called my_vector. Also, remember that you don't need the c() function when using `:`.
+
+- Class: cmd_question
+  Output: View the contents of the vector you just created.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: Type my_vector to view its contents.
+
+- Class: cmd_question
+  Output: The dim() function tells us the 'dimensions' of an object. What happens if we do dim(my_vector)? Give it a try.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: Just type dim(my_vector) to see what happens.
+
+- Class: cmd_question
+  Output: "Clearly, that's not very helpful! Since my_vector is a vector, it doesn't have a `dim` attribute (so it's just NULL), 
+  but we can find its length using the length() function. Try that now."
+  CorrectAnswer: length(my_vector)
+  AnswerTests: omnitest(correctExpr='length(my_vector)')
+  Hint: Type length(my_vector) to view the length of the vector you just created.
+
+- Class: cmd_question
+  Output: "Ah! That's what we wanted. But, what happens if we give my_vector a `dim` attribute? Let's give it a try. Type 
+  dim(my_vector) <- c(4, 5)."
+  CorrectAnswer: dim(my_vector) <- c(4, 5)
+  AnswerTests: omnitest(correctExpr='dim(my_vector) <- c(4, 5)')
+  Hint: Type dim(my_vector) <- c(4, 5) to give my_vector a `dim` attribute.
+
+- Class: text
+  Output: "It's okay if that last command seemed a little strange to you. It should! The dim() function allows you to get OR set 
+  the `dim` attribute for an R object. In this case, we assigned the value c(4, 5) to the `dim` attribute of my_vector."
+
+- Class: cmd_question
+  Output: Use dim(my_vector) to confirm that we've set the `dim` attribute correctly.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: Just type dim(my_vector) to make sure the `dim` attribute has been set.
+
+- Class: cmd_question
+  Output: Another way to see this is by calling the attributes() function on my_vector. Try it now.
+  CorrectAnswer: attributes(my_vector)
+  AnswerTests: omnitest(correctExpr='attributes(my_vector)')
+  Hint: The command attributes(my_vector) will show you all of the attributes for the my_vector object.
+
+- Class: text
+  Output: "Just like in math class, when dealing with a 2-dimensional object (think rectangular table), the first number is 
+  the number of rows and the second is the number of columns. Therefore, we just gave my_vector 4 rows and 5 columns."
+
+- Class: cmd_question
+  Output: But, wait! That doesn't sound like a vector any more. Well, it's not. Now it's a matrix. View the contents of my_vector now to see what it looks like.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: Type my_vector to view its contents.
+
+- Class: cmd_question
+  Output: Now, let's confirm it's actually a matrix by using another useful funciton, class(). Type class(my_vector) to see what I mean.
+  CorrectAnswer: class(my_vector)
+  AnswerTests: omnitest(correctExpr='class(my_vector)')
+  Hint: Type class(my_vector) to view the class of my_vector.
+
+- Class: cmd_question
+  Output: "Sure enough, my_vector is now a matrix. We should store it in a new variable that helps us remember what it is. 
+  Store the value of my_vector in a new variable called my_matrix."
+  CorrectAnswer: my_matrix <- my_vector
+  AnswerTests: omnitest(correctExpr='my_matrix <- my_vector')
+  Hint: Since we can't just change the name of our my_vector variable, we'll assign its value to a new variable with my_matrix <- my_vector.
+
+- Class: text
+  Output: "The example that we've used so far was meant to illustrate the point that a matrix is simply an atomic vector 
+  with a dimension attribute. A more direct method of creating the same matrix uses the matrix() function."
+
+- Class: cmd_question
+  Output: Bring up the help file for the matrix() function now using the `?` function.
+  CorrectAnswer: ?matrix
+  AnswerTests: omnitest(correctExpr='?matrix')
+  Hint: The command ?matrix will do the trick.
+
+- Class: cmd_question
+  Output: "Now, look at the documentation for the matrix function and see if you can figure out how to create a matrix 
+  containing the same numbers (1-20) and dimensions (4 rows, 5 columns) by calling the matrix() function. Store the result 
+  in a variable called my_matrix2."
+  CorrectAnswer: my_matrix2 <- matrix(1:20, nrow=4, ncol=5)
+  AnswerTests: calculates_same_value('matrix(1:20, nrow=4, ncol=5)'); expr_creates_var('my_matrix2')
+  Hint: Call the matrix() function with three arguments -- 1:20, the number of rows, and the number of columns. Be sure to specify arguments by their proper names and store the result in my_matrix2 (not in my_matrix).
+
+- Class: cmd_question
+  Output: "In addition to dim(), we can also check the specific number of rows or columns in our 2-dimensional object with either
+  `nrow()` or `ncol()`. Check the number of rows of my_matrix2 now to make sure its 4."
+  CorrectAnswer: nrow(my_matrix2)
+  AnswerTests: omnitest(correctExpr='nrow(my_matrix2)')
+  Hint: Call the nrow() function - you only need a single argument. 
+
+- Class: cmd_question
+  Output: "Once you start working with large datasets, `nrow()` becomes a very useful function for identifying how many observations
+  you have. Now check the number of columns with `ncol()`"
+  CorrectAnswer: ncol(my_matrix2)
+  AnswerTests: omnitest(correctExpr='ncol(my_matrix2)')
+  Hint: Call the ncol() function - you only need a single argument. 
+
+- Class: cmd_question
+  Output: Finally, let's confirm that my_matrix and my_matrix2 are actually identical. The identical() function will tell us if its first two arguments are the same. Try it out.
+  CorrectAnswer: identical(my_matrix, my_matrix2)
+  AnswerTests: any_of_exprs('identical(my_matrix, my_matrix2)', 'identical(my_matrix2, my_matrix)')
+  Hint: If you're not sure about this one, then checkout the documentation for identical() using the `?` function.
+
+- Class: text
+  Output: Now, imagine that the numbers in our table represent some measurements from a clinical experiment, where each row represents one patient and each column represents one variable for which measurements were taken.
+
+- Class: text
+  Output: We may want to label the rows, so that we know which numbers belong to each patient in the experiment. One way to do this is to add a column to the matrix, which contains the names of all four people.
+
+- Class: cmd_question
+  Output: Let's start by creating a character vector containing the names of our patients -- Bill, Gina, Kelly, and Sean. Remember that double quotes tell R that something is a character string. Store the result in a variable called patients.
+  CorrectAnswer: patients <- c("Bill", "Gina", "Kelly", "Sean")
+  AnswerTests: omnitest(correctExpr='patients <- c("Bill", "Gina", "Kelly", "Sean")')
+  Hint: Make sure to capitalize the first letter of each name and to store the result in a variable called patients. Also, don't get the order of the patients mixed up! That would be a disaster!
+
+- Class: cmd_question
+  Output: Now we'll use the cbind() function to 'combine columns'. Don't worry about storing the result in a new variable. Just call cbind() with two arguments -- the patients vector and my_matrix.
+  CorrectAnswer: cbind(patients, my_matrix)
+  AnswerTests: omnitest(correctExpr='cbind(patients, my_matrix)')
+  Hint: Type cbind(patients, my_matrix) to add the names of our patients to the matrix of numbers.
+
+- Class: text
+  Output: Something is fishy about our result! It appears that combining the character vector with our matrix of numbers caused everything to be enclosed in double quotes. This means we're left with a matrix of character strings, which is no good.
+
+- Class: text
+  Output: If you remember back to the beginning of this lesson, I told you that matrices can only contain ONE class of data. Therefore, when we tried to combine a character vector with a numeric matrix, R was forced to 'coerce' the numbers to characters, hence the double quotes.
+
+- Class: text
+  Output: "This is called 'implicit coercion', because we didn't ask for it. It just happened. But why didn't R just convert 
+  the names of our patients to numbers? I'll let you ponder that question on your own."
+
+- Class: cmd_question
+  Output: "So, we're still left with the question of how to include the names of our patients in the table without destroying 
+  the integrity of our numeric data. Try the following -- `my_data <- data.frame(patients, my_matrix)`"
+  CorrectAnswer: my_data <- data.frame(patients, my_matrix)
+  AnswerTests: omnitest(correctExpr='my_data <- data.frame(patients, my_matrix)')
+  Hint: Type my_data <- data.frame(patients, my_matrix), so we can explore what happens.
+
+- Class: cmd_question
+  Output: Now view the contents of my_data to see what we've come up with.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Type my_data to view its contents.
+
+- Class: text
+  Output: It looks like the data.frame() function allowed us to store our character vector of names right alongside our matrix of numbers. That's exactly what we were hoping for! 
+
+- Class: text
+  Output: Behind the scenes, the data.frame() function takes any number of arguments and returns a single object of class `data.frame` that is composed of the original objects.
+
+- Class: cmd_question
+  Output: Let's confirm this by calling the class() function on our newly created data frame.
+  CorrectAnswer: class(my_data)
+  AnswerTests: omnitest(correctExpr='class(my_data)')
+  Hint: The class function takes one argument -- the object of which you want to determine the class.
+  
+- Class: cmd_question
+  Output: "If we don't want to create a brand new data frame, we can also convert our original matrix into one to accomplish the
+  same thing. Create a new object called my_data2 using the function `as.data.frame()` on my_matrix."
+  CorrectAnswer: my_data2 <- as.data.frame(my_matrix)
+  AnswerTests: omnitest(correctExpr='my_data2 <- as.data.frame(my_matrix)')
+  Hint: You should provide my_matrix as the argument to `as.data.frame()`, and assign it to my_data2.
+  
+- Class: cmd_question
+  Output: "Now try to `cbind()` patients with my_data2. You don't need to assign it a new object for now."
+  CorrectAnswer: cbind(my_data2, patients)
+  AnswerTests: any_of_exprs('cbind(my_data2, patients)', 'cbind(patients, my_data2)')
+  Hint: Use the `cbind()` with my_data2 and patients as your two arguments.
+  
+- Class: text
+  Output: "It worked! We converted our matrix to a data frame, which let us include a different data type in our object. Note 
+  that when we converted our matrix, R also automatically assigned row and column names to our new data frame."
+
+- Class: text
+  Output: It's also possible to assign names to the individual rows and columns of a data frame, which presents another possible way of determining which row of values in our table belongs to each patient.
+
+- Class: text
+  Output: However, since we've already solved that problem, let's solve a different problem by assigning names to the columns of our data frame so that we know what type of measurement each column represents.
+
+- Class: cmd_question
+  Output: "Since we have six columns (including patient names), we'll need to first create a vector containing one element 
+  for each column. Create a character vector called cnames that contains the following values (in order) -- 'patient', 'age', 
+  'weight', 'bp', 'rating', 'test'."
+  CorrectAnswer: cnames <- c("patient", "age", "weight", "bp", "rating", "test")
+  AnswerTests: omnitest(correctExpr='cnames <- c("patient", "age", "weight", "bp", "rating", "test")')
+  Hint: Make sure all of the names are lowercase, surrounded by double quotes, and separated with commas. Don't forget to use the c() function.
+
+- Class: cmd_question
+  Output: Now, use the colnames() function to set the `colnames` attribute for our data frame. This is similar to the way we used the dim() function earlier in this lesson.
+  CorrectAnswer: colnames(my_data) <- cnames
+  AnswerTests: omnitest(correctExpr='colnames(my_data) <- cnames')
+  Hint: Try colnames(my_data) <- cnames.
+
+- Class: cmd_question
+  Output: Let's see if that got the job done. Print the contents of my_data.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: Print the contents of my_data to the console.
+  
+- Class: text
+  Output: "Now that you've made your own data frame, we are going to load one in for you so we can see what a real data frame 
+  might look like and explore it a bit."
+  
+- Class: cmd_question
+  Output: "Go ahead and look at a new object, UScereal, now."
+  CorrectAnswer: UScereal
+  AnswerTests: omnitest(correctExpr='UScereal')
+  Hint: Print the contents of my_data to the console.
+  
+- Class: text
+  Output: "You can see that its much larger than anything we've worked with in R so far. If your screen isn't wide enough, the 
+  columns may have wrapped around and started new lines. No worries - they're still where they should be at the end of your data 
+  frame, its just a quirk of how data is displayed in R when your screen isn't large enough."
+
+- Class: cmd_question
+  Output: "Now lets get a feel for the data. One of the quickest ways to check a data frame is with the `head()` function. This 
+  function will only display the first 6 rows of data, giving you a much more manageable chunk of data to digest. Go ahead and
+  check the first 6 lines of UScereal"
+  CorrectAnswer: head(UScereal)
+  AnswerTests: omnitest(correctExpr='head(UScereal)')
+  Hint: You'll need to nest UScereal in the `head()` function. 
+  
+- Class: text
+  Output: "Note that you can display different numbers of rows with `head()` using a second argument. You can query the help file
+  to find out more."
+  
+- Class: text
+  Output: "Much nicer. We can see our row names, each representing a different cereal brand, as well as 11 columns, each representing
+  a variable of the cereal. In this case they're macronutrients."
+
+- Class: cmd_question
+  Output: "`head()` also has a mirror function in `tail()`. As you might expect, it gives you the last 6 rows of data. Go ahead
+  and find the last 6 rows of UScereal now."
+  CorrectAnswer: tail(UScereal)
+  AnswerTests: omnitest(correctExpr='tail(UScereal)')
+  Hint: You'll need to nest UScereal in the `tail()` function. 
+  
+- Class: cmd_question
+  Output: "Note that we have mixed variables - some columns are numeric, while others are characters or factors. Again, this is 
+  a feature of data frames. Lets find out exactly what type of data is present in each column. If you remember back a few lessons, 
+  we used the structure function, `str()`, to determine details of a vector. It will tell us even more about our data frame. Go
+  ahead and look at the structure of UScereal now."
+  CorrectAnswer: str(UScereal)
+  AnswerTests: omnitest(correctExpr='str(UScereal)')
+  Hint: You'll need to nest UScereal in the `str()` function. 
+  
+- Class: text
+  Output: "Lets unpack this output. `str()` is first telling us that our object is a data frame with 65 observations and 11 
+  variables. This is the same as saying our data frame has 65 rows and 11 columns."
+  
+- Class: text
+  Output: "Next we have a short summary of each column in the data frame. `$col_name` refers to the column names while the entry
+  after the `:` tells us the data type. We can see that most of our columsn are numeric, but we have a few factors as well. It also
+  tells us how many levels there are to our factors (return to the Understanding Factors lesson if you need a refresh). Finally,
+  `str()` gives us the first handful of entries in that column."
+
+- Class: cmd_question
+  Output: "We can also use the `summary()` function on data frames. Go ahead and so so on UScereal."
+  CorrectAnswer: summary(UScereal)
+  AnswerTests: omnitest(correctExpr='summary(UScereal)')
+  Hint: You'll need to nest UScereal in the `summary()` function. 
+  
+- Class: text
+  Output: "Summary treats each column as a separate vector, and gives us a breakdown of each. Note
+  the differences between numeric columns and factors. With numeric, we get basic summary statistics; with factors, we see how many 
+  times each factor shows up."
+  
+- Class: text
+  Output: "Tabulation of factors is particularly important, and we'll need to do this frequently once we start analyzing categorical
+  data. We'll end this lesson by introducing you to an important function and an important operator."
+  
+- Class: cmd_question
+  Output: "The `table()` function will count the occurence of factors in a vector. But how do we pull out just one column
+  from our data frame? The easiest way is the `&` operator. If we call our data frame and follow its name with `&` and the 
+  column we want, we'll just get that column as a vector. Go ahead and enter `UScereal$vitamins` now."
+  CorrectAnswer: UScereal$vitamins
+  AnswerTests: omnitest(correctExpr='UScereal$vitamins')
+  Hint: Enter UScereal$vitamins
+
+- Class: cmd_question
+  Output: "You've isolated just that column of data. Now enter `table(UScereal$vitamins)`."
+  CorrectAnswer: table(UScereal$vitamins)
+  AnswerTests: omnitest(correctExpr='table(UScereal$vitamins)')
+  Hint: Enter table(UScereal$vitamins)
+  
+- Class: text
+  Output: "You've now tabulated your factors in the vitamins column. Well done! We'll be using both `table()` and `$` a lot 
+  in the near future."
+
+- Class: text
+  Output: In this lesson, you learned the basics of working with two very important and common data structures -- matrices and data frames. There's much more to learn and we'll be covering more advanced topics, particularly with respect to data frames, in future lessons.
+
+
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: As you wish
+  CorrectAnswer: As you wish
+  AnswerTests: submit_log()
+  Hint: hint
+
