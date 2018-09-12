@@ -1,0 +1,159 @@
+- Class: meta
+  Course: FES720 Intro to R
+  Lesson: Missing Values
+  Author: Simon A. Queenborough modifying from Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: "'The best solution to handle missing data is to have none' -R.A. Fisher"
+
+- Class: text
+  Output: Missing values play an important role in statistics and data analysis. 
+    Often, missing values must not be ignored, but rather they should be carefully 
+    studied to see if there's an underlying pattern or cause for their missingness.
+    
+- Class: text
+  Output: Different software, people, disciplines have different traditions of what 
+    is used to represent missing values, as well as what is done with them during
+    statistical analysis. Commonly used values include -999, NA, NAN, 0, and sometimes
+    the data are just left blank!
+    
+- Class: text
+  Output: The implications of what you choose to represent missing data can have profound
+    consequences for your results and conclusions.
+    
+- Class: video
+  Output: Here is a link to a recent paper that discusses the issue in terms of ecology
+    and evolution, if you want more details.
+  VideoLink: https://www.researchgate.net/profile/Shinichi_Nakagawa2/publication/23289535_Missing_inaction_the_dangers_of_ignoring_missing_data/links/0fcfd50821f9a4cd1a000000/Missing-inaction-the-dangers-of-ignoring-missing-data.pdf    
+    
+- Class: text
+  Output: However, for now, we will concern ourselves only with the practical aspects.
+    In R, NA is used to represent any value that is 'not available' or 'missing' 
+    (in the statistical sense). In this lesson, we'll explore missing values further.
+
+- Class: cmd_question
+  Output: "Any operation involving NA generally yields NA as the result. 
+    To illustrate, create a vector `c(44, NA, 5, NA)` and assign it to a variable x."
+  CorrectAnswer: x <- c(44, NA, 5, NA)
+  AnswerTests: omnitest(correctExpr='x <- c(44, NA, 5, NA)')
+  Hint: Assign the vector c(44, NA, 5, NA) to a variable x. The NA must uppercase.
+
+- Class: cmd_question
+  Output: Now, multiply x by 3.
+  CorrectAnswer: x * 3
+  AnswerTests: any_of_exprs('x * 3', '3 * x')
+  Hint: Try x * 3.
+
+- Class: text
+  Output: "Notice that the elements of the resulting vector that 
+    correspond with the NA values in x are also NA."
+
+- Class: cmd_question
+  Output: "To make things a little more interesting, let's 
+    create a vector containing 100 draws from a 
+    standard normal distribution with `y <- rnorm(100)`.
+    The function `rnorm()` generates random numbers from a 
+    normal distribution. "
+  CorrectAnswer: y <- rnorm(100)
+  AnswerTests: omnitest(correctExpr='y <- rnorm(100)')
+  Hint: The function rnorm() generates random numbers from a normal distribution. Type y <- rnorm(1000).
+
+- Class: cmd_question
+  Output: "Next, convert all the negative numbers to `NA`. Remember 
+    that we can use logical indexing to do this. Also, do not put
+    the `NA` in any quotes, otherwise R will think it is a text string
+    and not a missing value."
+  CorrectAnswer: y[y < 0] <- NA
+  AnswerTests: omnitest(correctExpr = 'y[y < 0] <- NA')
+  Hint: Remember that you can use brackets to index y[y < 0] ...
+
+- Class: cmd_question
+  Output: "Let's first ask the question of where our NAs are 
+    located in our data. 
+    The `is.na()` function tells us whether each element of a 
+    vector is NA. Call `is.na()` on y 
+    and assign the result to 'my_na'."
+  CorrectAnswer: my_na <- is.na(y)
+  AnswerTests: omnitest(correctExpr='my_na <- is.na(y)')
+  Hint: Assign the result of is.na(y) to the variable my_na.
+
+- Class: cmd_question
+  Output: Now, print my_na to see what you came up with.
+  CorrectAnswer: my_na
+  AnswerTests: omnitest(correctExpr='my_na')
+  Hint: Type my_na to view its contents.
+
+- Class: text
+  Output: "Everywhere you see a `TRUE`, you know the corresponding 
+    element of y is NA. 
+    Likewise, everywhere you see a FALSE, you know the corresponding
+    element of y is 
+    one of our positive random draws from the standard normal distribution."
+
+- Class: cmd_question
+  Output: In our previous discussion of logical operators, we introduced the `==` operator 
+    as a method of testing for equality between two objects. So, you might think the 
+    expression y == NA yields the same results as is.na(). Give it a try.
+  CorrectAnswer: y == NA
+  AnswerTests: omnitest(correctExpr='y == NA')
+  Hint: Try y == NA to see what happens.
+
+- Class: text
+  Output: The reason you got a vector of all NAs is that NA is not really a value, 
+    but just a placeholder for a quantity that is not available. Therefore the logical 
+    expression is incomplete and R has no choice but to return a vector of the same 
+    length as y that contains all NAs.
+
+- Class: text
+  Output: Don't worry if that's a little confusing. The key takeaway is to be 
+    cautious when using logical expressions anytime NAs might creep in, since a 
+    single NA value can derail the entire thing.
+
+- Class: text
+  Output: So, back to the task at hand. Now that we have a vector, my_na, that 
+    has a TRUE for every NA and FALSE for every numeric value, we can compute the 
+    total number of NAs in our data.
+
+- Class: text
+  Output: The trick is to recognize that underneath the surface, R represents TRUE 
+    as the number 1 and FALSE as the number 0. Therefore, if we take the sum of a bunch 
+    of TRUEs and FALSEs, we get the total number of TRUEs.
+
+- Class: cmd_question
+  Output: Let's give that a try here. Call the sum() function on my_na to count the 
+    total number of TRUEs in my_na, and thus the total number of NAs in my_data. 
+    Don't assign the result to a new variable.
+  CorrectAnswer: sum(my_na)
+  AnswerTests: omnitest(correctExpr='sum(my_na)')
+  Hint: Use sum(my_na) to count the number NAs in the data.
+
+- Class: cmd_question
+  Output: Pretty cool, huh? Finally, let's take a look at the data to convince ourselves 
+    that everything 'adds up'. Print y to the console.
+  CorrectAnswer: y
+  AnswerTests: omnitest(correctExpr='y')
+  Hint: Print y to the console.
+
+- Class: cmd_question
+  Output: Now that we've got NAs down pat, let's look at a second type of missing value -- NaN, 
+    which stands for 'not a number'. To generate NaN, try dividing (using a forward slash) 0 by 0 now.
+  CorrectAnswer: 0/0
+  AnswerTests: omnitest(correctExpr='0/0')
+  Hint: Try 0/0.
+
+- Class: cmd_question
+  Output: Let's do one more, just for fun. In R, Inf stands for infinity. What happens if you subtract Inf from Inf?
+  CorrectAnswer: Inf - Inf
+  AnswerTests: omnitest(correctExpr='Inf - Inf')
+  Hint: Type Inf - Inf. Can you guess the result?
+
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: Ok, fine
+  CorrectAnswer: Ok, fine
+  AnswerTests: submit_log()
+  Hint: ""
