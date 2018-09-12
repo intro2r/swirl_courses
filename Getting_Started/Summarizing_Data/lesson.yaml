@@ -160,6 +160,11 @@
   Output: "We now have a boxplot for each subset of your vector! These types of visualizations are extremely useful for comparing
   differences between groups at a glance."
   
+- Class: text  
+  Output: "One final note on boxplots ... You may have noticed that there were no outliers on the last boxplot. 
+    The dataset was too small (only 10 elements each), so the whiskers included all the data, and were probably not
+    even 1.5 times the interquartile range."
+  
 - Class: text
   Output: "We should note that these functions only work in this way for numeric data. We will 
   cover how to deal with character data when we start working with factors/categorical data. "
