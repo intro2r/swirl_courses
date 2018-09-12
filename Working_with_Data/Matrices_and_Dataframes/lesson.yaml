@@ -1,10 +1,10 @@
 
 - Class: meta
   Course: FES720 Intro to R
-  Lesson: Matrices and Data Frames
-  Author: Simon Queenborough & Nick Carchedi
+  Lesson: Matrices and Dataframes
+  Author: Andrew Mueheisen, Simon Queenborough & Nick Carchedi
   Type: Standard
-  Organization: JHU Biostat
+  Organization: Yale FES
   Version: 2.2.0
 
 - Class: text
@@ -28,14 +28,14 @@
   Hint: Type my_vector to view its contents.
 
 - Class: cmd_question
-  Output: The dim() function tells us the 'dimensions' of an object. What happens if we do dim(my_vector)? Give it a try.
+  Output: The `dim()` function tells us the 'dimensions' of an object. What happens if we do `dim(my_vector)`? Give it a try.
   CorrectAnswer: dim(my_vector)
   AnswerTests: omnitest(correctExpr='dim(my_vector)')
   Hint: Just type dim(my_vector) to see what happens.
 
 - Class: cmd_question
   Output: "Clearly, that's not very helpful! Since my_vector is a vector, it doesn't have a `dim` attribute (so it's just NULL), 
-  but we can find its length using the length() function. Try that now."
+  but we can find its length using the `length()` function. Try that now."
   CorrectAnswer: length(my_vector)
   AnswerTests: omnitest(correctExpr='length(my_vector)')
   Hint: Type length(my_vector) to view the length of the vector you just created.
@@ -48,17 +48,17 @@
   Hint: Type dim(my_vector) <- c(4, 5) to give my_vector a `dim` attribute.
 
 - Class: text
-  Output: "It's okay if that last command seemed a little strange to you. It should! The dim() function allows you to get OR set 
+  Output: "It's okay if that last command seemed a little strange to you. It should! The `dim()` function allows you to get OR set 
   the `dim` attribute for an R object. In this case, we assigned the value c(4, 5) to the `dim` attribute of my_vector."
 
 - Class: cmd_question
-  Output: Use dim(my_vector) to confirm that we've set the `dim` attribute correctly.
+  Output: Use `dim(my_vector)` to confirm that we've set the `dim` attribute correctly.
   CorrectAnswer: dim(my_vector)
   AnswerTests: omnitest(correctExpr='dim(my_vector)')
   Hint: Just type dim(my_vector) to make sure the `dim` attribute has been set.
 
 - Class: cmd_question
-  Output: Another way to see this is by calling the attributes() function on my_vector. Try it now.
+  Output: Another way to see this is by calling the `attributes()` function on my_vector. Try it now.
   CorrectAnswer: attributes(my_vector)
   AnswerTests: omnitest(correctExpr='attributes(my_vector)')
   Hint: The command attributes(my_vector) will show you all of the attributes for the my_vector object.
@@ -74,7 +74,7 @@
   Hint: Type my_vector to view its contents.
 
 - Class: cmd_question
-  Output: Now, let's confirm it's actually a matrix by using another useful funciton, class(). Type class(my_vector) to see what I mean.
+  Output: Now, let's confirm it's actually a matrix by using another useful funciton, `class()`. Type `class(my_vector)` to see what I mean.
   CorrectAnswer: class(my_vector)
   AnswerTests: omnitest(correctExpr='class(my_vector)')
   Hint: Type class(my_vector) to view the class of my_vector.
@@ -88,24 +88,24 @@
 
 - Class: text
   Output: "The example that we've used so far was meant to illustrate the point that a matrix is simply an atomic vector 
-  with a dimension attribute. A more direct method of creating the same matrix uses the matrix() function."
+  with a dimension attribute. A more direct method of creating the same matrix uses the `matrix()` function."
 
 - Class: cmd_question
-  Output: Bring up the help file for the matrix() function now using the `?` function.
+  Output: Bring up the help file for the `matrix()` function now using the `?` function.
   CorrectAnswer: ?matrix
   AnswerTests: omnitest(correctExpr='?matrix')
   Hint: The command ?matrix will do the trick.
 
 - Class: cmd_question
   Output: "Now, look at the documentation for the matrix function and see if you can figure out how to create a matrix 
-  containing the same numbers (1-20) and dimensions (4 rows, 5 columns) by calling the matrix() function. Store the result 
+  containing the same numbers (1-20) and dimensions (4 rows, 5 columns) by calling the `matrix()` function. Store the result 
   in a variable called my_matrix2."
   CorrectAnswer: my_matrix2 <- matrix(1:20, nrow=4, ncol=5)
   AnswerTests: calculates_same_value('matrix(1:20, nrow=4, ncol=5)'); expr_creates_var('my_matrix2')
   Hint: Call the matrix() function with three arguments -- 1:20, the number of rows, and the number of columns. Be sure to specify arguments by their proper names and store the result in my_matrix2 (not in my_matrix).
 
 - Class: cmd_question
-  Output: "In addition to dim(), we can also check the specific number of rows or columns in our 2-dimensional object with either
+  Output: "In addition to `dim()`, we can also check the specific number of rows or columns in our 2-dimensional object with either
   `nrow()` or `ncol()`. Check the number of rows of my_matrix2 now to make sure its 4."
   CorrectAnswer: nrow(my_matrix2)
   AnswerTests: omnitest(correctExpr='nrow(my_matrix2)')
@@ -119,7 +119,7 @@
   Hint: Call the ncol() function - you only need a single argument. 
 
 - Class: cmd_question
-  Output: Finally, let's confirm that my_matrix and my_matrix2 are actually identical. The identical() function will tell us if its first two arguments are the same. Try it out.
+  Output: Finally, let's confirm that my_matrix and my_matrix2 are actually identical. The `identical()` function will tell us if its first two arguments are the same. Try it out.
   CorrectAnswer: identical(my_matrix, my_matrix2)
   AnswerTests: any_of_exprs('identical(my_matrix, my_matrix2)', 'identical(my_matrix2, my_matrix)')
   Hint: If you're not sure about this one, then checkout the documentation for identical() using the `?` function.
@@ -137,7 +137,7 @@
   Hint: Make sure to capitalize the first letter of each name and to store the result in a variable called patients. Also, don't get the order of the patients mixed up! That would be a disaster!
 
 - Class: cmd_question
-  Output: Now we'll use the cbind() function to 'combine columns'. Don't worry about storing the result in a new variable. Just call cbind() with two arguments -- the patients vector and my_matrix.
+  Output: Now we'll use the `cbind()` function to 'combine columns'. Don't worry about storing the result in a new variable. Just call cbind() with two arguments -- the patients vector and my_matrix.
   CorrectAnswer: cbind(patients, my_matrix)
   AnswerTests: omnitest(correctExpr='cbind(patients, my_matrix)')
   Hint: Type cbind(patients, my_matrix) to add the names of our patients to the matrix of numbers.
@@ -166,13 +166,13 @@
   Hint: Type my_data to view its contents.
 
 - Class: text
-  Output: It looks like the data.frame() function allowed us to store our character vector of names right alongside our matrix of numbers. That's exactly what we were hoping for! 
+  Output: It looks like the `data.frame()` function allowed us to store our character vector of names right alongside our matrix of numbers. That's exactly what we were hoping for! 
 
 - Class: text
-  Output: Behind the scenes, the data.frame() function takes any number of arguments and returns a single object of class `data.frame` that is composed of the original objects.
+  Output: Behind the scenes, the `data.frame()` function takes any number of arguments and returns a single object of class `data.frame` that is composed of the original objects.
 
 - Class: cmd_question
-  Output: Let's confirm this by calling the class() function on our newly created data frame.
+  Output: Let's confirm this by calling the `class()` function on our newly created data frame.
   CorrectAnswer: class(my_data)
   AnswerTests: omnitest(correctExpr='class(my_data)')
   Hint: The class function takes one argument -- the object of which you want to determine the class.
@@ -209,7 +209,7 @@
   Hint: Make sure all of the names are lowercase, surrounded by double quotes, and separated with commas. Don't forget to use the c() function.
 
 - Class: cmd_question
-  Output: Now, use the colnames() function to set the `colnames` attribute for our data frame. This is similar to the way we used the dim() function earlier in this lesson.
+  Output: Now, use the `colnames()` function to set the `colnames` attribute for our data frame. This is similar to the way we used the `dim()` function earlier in this lesson.
   CorrectAnswer: colnames(my_data) <- cnames
   AnswerTests: omnitest(correctExpr='colnames(my_data) <- cnames')
   Hint: Try colnames(my_data) <- cnames.
@@ -225,7 +225,7 @@
   might look like and explore it a bit."
   
 - Class: cmd_question
-  Output: "Go ahead and look at a new object, UScereal, now."
+  Output: "Go ahead and look at a new object, `UScereal`, now."
   CorrectAnswer: UScereal
   AnswerTests: omnitest(correctExpr='UScereal')
   Hint: Print the contents of my_data to the console.
@@ -278,7 +278,7 @@
   `str()` gives us the first handful of entries in that column."
 
 - Class: cmd_question
-  Output: "We can also use the `summary()` function on data frames. Go ahead and so so on UScereal."
+  Output: "We can also use the `summary()` function on data frames. Go ahead and do so on UScereal."
   CorrectAnswer: summary(UScereal)
   AnswerTests: omnitest(correctExpr='summary(UScereal)')
   Hint: You'll need to nest UScereal in the `summary()` function. 
@@ -294,7 +294,7 @@
   
 - Class: cmd_question
   Output: "The `table()` function will count the occurence of factors in a vector. But how do we pull out just one column
-  from our data frame? The easiest way is the `&` operator. If we call our data frame and follow its name with `&` and the 
+  from our data frame? The easiest way is the `$` operator. If we call our data frame and follow its name with `$` and the 
   column we want, we'll just get that column as a vector. Go ahead and enter `UScereal$vitamins` now."
   CorrectAnswer: UScereal$vitamins
   AnswerTests: omnitest(correctExpr='UScereal$vitamins')
