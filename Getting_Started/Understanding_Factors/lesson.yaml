@@ -97,11 +97,10 @@
 
 - Class: cmd_question
   Output: "Modify the `food` variable to make it an ordered factor, with 
-    levels ordered low > medium > high."
-  CorrectAnswer: food <- factor(food, levels = c("low", "medium", "high"), ordered = TRUE)
-  AnswerTests: omnitest(correctExpr='food <- factor(food, levels = c("low", "medium", "high"), ordered = TRUE)')
-  Hint: "You will first need to over-write the original food variable, e..g, `food <- factor(food, `, then add in the 
-    new arguments."
+    levels ordered low > medium > high. Assign this to a the new variable `food1`"
+  CorrectAnswer: food1 <- factor(food, levels = c("low", "medium", "high"), ordered = TRUE)
+  AnswerTests: omnitest(correctExpr='food1 <- factor(food, levels = c("low", "medium", "high"), ordered = TRUE)')
+  Hint: "You will need to create a new variable, food1, and use the arguments levels and ordered."
 
 - Class: text
   Output: "In R’s memory, these factors are represented by numbers (1, 2, 3). 
@@ -139,11 +138,17 @@
     Wrap this within barplot().
 
 - Class: cmd_question
-  Output: "Use the factor() command to modify the factor `Group` so that the control group is plotted last. Do this
-    *within* the call to barplot."
-  CorrectAnswer: barplot( table(factor(Group, levels = c('Treatment1', 'Treatment2', 'Control'), ordered = TRUE)) )
-  AnswerTests: omnitest(correctExpr="barplot( table(factor(Group, levels = c('Treatment1', 'Treatment2', 'Control'), ordered = TRUE)) )")
-  Hint: This is a tricky one! Refer back to your answers  above, and make sure that you are nesting the new factor within table() within barplot()
+  Output: "Use the factor() command to modify the factor `Group` so that the control group is plotted last. 
+    Assign this to a new variable, `Group_ord`."
+  CorrectAnswer: Group_ord <- factor(Group, levels = c('Treatment1', 'Treatment2', 'Control'), ordered = TRUE)) )
+  AnswerTests: omnitest(correctExpr="Group_ord <- factor(Group, levels = c('Treatment1', 'Treatment2', 'Control'), ordered = TRUE)) )")
+  Hint: This is a tricky one! Refer back to your answers  above. 
+
+- Class: cmd_question
+  Output: "Now, make a barplot of Group_ord."
+  CorrectAnswer: barplot(table(Group_ord))
+  AnswerTests: omnitest(correctExpr = 'barplot(table(Group_ord))')
+  Hint: Make sure that you are nesting the new factor within table() within barplot().
 
 - Class: text
   Output: "## Removing Levels from a Factor"
