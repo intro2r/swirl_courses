@@ -141,7 +141,7 @@
   Output: "Use the factor() command to modify the factor `Group` so that the control group is plotted last. 
     Assign this to a new variable, `Group_ord`."
   CorrectAnswer: Group_ord <- factor(Group, levels = c('Treatment1', 'Treatment2', 'Control'), ordered = TRUE)) )
-  AnswerTests: omnitest(correctExpr="Group_ord <- factor(Group, levels = c('Treatment1', 'Treatment2', 'Control'), ordered = TRUE)) )")
+  AnswerTests: omnitest(correctExpr="Group_ord <- factor(Group, levels = c('Treatment1', 'Treatment2', 'Control'), ordered = TRUE))")
   Hint: This is a tricky one! Refer back to your answers  above. 
 
 - Class: cmd_question
