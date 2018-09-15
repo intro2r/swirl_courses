@@ -1,0 +1,232 @@
+- Class: meta
+  Course: FES720 Intro to R
+  Lesson: Subsetting Data Frames
+  Author: Simon Queenborough & Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: "Now that we're finally thinking in 2 dimensions, we're going to learn one of the most important
+  skills in the course, subsetting data frames."
+  
+- Class: cmd_question
+  Output: "Lets start with a quick refresher on subsets. Make a vector called my_seq and give it the values 
+  from 0 to 20 in increments of 2."
+  CorrectAnswer: my_seq <- seq(0,20, 2)
+  AnswerTests: any_of_exprs('my_seq <- seq(0,20,2)','my_seq <- seq(from = 0, to = 20, 2)','my_seq <- seq(from = 0, to = 20, by = 2)','my_seq <- seq(0,20,by=2)')
+  Hint: Remember the `seq()` function lets you create a vector in whichever increments you need.
+
+- Class: cmd_question
+  Output: "Now display the first 5 elements of the vector. As a reminder, you'll need square brackets 
+  `[]` along with a vector of the values 1 through 5."
+  CorrectAnswer: my_seq[1:5]
+  AnswerTests: any_of_exprs('my_seq[1:5]','my_seq[c(1,2,3,4,5)]','my_seq[seq(1,5)]')
+  Hint: "You can nest in your `[]` anything that might give you 1 to 5, e.g. `1:5`, `seq(1,5)`, or c(1,2,3,4,5)"
+  
+- Class: cmd_question
+  Output: "Display only those values greater than 10. You'll need to logically subset here. Remember that 
+  we can make a logical vector with the '<' or '>' operator, and use this logical vector as our subset
+  condition in the `[]`."
+  CorrectAnswer: my_seq[my_seq > 10]
+  AnswerTests: omnitest(correctExpr = 'my_seq[my_seq > 10]')
+  Hint: "We can create our logical vector with the expression `my_seq > 10`. Nest this in your square brackets 
+  to achieve the desired subset."
+  
+- Class: text
+  Output: "Now that you're refreshed on subsets, we're going to apply this logic in 2 dimensions."
+  
+- Class: cmd_question
+  Output: "We've loaded a data frame for you, called forest_area. It has the area of every country, 
+  the percentage of that area covered in forest, and their respective ranks in forest cover. Look at
+  the first 6 rows now using head()."
+  CorrectAnswer: head(forest_area)
+  AnswerTests: omnitest(correctExpr = 'head(forest_area)')
+  Hint: "Make sure you're using the `head()` function on forest_area. "
+
+- Class: cmd_question
+  Output: "You can see we have 4 columns, most of which are self-explanatory. Per.forest stands for
+  percentage forest. Lets now look at the structure of our data frame. Use the str() function."
+  CorrectAnswer: str(forest_area)
+  AnswerTests: omnitest(correctExpr = 'str(forest_area)')
+  Hint: "Make sure you're using the `str()` function on forest_area. "
+  
+- Class: text
+  Output: "Everything looks good - country should be a factor, and is, and everything else is either 
+  numeric or an integer. Lets use this data frame to practice subsetting!"
+  
+- Class: text
+  Output: "With vectors, we only needed a single value or vector in our square brackets `[]` because
+  vectors are 1-dimensional. With 2-dimensional objects, we'll need 2 values, the first telling R which
+  row or rows we want, and the second telling R which column or columns. We use a comma to separate them,
+  so it'll take the form [row,col]."
+  
+- Class: mult_question
+  Output: What do you think `forest_area[1,2]` will give you?
+  AnswerChoices: The entire data frame; The first column of data; The value in the first row and second column; The value in the first column and second row
+  CorrectAnswer: The value in the first row and second column
+  AnswerTests: omnitest(correctVal="The value in the first row and second column")
+  Hint: "Remember that the first value refers to the row, and the second value the column."
+  
+- Class: cmd_question
+  Output: "Subset now by entering `forest_area[1,2]`."
+  CorrectAnswer: forest_area[1,2]
+  AnswerTests: omnitest(correctExpr = 'forest_area[1,2]')
+  Hint: "Just enter the exact code show above. "
+  
+- Class: cmd_question
+  Output: "Its basically like telling R which coordinate you want in a x,y grid. As in 1-dimension, we
+  can also use vectors as our subset rather than a single value. Use vectors to subset forest_area for 
+  the 1st, 3rd, and 5th row, and the 2nd and 4th column."
+  CorrectAnswer: forest_area[c(1,3,5),c(2,4)]
+  AnswerTests: omnitest(correctExpr = 'forest_area[c(1,3,5),c(2,4)]')
+  Hint: "You will have to provide a separate vector of the desired elements for both the row and column.
+  For example, the row subset should look like [c(1,3,5),column_subset]."
+  
+- Class: cmd_question
+  Output: "Often, we just want the entire row or the entire column. If you want all of either rows or 
+  columns, simply leave that subset blank. Lets get the entire first row by entering `forest_area[1,]` now.
+  This tells R we want the first row, and all columns."
+  CorrectAnswer: forest_area[1,]
+  AnswerTests: omnitest(correctExpr = 'forest_area[1,]')
+  Hint: "Just copy and paste the required code. "
+  
+- Class: cmd_question
+  Output: "Lets do something similar, but this time subset all rows of just the 2nd column."
+  CorrectAnswer: forest_area[,2]
+  AnswerTests: omnitest(correctExpr = 'forest_area[,2]')
+  Hint: "If you want all rows, leave the row subset blank, while selecting the 2nd column. "
+
+- Class: text
+  Output: "Well done. You now know how to subset by position in 2-dimensional objects. Subsetting an
+  entire column is particularly useful, because each column represents a variable of our data. You can
+  use positional subsets to do this, but there's an easier more flexible way."
+
+- Class: text
+  Output: "If we want to target a single column of our data (for example, percent forest area in our data frame),
+  the easiest way is the `$` operator. If we use it following the name of our data frame, we can tell 
+  R exactly which column of data we're interested in working with, and it will return that column 
+  as if it were its own vector."
+  
+- Class: mult_question
+  Output: What do you think `forest_area$per.forest` will give you?
+  AnswerChoices: The entire data frame; Country names; Percent forest cover; The first row of data
+  CorrectAnswer: Percent forest cover
+  AnswerTests: omnitest(correctVal="Percent forest cover")
+  Hint: "Remember that `$` returns a single column from your data frame."
+
+- Class: cmd_question
+  Output: "We could print that column of data, but it would just be a long vector that's hard 
+  to interpret. So lets visualize it instead! Make a histogram of the per.forest column in your 
+  forest_area data frame."
+  CorrectAnswer: hist(forest_area$per.forest)
+  AnswerTests: omnitest(correctExpr = 'hist(forest_area$per.forest)')
+  Hint: "hist() is the function to make a histogram, and you'll need to call your column of data specifically
+  in the format of `data_frame$column_name`."
+  
+- Class: cmd_question
+  Output: "Now find the median land area in our data frame. Just like `mean()`, the function you want is
+  `median()`."
+  CorrectAnswer: median(forest_area$land.area.km)
+  AnswerTests: omnitest(correctExpr = 'median(forest_area$land.area.km)')
+  Hint: "median() is the function to make a histogram, and you'll need to call your column of data specifically
+  in the format of `data_frame$column_name`."
+  
+- Class: text
+  Output: "The `$` operator is a much better way to subset a column of data than positional subsets, because
+  we don't have to memorize what position our column of interest is in (is it the 2nd column? The 4th?). This
+  might seem trivial with 4 columns, but when you have 10, 20, or maybe 100 variables, the ability to 
+  refer to the column by name is a life saver."
+  
+- Class: text
+  Output: "Now we're really going to spice things up - logical subsets! Earlier in the lesson we subset
+  a vector based on a logical condition. We can also subset our entire data frame using the values of
+  a single column."
+  
+- Class: cmd_question
+  Output: "What if we were interested in rows of data (observations) for only those countries with more than
+  80% forest cover?. We'll need a logical subset of course! To show you how this works, first enter
+  `forest_area$per.forest > 80` now."
+  CorrectAnswer: forest_area$per.forest > 80
+  AnswerTests: omnitest(correctExpr = 'forest_area$per.forest > 80')
+  Hint: "Just copy and paste the specified code."
+  
+- Class: cmd_question
+  Output: "This logical vector can be passed as our row subset, such that R will only keep those rows
+  which are TRUE in the vector. Lets subset our entire data frame with this vector by passing the
+  logical statement we just entered as our row subset, and leaving the column subset blank (because
+  we want to see all variables). Try it now."
+  CorrectAnswer: forest_area[forest_area$per.forest > 80,]
+  AnswerTests: omnitest(correctExpr = 'forest_area[forest_area$per.forest > 80,]')
+  Hint: "This one is a little tricky. The basic formula for subsetting this data frame looks like
+  `forest_area[row,col]`. The row subset should be the logical statement we entered in the previous 
+  question, and the col subset should be left blank to subset all columns."
+  
+- Class: cmd_question
+  Output: "Great work. Now subset the data frame for ranks above or equal to 20. To add an `equals to` 
+  to an inequality, just enter it as `>=` or `<=`."
+  CorrectAnswer: forest_area[forest_area$rank >= 20,]
+  AnswerTests: omnitest(correctExpr = 'forest_area[forest_area$rank >= 20,]')
+  Hint: "This one is a little tricky. The basic formula for subsetting this data frame looks like
+  `forest_area[row,col]`. The row subset should be the desired logical statement, and the col subset 
+  should be left blank to subset all columns."
+  
+- Class: text
+  Output: "We can even use logical subsets to zero in on specific observations using other functions. How
+  might we find the country with the maximum percentage forest cover?"
+  
+- Class: cmd_question
+  Output: "Use the max() function to find the maximum value in the per.forest column in our data frame."
+  CorrectAnswer: max(forest_area$per.forest)
+  AnswerTests: omnitest(correctExpr = 'max(forest_area$per.forest)')
+  Hint: "Remember to call your column with the `$` operator, and nest this inside the max() function."
+
+- Class: cmd_question
+  Output: "We can use this function to create a logical statement to check where along our column of values the percentage
+  forest cover is equal to the maximum. When finding an equivalence (as opposed to an inequality), the operator
+  is a double equals, `==`. Enter `forest_area$per.forest == max(forest_area$per.forest)` now."
+  CorrectAnswer: forest_area$per.forest == max(forest_area$per.forest)
+  AnswerTests: omnitest(correctExpr = 'forest_area$per.forest == max(forest_area$per.forest)')
+  Hint: "Just copy and paste the required code."
+  
+- Class: cmd_question
+  Output: "This gives us a logical vector in which the single TRUE corresponds to the maximum percentage
+  forest cover. Now use this logical statement to subset forest_area for just the maximum, remembering to
+  select all columns."
+  CorrectAnswer: forest_area[forest_area$per.forest == max(forest_area$per.forest),]
+  AnswerTests: omnitest(correctExpr = 'forest_area[forest_area$per.forest == max(forest_area$per.forest),]')
+  Hint: "You'll need to subset the data frame, i.e. forest_area[row,col], where the row subset is the 
+  logical statement we created in the previous question. Remember to leave col blank."
+  
+- Class: text
+  Output: "This is a very powerful form of subsetting, letting us select observations in our data frame
+  for desired ranges of values or specific conditions like maximum or minimum. Essentially any logical
+  condition you can imagine."
+  
+- Class: text
+  Output: "Lets do one last subset for this lesson. This time, we want only the country name that has
+  the minimum percentage forest cover."
+  
+- Class: cmd_question
+  Output: "Since we only want the country name, we're only subsetting the country column of our data frame.
+  You can access this with the `$` operator as usual. Because we're only subsetting a single column, 
+  we only need a single subset in our brackets `[]` (i.e. we dont need a row and column). Try selecting
+  the country name that has the minimum percentage forest cover now."
+  CorrectAnswer: forest_area$country[forest_area$per.forest == min(forest_area$per.forest)]
+  AnswerTests: omnitest(correctExpr = 'forest_area$country[forest_area$per.forest == min(forest_area$per.forest)]')
+  Hint: "Your logical statement will be very similar to the one we made already, but with min instead 
+  of max. Your subset form will look like `data_frame$column_name[]`, where you only have a single 
+  subset condition (because a single column is essentially a vector)."
+  
+- Class: text
+  Output: "Excellent work. You've now been introduced to subsets in 2 dimensions. It may seem tricky
+  or confusing now, but with practice (and you will practice plenty), you'll be subseting your data frames
+  like a pro in no time."
+  
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: As you wish
+  CorrectAnswer: As you wish
+  AnswerTests: submit_log()
+  Hint: 
