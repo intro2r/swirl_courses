@@ -195,10 +195,12 @@
   that when we converted our matrix, R also automatically assigned row and column names to our new data frame."
 
 - Class: text
-  Output: It's also possible to assign names to the individual rows and columns of a data frame, which presents another possible way of determining which row of values in our table belongs to each patient.
+  Output: "It's also possible to assign names to the individual rows and columns of a data frame, 
+    which presents another possible way of determining which row of values in our table belongs to each patient."
 
 - Class: text
-  Output: However, since we've already solved that problem, let's solve a different problem by assigning names to the columns of our data frame so that we know what type of measurement each column represents.
+  Output: "However, since we've already solved that problem, let's solve a different problem 
+    by assigning names to the columns of our data frame so that we know what type of measurement each column represents."
 
 - Class: cmd_question
   Output: "Since we have six columns (including patient names), we'll need to first create a vector containing one element 
@@ -209,7 +211,8 @@
   Hint: Make sure all of the names are lowercase, surrounded by double quotes, and separated with commas. Don't forget to use the c() function.
 
 - Class: cmd_question
-  Output: Now, use the `colnames()` function to set the `colnames` attribute for our data frame. This is similar to the way we used the `dim()` function earlier in this lesson.
+  Output: "Now, use the `colnames()` function to set the `colnames` attribute for our original data frame, `my_data`. 
+    This is similar to the way we used the `dim()` function earlier in this lesson."
   CorrectAnswer: colnames(my_data) <- cnames
   AnswerTests: omnitest(correctExpr='colnames(my_data) <- cnames')
   Hint: Try colnames(my_data) <- cnames.
