@@ -267,7 +267,7 @@
     This is a tough one, so it may help to copy the file into a spreadsheet, or do some
     searching with the search function for specific characters within the file. Remember to set 
     the header and sep arguments"
-  CorrectAnswer: read.table('example6.txt', header = TRUE, sep = '\t'))
+  CorrectAnswer: read.table('example6.txt', header = TRUE, sep = '\t')
   AnswerTests: omnitest(correctExpr="read.table('example6.txt', header = TRUE, sep = '\t')")
   Hint: "The code you need is: read.table('example6.txt', header = TRUE, sep = '\\t').
     But, you will also need to edit the text file."
