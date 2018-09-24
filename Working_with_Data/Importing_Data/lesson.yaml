@@ -129,7 +129,7 @@
   Output: "Now that we know what the actual separator is, let's put that in place of the comma."
   CorrectAnswer: str(read.table('test1.txt', header = TRUE, sep = '\t'))
   AnswerTests: omnitest(correctExpr="str(read.table('test1.txt', header = TRUE, sep = '\t'))")
-  Hint: "Replace the comma with a '\t' in the 'sep = ' argument."
+  Hint: "Replace the comma with a '\\t' in the 'sep = ' argument."
   
 - Class: text
   Output: "We get our nice dataframe back again. Yay!"
