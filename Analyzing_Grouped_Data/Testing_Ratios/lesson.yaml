@@ -1,5 +1,5 @@
 - Class: meta
-  Course: fes720_Statistics
+  Course: Analyzing_Grouped_Data
   Lesson: Testing_Ratios
   Author: Simon Queenborough
   Type: Standard
@@ -7,12 +7,15 @@
   Version: 0.0.1
 
 - Class: text
-  Output: "Welcome to FES720 Statistics section! In this series of lessons, we will
-    look at how to do various common statistical tests in R, leading to
-    more complex data and modelling approaches."
+  Output: "We're finally ready to start performing statistical tests in R! In this Unit, we will
+    focus on relatively simple cases of grouped data (data that can be binned into categories)."
     
 - Class: text
-  Output: "We will focus first on simple tests to compare proportions and ratios, for example
+  Output: "Such tests include comparison of proportions or ratios using proportion or chi square tests, and 
+  comparison of means between groups using t-tests, ANOVAs, and ANCOVAs."
+        
+- Class: text
+  Output: "We will start with simple tests to compare proportions and ratios, for this example
     asking if there are more people with blue or brown eyes in a room."
     
 - Class: text
@@ -63,10 +66,10 @@
     
 - Class: text
   Output: "The syntax of these two functions is essentially the same. They require the arguments
-    `x = ` the number of successes (e.g., the number of males); `n = ` the total number of trials (e.g., the 
-    number of males + number of females); `p = ` the expected probability to test against (the default is 0.5); and
-    `alternative = ` a character string specifying your alternative hypothesis ('two.sided', 'greater', or
-    'lesser')."
+    `x = ` the number of successes (the occurence of the outcome we're interested in, e.g. the number of males); 
+    `n = ` the total number of trials (e.g., the number of males + number of females); `p = ` the expected probability 
+    to test against (the default is 0.5); and `alternative = ` a character string specifying your alternative hypothesis 
+    ('two.sided', 'greater', or 'lesser')."
 
 
 - Class: cmd_question
@@ -78,10 +81,10 @@
     What is your alternative hypothesis?"
     
 - Class: text
-  Output: "What does this output tell us? If you used `binom.test()`, it first tells us the name of the
+  Output: "What does this output tell us? If you used `prop.test()`, it first tells us the name of the
     test, the data, number of successes, trials, and p-value. It provides us with the alternative
-    hypothesis, the 95% confidence intervals, and the calculated probability of success. `prop.test()`
-    returns something similar."
+    hypothesis, the 95% confidence intervals, and the calculated probability of success (equal to the p-value
+    for this test). `binom.test()` returns something similar."
     
 - Class: text
   Output: "In either function, the p-value is greater than the usual alpha of 0.05, suggesting that 
@@ -89,13 +92,13 @@
     
 - Class: cmd_question
   Output: "Usefully, the output of all statistical models or tests in R is a list, so we can extract the 
-    parts we want. Run the function again, and assign the result to the object `m`."
-  CorrectAnswer: m <- binom.test(x = 48, n = 100, alternative = 'two.sided')
-  AnswerTests: omnitest(correctExpr="m <- binom.test(x = 48, n = 100, alternative = 'two.sided')")
-  Hint: m <- binom.test(x = 48, n = 100, alternative = 'two.sided')
+    parts we want. Run the function again using `prop.test`, and assign the result to the object `m`."
+  CorrectAnswer: m <- prop.test(x = 48, n = 100, alternative = 'two.sided')
+  AnswerTests: omnitest(correctExpr="m <- prop.test(x = 48, n = 100, alternative = 'two.sided')")
+  Hint: m <- prop.test(x = 48, n = 100, alternative = 'two.sided')
 
 - Class: cmd_question
-  Output: "Now, extract the p-value from `m`."
+  Output: "Now, extract the p-value from `m` using the `$` operator."
   CorrectAnswer: m$p.value
   AnswerTests: omnitest(correctExpr='m$p.value')
   Hint: Remember that you can access parts of a list with `$`. If you get stuck, run `str(m)`.
@@ -110,8 +113,8 @@
   Output: "We have some sensible biological reason to think that we might expect 
     more males flowering this year. Alter your previous test to reflect this hypothesis.
     Do not assign the output to any object."
-  CorrectAnswer: binom.test(x = 48, n = 100, alternative = 'greater')
-  AnswerTests: omnitest(correctExpr="binom.test(x = 48, n = 100, alternative = 'greater')")
+  CorrectAnswer: prop.test(x = 48, n = 100, alternative = 'greater')
+  AnswerTests: any_of_exprs("binom.test(x = 48, n = 100, alternative = 'greater')", "prop.test(x = 48, n = 100, alternative = 'greater')")
   Hint: Check the argument `alternative = `
   
 - Class: text
@@ -168,9 +171,10 @@
 - Class: cmd_question
   Output: "So, we can pass a matrix to `x` instead. Make a matrix of two columns, with the counts
     of male and female flowering trees in years 1 and 2. Columns should be males and females, rows
-    should be years. (There are several ways to do this operation, and swirl checks only a couple)."
+    should be years. (There are several ways to do this operation, but do it with a vector of values and either 
+    an nrow or ncol argument)."
   CorrectAnswer: matrix(c(48, 58, 52, 43), ncol = 2)
-  AnswerTests: omnitest(correctExpr='matrix(c(48, 58, 52, 43), ncol = 2)')
+  AnswerTests: any_of_exprs("matrix(c(48, 58, 52, 43), ncol = 2)", "matrix(c(48, 58, 52, 43), nrow = 2)")
   Hint: matrix(c(48, 58, 52, 43), ncol = 2)
   
 - Class: text
