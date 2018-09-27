@@ -1,0 +1,391 @@
+- Class: meta
+  Course: Analyzing_Grouped_Data
+  Lesson: lapply and sapply
+  Author: Nick Carchedi, Simon Queenborough
+  Type: Standard
+  Organization: Yale FES
+  Version: 2.2.11
+
+
+- Class: text
+  Output: "*Conducting data analysis is like drinking a fine wine. It is 
+    important to swirl and sniff the wine, to unpack the complex bouquet
+    and to appreciate the experience. Gulping the wine doesn't work*.
+    
+    [Wright, D.B. 2003. Making friends with your data: Improving how statistics
+    are conducted and reported. British Journal of Educational Psychology, 73, 123-136.]"
+  
+- Class: text
+  Output: "Most statistical tests and techniques have underlying assumptions that are often
+    violated (i.e., the data or model do not meet the assumptions). Some of these violations
+    have little impact on the results or conclusions. "
+    
+- Class: text
+  Output: "Others can increase type I (false positive) or type II (false negative) errors, 
+    potentially leading to wrong conclusions and erroneous recommendations.
+    Most statistical violations can be avoided by exploring your data better before analysis."
+    
+- Class: text 
+  Output: "In this lesson, we will examine graphical and statistical methods for 
+    data exploration and testing assumptions. We follow the recommendations
+    of Zuur et al., 2010. A protocol for data exploration to avoid common statistical problems.
+    *Methods in Ecology and Evolution* 1, 3--14."
+
+- Class: text
+  Output: "All models and statistical tests have assumptions. Different tests
+    can deal with violation of some assumptions better than others. For example,
+    heterogeneity (differences in variation) may be problematic in linear regression,
+    or a single outlier may exert a huge influence on estimates of the mean."
+    
+- Class: text
+  Output: "These assumptions come under three broad categories: 
+  
+    (1) Distributional assumptions are 
+    concerned with the probability distributions of the observations 
+    or their associated random errors (e.g., normal versus binomial),
+    
+    (2) Structural assumptions are concerned with the form of the
+    functional relationships between the response variable and the predictor
+    variables (e.g., linear regression assumes that the relationship is linear),
+    
+    (3) Cross-variation assumptions are concerned with the joint probability
+    distribution of the observations and/or the errors (e.g., 
+    most tests assume that the observations are independent)."
+
+- Class: text
+  Output: "Before we proceed, two other important issue to be clear about."
+
+- Class: text
+  Output: "First, data exploration is a very different, and separate, 
+    process from hypothesis testing (or Bayesian, likelihood, or information
+    theoretic approaches). Models and hypotheses should be based on your understanding
+    of your study system, not on 'data dredging' looking for patterns."
+
+- Class: text
+  Output: "Second, here we emphasize the visual inspection of the data and model, 
+    rather than an over-reliance on statistical tests of the assumptions.
+    There are statistical tests for normality and homogeneity, but the statistical
+    literature warns against them. See the Best Practice and Resources pages for 
+    more information."
+    
+- Class: cmd_question
+  Output: "We will explore several data sets now. First, look at the head
+    of the sparrow dataset loaded with this lesson. The dataset is called
+    'sparrows'"
+  CorrectAnswer: head(sparrows)
+  AnswerTests: omnitest(correctExpr='head(sparrows)')
+  Hint: Type head(sparrows) to view the 'head' of the dataset.    
+
+- Class: text
+  Output: "You can see 10 columns with morphometric information on 979
+    individual sparrows from females and males of two species."
+
+- Class: text 
+  Output: "## Are there outliers in Y and X?"
+  
+- Class: text
+  Output: "An outlier is an observation or data point that is 
+    'abnormally' high or low compared to the other data. It may
+    indicate real variation or experimental, observation, 
+    and/or data entry errors. As such, the definition of what
+    constitutes an outlier is subjective."
+  
+- Class: text
+  Output: "Different techniques respond to and treat outliers differently.
+    For some analyses, outliers make no difference; for others they may bias the
+    results and conclusions."
+    
+- Class: cmd_question
+  Output: "The classic graph for looking at outliers is the boxplot, which we have seen
+    before. Make a simple boxplot of sparrow wing length, 'sparrows$Wing'."
+  CorrectAnswer: boxplot(sparrows$Wing)
+  AnswerTests: omnitest(correctExpr='boxplot(sparrows$Wing)')
+  Hint: Type boxplot(sparrows$Wing) to display the boxplot.
+
+- Class: text
+  Output: "The bold line in the middle of the box indicates the median, 
+    the lower end of the box is the 25% quartile, the upper end of the box
+    is the 75% quartile. The 'hinge' is the 75% quartile minus the 25% quartile.
+    The lines (or whiskers) indicate 1.5 times the size of the hinge. 
+    (Note that the interval defined by these lines is not a confidence interval.)
+    Points beyond these lines are (often wrongly) considered to be outliers."
+    
+- Class: text
+  Output: "In this case, the boxplot is suggesting to us that 
+    there may be at least 6 outliers."
+    
+- Class: cmd_question
+  Output: "Boxplots provide a summary of the data. As we will discuss in 
+    Unit 5, a better approach would be to present the raw data as well.
+    We can use the basic `plot()` function to do this. Use `plot()` to
+    display the wing measurements."
+  CorrectAnswer: plot(sparrows$Wing)
+  AnswerTests: omnitest(correctExpr='plot(sparrows$Wing)')
+  Hint: Type plot(sparrows$Wing) to display the plot.    
+  
+- Class: text
+  Output: "As usual, running `plot()` on a numeric vector creates a plot
+    showing each data point as an open circle, displayed in the order
+    they occur in the vector (indicated by the x-axis, labelled Index)."
+    
+- Class: text
+  Output: "This plot is a version of the 'Cleveland dotplot', the 
+    row number (i.e., index) of an observation is plotted vs. the observation value."
+
+- Class: cmd_question
+  Output: "R has the function `dotchart() to do this better than our simple 
+    use of `plot()`. Run `dotchart() on the same sparrow wing data."
+  CorrectAnswer: dotchart(sparrows$Wing)
+  AnswerTests: omnitest(correctExpr='dotchart(sparrows$Wing)')
+  Hint: Type dotchart(sparrows$Wing) to display the plot.    
+
+- Class: text
+  Output: "Here the function as rotated the plot, compared to before. 
+    The data are organised by index on the y-axis and the values are 
+    indicated on the x-axis. We also see vertical grey lines that 
+    make it easier to compare the horizontal position of each point."
+    
+- Class: text
+  Output: "This dotplot suggests that there may in fact be fewer than 
+    6 outliers. A nice feature of this function is that we can 
+    condition the continuous variable on other factors in the data,
+    using the argument 'group = '."
+
+- Class: cmd_question
+  Output: "Create a dotchart of the sparrow wing data, grouped by 
+    species."
+  CorrectAnswer: dotchart(sparrows$Wing, group = sparrows$Species)
+  AnswerTests: omnitest(correctExpr='dotchart(sparrows$Wing, group = sparrows$Species)')
+  Hint: Type dotchart(sparrows$Wing, group = sparrows$Species) to display the plot.  
+  
+- Class: text
+  Output: "Now we can see that most of the 'outliers' in fact belong to the 
+    species 'SESP' and appear much more within the expected range of the data.
+    There is only one value from the 'SSTS' species that appears abnormally high."
+
+- Class: text
+  Output: "What you then do with any outliers depends. If there are no data entry 
+    errors, you could check for other explanatory factors, transform the data, or 
+    drop the sample with the outlier, depending on the sensitivity of the analysis."
+
+
+- Class: text
+  Output: "## Do we have homogeneity of variance?"
+
+- Class: text
+  Output: "Homogeneity of variance is an important assumption in 
+    analysis of variance (ANOVA), other regression-related models
+    and some multivariate techniques. Violation of constant variance
+    across groups makes it hard to estimate the standard deviation
+    of the coefficient estimates."
+
+- Class: cmd_question
+  Output: "In ANOVA, we can check the variance by making conditional boxplots
+    for each group. Make a boxplot of $Wing conditional on $Species and $Sex.
+    We can do this by writing a formula: sparrows$Wing ~ sparrows$Sex + sparrows$Species.
+    The tilde (~) means 'as a function of'. Create a plot of boxplots using this formula."
+  CorrectAnswer: boxplot(sparrows$Wing ~ sparrows$Sex + sparrows$Species)
+  AnswerTests: any_of_exprs('boxplot(sparrows$Wing ~ sparrows$Sex + sparrows$Species)', 'boxplot(sparrows$Wing ~ sparrows$Species + sparrows$Sex)', 'boxplot(Wing ~ Sex + Species, data = sparrows)', 'boxplot(Wing ~ Species + Sex, data = sparrows)')
+  Hint: Type boxplot(sparrows$Wing ~ sparrows$Sex + sparrows$Species) to display the plot.  
+
+- Class: text
+  Output: "To perform this model as an ANOVA, the variation in the observations from the 
+    sexes should be similar, as should the variation in the observations from the species.
+    In this case, there seems to be less variation in females of SSTS than females of SESP.
+    Larger differences would be more worrying."
+    
+- Class: cmd_question
+  Output: "To verify that variances are homogeneous in regression-type models with
+    continuous predictors,
+    we should use the *residuals* (i.e.,  the differences between the observed values and
+    the estimated values) of the model. We have loaded a model of sparrow wing length
+    on weight + species. Type 'm' to look at the model coefficients."
+  CorrectAnswer: m
+  AnswerTests: omnitest(correctExpr='m')
+  Hint: Type m to display the model.    
+     
+- Class: cmd_question
+  Output: "Now type 'str(m)' to look at the model structure
+   and see how we can extract the residuals."
+  CorrectAnswer: str(m)
+  AnswerTests: omnitest(correctExpr='str(m)')
+  Hint: Type str(m) to display the model.
+  
+- Class: cmd_question
+  Output: "There is a lot in there! But, scroll up to the top and you will
+    see ` $ residuals   : Named num [1:979] 0.197 ... `. 
+    Extract (subset) this part of m as a vector. Remember that m, the model output,
+    is a list."
+  CorrectAnswer: m$residuals
+  AnswerTests: any_of_exprs('m$residuals', "m[['residuals']]")
+  Hint: Remember that m is a list, and we can access each part using the name and dollar sign,
+    or double square brackets. Using single brackets retains the list structure, which will
+    fail if we try plotting or working further with this object.
+  
+- Class: cmd_question
+  Output: "Now that you can get at the residuals, we can use a similar method to 
+    extract the fitted (i.e., predicted) values. Use these two vectors to make a 
+    plot of residuals on fitted values of the model m, to check for variation in the 
+    variance, within a call to `plot()`."
+  CorrectAnswer: plot(m$residuals ~ m$fitted.values)
+  AnswerTests: any_of_exprs("plot(m$residuals ~ m$fitted.values)", "plot(m[['residuals']] ~ m[['fitted.values']])")
+  Hint: Type plot(m$residuals ~ m$fitted.values) to display the plot.  
+
+- Class: text
+  Output: "The residuals look to be ok, there is no great widening or narrowing of the distribution 
+    as we move along the x-axis. (There is one large residual up top, though)."
+    
+- Class: text
+  Output: "For any categorical predictors
+    in the model, we would make boxplots of the residuals conditional on these factors, as above."
+    
+
+- Class: text
+  Output: "For those who really want it, you can run a Bartlett's test 
+    for equality of variances with the function `bartlett.test()."
+
+- Class: text
+  Output: "To resolve inhomogenous variance, you either have to transform the response
+    variable, or use an approach that does not require homogeneity of variance (e.g.,
+    generalised least squares)."
+    
+    
+- Class: text
+  Output: "## Are the data normally distributed?"
+  
+- Class: text
+  Output: "Many statistical techniques assume that the data are normally 
+    distributed, including linear regression and t-tests. Violations of 
+    normality create problems for determining whether model coefficients 
+    are significantly different from zero and for calculating confidence 
+    intervals. Normality is not required for estimating the values of
+    the coefficients themselves (although outliers may do ...)."
+    
+- Class: cmd_question
+  Output: "We can examine
+    the normality of data by plotting a histogram. Plot a basic histogram of 
+    sparrow weight."
+  CorrectAnswer: hist(sparrows$Weight)
+  AnswerTests: omnitest(correctExpr='hist(sparrows$Weight)')
+  Hint: Type hist(sparrows$Weight) to display the plot.  
+  
+- Class: cmd_question
+  Output: "The distribution is skewed, with more lower values than higher values. 
+    For a test such as a t-test, all we can do is plot the raw data. For a regression,
+    we should again be checking the residuals. Plot a histogram of the residuals 
+    from the model 'm'."
+  CorrectAnswer: hist(m$residuals)
+  AnswerTests: omnitest(correctExpr='hist(m$residuals)')
+  Hint: Type hist(m$residuals) to display the plot.  
+
+- Class: text
+  Output: "These look better! Less skewed."
+  
+- Class: cmd_question
+  Output: "Another graphical tool for examining normality
+    is the normal probability plot or normal quantile plot of the residuals.
+    We use the function `qqnorm()` to generate this plot. The
+    residuals should fall more or less along a straight line. Make a
+    qq plot of the residuals from the model m."
+  CorrectAnswer: qqnorm(m$residuals)
+  AnswerTests: omnitest(correctExpr='qqnorm(m$residuals)')
+  Hint: Type qqnorm(m$residuals) to display the plot.  
+ 
+- Class: text
+  Output: "A normal distribution is indicated by the points lying close 
+    to the diagonal reference line.
+
+    A bow-shaped pattern of deviations from the diagonal indicates that 
+    the residuals have excessive skewness (i.e., they are not symmetrically 
+    distributed, with too many large errors in one direction).
+
+    An S-shaped pattern of deviations indicates that the residuals have 
+    excessive kurtosis (i.e., there are either too many or two few large errors 
+    in both directions)."
+  
+- Class: cmd_question
+  Output: "If you really need a p-value for your decision, you can use
+    a Shapiro-Wilk test: `shapiro.test(). Run this test on the residuals
+    of our model."
+  CorrectAnswer: shapiro.test(m$residuals)
+  AnswerTests: omnitest(correctExpr='shapiro.test(m$residuals)')
+  Hint: Type shapiro.test(m$residuals) to run the test.    
+  
+- Class: text
+  Output: "For further reading on the issue of statistical tests of 
+    normality, see Zuur et al. 2010, Laasa 2009, and this [link](https://stats.stackexchange.com/questions/90697/is-shapiro-wilk-the-best-normality-test-why-might-it-be-better-than-other-tests?noredirect=1&lq=1).
+    As you may realise, real data with perfect Normal errors are extremely rare."
+  
+  
+- Class: text
+  Output: "## Are there lots of zeros in the data?"
+  
+- Class: text
+  Output: "When working with count data (i.e., number of bugs on a leaf),
+    it is common to have zeros. In some cases, one can have a lot of zeros.
+    Such 'zero-inflated' data is problematical to analyze, and will require
+    either a two-step approach first modelling the zeros and non-zeros using a
+    binomial generalized linear model, and then only the non-zeros likely 
+    with a Poisson glm; or using a zero-inflated glm which essentially
+    does these two steps at once."
+    
+- Class: text
+  Output: "## Is there collinearity among the covariates?"
+  
+- Class: text
+  Output: "Collinearity is the existence of correlation between covariates (the
+    various predictor variables in your model). For example, weight and height
+    are often tightly correlated, as are levels of soil nutrients. If collinear
+    variables are all in the model, it is hard for the model to determine
+    which variables are significant."
+    
+- Class: cmd_question
+  Output: "We can check for collinearity quickly with the `plot()` 
+    function again. Running `plot()` on a dataframe will generate a matrix
+    of small plots, with each variable plotted against each other variable.
+    The `pairs()` function does a similar thing.
+    Run `plot()` on the sparrow dataset."
+  CorrectAnswer: plot(sparrows)
+  AnswerTests: any_of_exprs('plot(sparrows)', 'pairs(sparrows)')
+  Hint: Type plot(sparrows) to display the plot.  
+  
+  
+- Class: text
+  Output: "## Are observations of the response variable independent?"
+  
+- Class: text
+  Output: "A critical assumption of most statistical techniques
+    is that observations are independent of one another. This assumption
+    means that the value of any one data point is not influenced by
+    the values of other data points, after the effects of the 
+    predictor variables have been taken into account."
+    
+- Class: text
+  Output: "What this means in practice, is that for data that we 
+    *know* are likely to be highly auto-correlated, such as
+    time-series, repeated measures, or data with strong spatial
+    structure such as tree growth or survival in a plot, we may or may
+    not need to account for this structure in the model."
+    
+- Class: text
+  Output: "It may be that the predictors we have in the model
+    account for the auto-correlation and we do not need a explicit
+    spatial or temporal model."
+    
+- Class: text
+  Output: "As with Normality and heterogeneity of variance, 
+    we can check the residuals of the model for evidence of
+    autocorrelation in space or time (or phylogeny, or ...)."
+    
+- Class: text
+  Output: "Great, now you have some idea of how to explore data and 
+    test the assumptions of various statistical approaches. See the links on
+    the Resources page for more background and more advanced techniques."
+    
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: Super!
+  CorrectAnswer: Super!
+  AnswerTests: submit_log()
+  Hint: hint    
