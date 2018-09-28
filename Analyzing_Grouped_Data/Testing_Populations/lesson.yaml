@@ -7,11 +7,6 @@
   Version: 0.0.1
 
 - Class: text
-  Output: "Welcome to the second lesson in the FES720 Statistics section! In this series of lessons, we are
-    looking at how to do various common statistical tests in R, leading to more complex 
-    data and modelling approaches."
-
-- Class: text
   Output: "In this lesson, we will look at methods to test whether samples are drawn from populations
     with different means, or test whether one sample is drawn from a population with a mean different 
     from some theoretical mean."
@@ -51,52 +46,30 @@
 
 - Class: text
   Output: "The t-test and ANOVA assume that the data (or the residuals from the model)
-    follow a Normal distribution. We can test this assumption visually using a 
-    a histogram and/or a quantile-quantile plot, 
-    and statistically using a Shapiro-Wilk test (or Kolmogorov-Smirnov test)."
-    
-- Class: cmd_question
-  Output: "We can generate a vector of random numbers drawn from a Normal distribution
-    using the function `rnorm()`. We need to provide the number of observations we want 
-    to draw (`n = `), and can also set the mean (`mean = `) and standard deviation (`sd = `).
-    Draw 1000 observations from a distribution with mean of 10 and a standard deviation 
-    of 2.5. Assign it to the object `n`"
-  CorrectAnswer: n <- rnorm(n = 1000, mean = 10, sd = 2.5)
-  AnswerTests: omnitest(correctExpr='n <- rnorm(n = 1000, mean = 10, sd = 2.5)')
-  Hint: n <-  rnorm(n = 1000, mean = 10, sd = 2.5)
+    follow a Normal distribution. Lets test this assumption visually using a 
+    a histogram and/or a quantile-quantile plot, and statistically using a Shapiro-Wilk test (or Kolmogorov-Smirnov test)."
 
 - Class: cmd_question
-  Output: "The Normal distribution is the classic 'bell-curve' shape. Thus,
-    a histogram of the data (or the residuals from a statistical model) should
-    resemble this shape. Using the function `hist()`, draw a histogram of the
-    Normal distribution using the code you used above, nested inside `hist()`."
-  CorrectAnswer: hist(n)
-  AnswerTests: omnitest(correctExpr='hist(n)')
-  Hint: hist(n)
-  
-- Class: cmd_question
-  Output: "Compare this distribution that we know is Normal, to the distribution
-    of the `$Pace_mins` data. Make a histogram of Pace."
+  Output: "Make a histogram of Pace (minutes)."
   CorrectAnswer: hist(race$Pace_mins)
   AnswerTests: omnitest(correctExpr='hist(race$Pace_mins)')
   Hint: hist(race$Pace_mins)
 
 - Class: text
+  Output: "We appear to have a decent right-skew in our data, but lets diagnose using a few other methods."
+
+- Class: text
   Output: "### The quantile-quantile plot"
   
-- Class: text
-  Output: "The function `qqnorm()` creates a q-q plot; the function `qqline()` adds
-    a theoretical line to the plot. Normal data will fall more or less along the line."
-    
 - Class: cmd_question
-  Output: "Plot a q-q plot of the `$Pace_mins` data."
+  Output: "Plot a q-q plot of the `$Pace_mins` data (Remember the function `qqnorm()`)."
   CorrectAnswer: qqnorm(race$Pace_mins)
   AnswerTests: omnitest(correctExpr='qqnorm(race$Pace_mins)')
   Hint: qqnorm(race$Pace_mins)
   
 - Class: cmd_question
   Output: "The data look ok, but it can be hard to tell without a reference ... 
-    let's plot the line and see ..."
+    let's add a line to the plot using `qqline()`..."
   CorrectAnswer: qqline(race$Pace_mins)
   AnswerTests: omnitest(correctExpr='qqline(race$Pace_mins)')
   Hint: qqline(race$Pace_mins)
@@ -107,30 +80,19 @@
     
 - Class: text
   Output: "### The Shapiro-Wilk test"
-    
-- Class: text
-  Output: "The function `shapiro.test()` performs the Shapiro-Wilk test of normality on 
-    a vector of data. It takes only one argument, `x = `., and returns the test statistic `W`,
-    and associated p-value."
-    
-- Class: cmd_question
-  Output: "First, test our normal data, `n`, is normally distributed."
-  CorrectAnswer: shapiro.test(n)
-  AnswerTests: omnitest(correctExpr='shapiro.test(n)')
-  Hint: shapiro.test(n)
-  
-- Class: text
-  Output: "The p-value is greater than 0.05, suggesting that the data are not significantly
-    different from a normal distribution."
 
 - Class: cmd_question
-  Output: "Check if the `$Pace` column in the race data is normally distributed (we would
-    expect not, given that it is a vector of integers from 1 to 2655 giving the final place
-    in the race of each runner)."
+  Output: "Check if the `$Pace` column in the race data is normally distributed using a Shapiro-Wilk test of 
+  normality (we would expect not, given that it is a vector of integers from 1 to 2655 giving the final place 
+  in the race of each runner)."
   CorrectAnswer: shapiro.test(race$Place)
   AnswerTests: omnitest(correctExpr='shapiro.test(race$Place)')
   Hint: shapiro.test(race$Place)
-
+  
+- Class: text
+  Output: "Our data is clearly not normally distributed. This does not inherently mean that we can not use parametric
+  tests for our data - the degree to which our data deviates from normality is more important. We should take caution in 
+  interpreting model results however. We will forge ahead anyway."
 
 - Class: text
   Output: "## A. Compare the mean of one sample to a known mean"
@@ -214,7 +176,7 @@
     However, we will proceed with these data to illustrate the test."
 
 - Class: text
-  Output: "For a one-sample t-test, we need to provide the data (`x = `), the
+  Output: "For a one-sample t-test, we use the function `t.test` and provide the data (`x = `), the
     known mean that we want to compare the data against (`mu = `), and the 
     alternative hypothesis ('alternative = `)."
 
@@ -238,7 +200,7 @@
     It is used to determine whether the median of the sample is equal to a specified value."
     
 - Class: text
-  Output: "The one-sample Wilcoxon signed-rank test requires the same same three arguments
+  Output: "The one-sample Wilcoxon signed-rank test, `wilcox.test()`, requires the same same three arguments
     as the t-test: the data (`x = `), the specified value (`mu = `), and the alternative
     hypothesis (`alternative = `; two-sided is the default)."
     
@@ -250,7 +212,7 @@
   
 - Class: text
   Output: "The p-value less than 0.05 suggests that we can reject the null hypothesis,
-    and infer that people ran faster this time."
+    and infer that people ran faster than this time."
 
 - Class: text
   Output: "## B. Compare the mean of one sample to the mean of another sample"
@@ -335,13 +297,13 @@
   Output: "Check if males ran faster than females using a t-test, using subsetting to pull out 
     males for `x` and females for `y`."
   CorrectAnswer: t.test(race$Nettime_mins[race$Sex == 'M'], race$Nettime_mins[race$Sex == 'F'], alternative = 'less', var.equal = TRUE)
-  AnswerTests: omnitest(correctExpr = "t.test(race$Nettime_mins[race$Sex == 'M'], race$Nettime_mins[race$Sex == 'F'], alternative = 'less', var.equal = TRUE)")
+  AnswerTests: any_of_exprs("t.test(race$Nettime_mins[race$Sex == 'M'], race$Nettime_mins[race$Sex == 'F'], alternative = 'less', var.equal = TRUE)",
+  "t.test(x = race$Nettime_mins[race$Sex == 'M'],y = race$Nettime_mins[race$Sex == 'F'], alternative = 'less', var.equal = TRUE)")
   Hint: remember to subset the sexes adn set var.equal to TRUE
   
 - Class: text
   Output: "The p-value suggests that there is a significant difference between the mean values of male and
     female net time."
-
 
 - Class: cmd_question
   Output: "You can also use the formula method to set up the model within `t.test()`, 
@@ -365,7 +327,7 @@
   Output: "### B2. Non-normal data: two-sample Wilcoxon test"
 
 - Class: text
-  Output: "The two-sample Wilcoxon test (`wilcox.test()`) parallels the two-sample t-test. As before, 
+  Output: "The two-sample Wilcoxon test, `wilcox.test()`, parallels the two-sample t-test. As before, 
     we need to provide two data arguments and specify if we want an alternative 
     hypothesis different to a two-sided test. Again, we can use `x = ` and `y = `
     data arguments, or use a formula."
@@ -412,7 +374,8 @@
     the default alternative hypthesis (i.e., the difference between before and after 
     could be greater or lesser)."  
   CorrectAnswer: t.test(x = rats$after, y = rats$before, paired = TRUE)
-  AnswerTests: omnitest(correctExpr="t.test(x = rats$after, y = rats$before, paired = TRUE)")
+  AnswerTests: any_of_exprs("t.test(x = rats$after, y = rats$before, paired = TRUE)",
+  "t.test(x = rats$before, y = rats$after, paired = TRUE)")
   Hint: t.test(x = rats$after, y = rats$before, paired = TRUE)
   
 - Class: text
@@ -455,7 +418,7 @@
     To determine this, a post-hoc test must be carried out."
     
 - Class: cmd_question
-  Output: "Let's test different age groups and see which ran faster. First,
+  Output: "Let's test different age groups in our race data and see which ran faster. First,
     make a boxplot of net time on age (Class), using a formula and data 
     argument in `boxplot()`."
   CorrectAnswer: boxplot(Nettime_mins ~ Class, data = race)
@@ -502,7 +465,7 @@
     freedom (Df), sum of squares, etc. The p-value tells us that
     there _are_ significant differences between age classes."
   
-- Class: text
+- Class: cmd_question
   Output: "Ok. But what if we want to actually _see_ the means of
     each category... We can use `summary.lm()` to return those. Try that."
   CorrectAnswer: summary.lm(m0)
