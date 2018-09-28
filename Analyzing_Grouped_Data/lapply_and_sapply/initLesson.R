@@ -9,7 +9,7 @@ swirl_options(swirl_logging = TRUE)
 }
 
 # Path to installed lesson
-.lessonpath <- file.path(.get_course_path(), "fes720_Basic",
+.lessonpath <- file.path(.get_course_path(), "Analyzing_Grouped_Data",
                         "lapply_and_sapply")
 # Path to dataset
 .datapath <- file.path(.lessonpath, "flag.data.txt")
