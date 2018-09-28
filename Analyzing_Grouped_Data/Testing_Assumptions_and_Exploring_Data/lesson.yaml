@@ -392,9 +392,9 @@
     structure such as tree growth or survival in a plot, we may or may
     not need to account for this structure in the model."
     
- - Class: text
+- Class: text
   Output: "Auto-correlation refers to the tendency for observations 
-  close in space or time to be similar (i.e. to be correlated with one another)."
+    close in space or time to be similar (i.e. to be correlated with one another)."
     
 - Class: text
   Output: "It may be that the predictors we have in the model
