@@ -140,7 +140,7 @@
   Hint: Type dotchart(sparrows$Wing) to display the plot.    
 
 - Class: text
-  Output: "Here the function as rotated the plot, compared to before. 
+  Output: "Here the function has rotated the plot, compared to before. 
     The data are organised by index on the y-axis and the values are 
     indicated on the x-axis. We also see vertical grey lines that 
     make it easier to compare the horizontal position of each point."
@@ -166,7 +166,9 @@
 - Class: text
   Output: "What you then do with any outliers depends. If there are no data entry 
     errors, you could check for other explanatory factors, transform the data, or 
-    drop the sample with the outlier, depending on the sensitivity of the analysis."
+    drop the sample with the outlier, depending on the sensitivity of the analysis.
+    Be careful how you treat outliers - ethically removing points of data because they 
+    don't fit your expectation requires strong justification."
 
 
 - Class: text
@@ -225,15 +227,18 @@
 - Class: cmd_question
   Output: "Now that you can get at the residuals, we can use a similar method to 
     extract the fitted (i.e., predicted) values. Use these two vectors to make a 
-    plot of residuals on fitted values of the model m, to check for variation in the 
-    variance, within a call to `plot()`."
+    plot of residuals as a function of fitted values of the model m, to check for variation in the 
+    variance, within a call to `plot()`. Use the `~` notation as we did in the boxplot for your plot formula."
   CorrectAnswer: plot(m$residuals ~ m$fitted.values)
   AnswerTests: any_of_exprs("plot(m$residuals ~ m$fitted.values)", "plot(m[['residuals']] ~ m[['fitted.values']])")
   Hint: Type plot(m$residuals ~ m$fitted.values) to display the plot.  
 
 - Class: text
   Output: "The residuals look to be ok, there is no great widening or narrowing of the distribution 
-    as we move along the x-axis. (There is one large residual up top, though)."
+    as we move along the x-axis. (There is one large residual up top, though). When assessing equal variance, 
+    we want to see a relatively homogenous cloud of points. We don't want to see any structure in this cloud - the 
+    most common is when variance is greater at one end of your data's range than another, giving a conical shape to your
+    residuals."
     
 - Class: text
   Output: "For any categorical predictors
@@ -270,9 +275,9 @@
   Hint: Type hist(sparrows$Weight) to display the plot.  
   
 - Class: cmd_question
-  Output: "The distribution is skewed, with more lower values than higher values. 
-    For a test such as a t-test, all we can do is plot the raw data. For a regression,
-    we should again be checking the residuals. Plot a histogram of the residuals 
+  Output: "The distribution is slightly skewed, with more lower values than higher values. 
+    For a test such as a t-test, all we can do to assess normality is plot the raw data. 
+    For a regression, we should again be checking the residuals. Plot a histogram of the residuals 
     from the model 'm'."
   CorrectAnswer: hist(m$residuals)
   AnswerTests: omnitest(correctExpr='hist(m$residuals)')
@@ -290,6 +295,13 @@
   CorrectAnswer: qqnorm(m$residuals)
   AnswerTests: omnitest(correctExpr='qqnorm(m$residuals)')
   Hint: Type qqnorm(m$residuals) to display the plot.  
+
+- Class: cmd_question
+  Output: "It can be helpful to see a reference diagonal. Add the line by typing 
+  qqline(m$residuals)."
+  CorrectAnswer: qqline(m$residuals)
+  AnswerTests: omnitest(correctExpr='qqline(m$residuals)')
+  Hint: Type qqline(m$residuals) to display the line.  
  
 - Class: text
   Output: "A normal distribution is indicated by the points lying close 
@@ -312,6 +324,12 @@
   Hint: Type shapiro.test(m$residuals) to run the test.    
   
 - Class: text
+  Output: "The p-value in this case indicates that our distribution is significantly different 
+  from a normal distribution. Realistically, this will nearly always be the case, making the test
+  somewhat unhelpful. Examining model fit through residuals will give you a better idea as to whether 
+  the distribution of your data is a problem."
+  
+- Class: text
   Output: "For further reading on the issue of statistical tests of 
     normality, see Zuur et al. 2010, Laasa 2009, and this [link](https://stats.stackexchange.com/questions/90697/is-shapiro-wilk-the-best-normality-test-why-might-it-be-better-than-other-tests?noredirect=1&lq=1).
     As you may realise, real data with perfect Normal errors are extremely rare."
@@ -321,13 +339,14 @@
   Output: "## Are there lots of zeros in the data?"
   
 - Class: text
-  Output: "When working with count data (i.e., number of bugs on a leaf),
+  Output: "When working with count data (e.g., number of bugs on a leaf),
     it is common to have zeros. In some cases, one can have a lot of zeros.
     Such 'zero-inflated' data is problematical to analyze, and will require
     either a two-step approach first modelling the zeros and non-zeros using a
     binomial generalized linear model, and then only the non-zeros likely 
     with a Poisson glm; or using a zero-inflated glm which essentially
-    does these two steps at once."
+    does these two steps at once. Much of this will make more sense when we 
+    start modeling associations in Unit 4."
     
 - Class: text
   Output: "## Is there collinearity among the covariates?"
@@ -349,6 +368,12 @@
   AnswerTests: any_of_exprs('plot(sparrows)', 'pairs(sparrows)')
   Hint: Type plot(sparrows) to display the plot.  
   
+- Class: text
+  Output: "You may need to expand the plotting window to interpret the output. Collinearity 
+  will show itself as an obvious relationship between two predictors. In this data set, nearly 
+  all of the anatomical variables are collinear, which makes sense. Because of this, you would need
+  to take caution using more than one of these variables as predictors in a model, as they represent
+  essentially the same thing (overall body size)."
   
 - Class: text
   Output: "## Are observations of the response variable independent?"
@@ -366,6 +391,10 @@
     time-series, repeated measures, or data with strong spatial
     structure such as tree growth or survival in a plot, we may or may
     not need to account for this structure in the model."
+    
+ - Class: text
+  Output: "Auto-correlation refers to the tendency for observations 
+  close in space or time to be similar (i.e. to be correlated with one another)."
     
 - Class: text
   Output: "It may be that the predictors we have in the model
