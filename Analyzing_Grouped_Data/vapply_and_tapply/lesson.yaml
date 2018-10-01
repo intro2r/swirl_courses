@@ -1,9 +1,9 @@
 - Class: meta
-  Course: fes710_Basic
+  Course: Analyzing_Grouped_Data
   Lesson: vapply and tapply
-  Author: Nick Carchedi
+  Author: Nick Carchedi,Simon Queenborough
   Type: Standard
-  Organization: JHU Biostat
+  Organization: Yale FES
   Version: 2.2.11
 
 - Class: text
