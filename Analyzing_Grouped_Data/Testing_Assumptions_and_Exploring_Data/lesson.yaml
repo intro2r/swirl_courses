@@ -1,7 +1,7 @@
 - Class: meta
   Course: Analyzing_Grouped_Data
-  Lesson: lapply and sapply
-  Author: Nick Carchedi, Simon Queenborough
+  Lesson: Testing Assumptions and Exploring Data
+  Author: Simon Queenborough, Andrew Muehleisen
   Type: Standard
   Organization: Yale FES
   Version: 2.2.11
