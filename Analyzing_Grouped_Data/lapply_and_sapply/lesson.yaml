@@ -1,9 +1,9 @@
 - Class: meta
-  Course: fes720_Basic
+  Course: Analyzing_Grouped_Data
   Lesson: lapply and sapply
-  Author: Nick Carchedi
+  Author: Nick Carchedi, Simon Queenborough
   Type: Standard
-  Organization: JHU Biostat
+  Organization: Yale FES
   Version: 2.2.11
 
 - Class: text
