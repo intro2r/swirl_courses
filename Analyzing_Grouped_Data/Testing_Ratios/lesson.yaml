@@ -188,7 +188,7 @@
     you do not need to include `n` (but you will still need to set `alternative = `)."
   CorrectAnswer: prop.test(x = matrix(c(48, 58, 52, 43), ncol = 2), alternative = 'less')
   AnswerTests: omnitest(correctExpr="prop.test(x = matrix(c(48, 58, 52, 43), ncol = 2), alternative = 'less')")
-  Hint: prop.test(x = matrix(c(48, 58, 52, 43), ncol = 2), alternative = 'two.sided')
+  Hint: prop.test(x = matrix(c(48, 58, 52, 43), ncol = 2), alternative = 'less')
 
 - Class: text
   Output: "The output is the same as before, except the p-value relates to the hypothesis
