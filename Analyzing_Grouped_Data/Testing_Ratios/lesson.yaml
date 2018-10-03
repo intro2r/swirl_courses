@@ -174,7 +174,7 @@
     should be years. (There are several ways to do this operation, but do it with a vector of values and either 
     an nrow or ncol argument)."
   CorrectAnswer: matrix(c(48, 58, 52, 43), ncol = 2)
-  AnswerTests: any_of_exprs("matrix(c(48, 58, 52, 43), ncol = 2)", "matrix(c(48, 58, 52, 43), nrow = 2)")
+  AnswerTests: any_of_exprs('matrix(c(48, 58, 52, 43), ncol = 2)', 'matrix(c(48, 58, 52, 43), nrow = 2)')
   Hint: matrix(c(48, 58, 52, 43), ncol = 2)
   
 - Class: text
