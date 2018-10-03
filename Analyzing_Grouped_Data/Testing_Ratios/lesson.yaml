@@ -259,10 +259,10 @@
 - Class: cmd_question
   Output: "Ok, does our picking reflect the relative abundance of each variety in Lyman's Orchard?
     Lyman's grow 10 ha of Honeycrisp, 20 ha of Empire, and 30 ha of Macoun. If we picked apples
-    at random, our bags should reflect these proportions. Check if this was so."
+    at random, our bags should reflect these proportions. Check if this was so. Simplify to fractions of 6"
   CorrectAnswer: chisq.test(x = c(81, 50, 27), p = c(1/6, 2/6, 3/6))
   AnswerTests: omnitest(correctExpr='chisq.test(x = c(81, 50, 27), p = c(1/6, 2/6, 3/6))')
-  Hint: There are several ways to specify the probabilities. Try and simplify it as much as possible.
+  Hint: There are several ways to specify the probabilities. Try and simplify it as much as possible, to fractions of x/6.
 
 - Class: text
   Output: "The p-value of < 2.2e-16 suggests that *someone* has a significant preference for Honeycrip apples ... "
