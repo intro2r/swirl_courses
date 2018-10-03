@@ -66,9 +66,9 @@
     
 - Class: text
   Output: "The syntax of these two functions is essentially the same. They require the arguments
-    `x = ` the number of successes (the occurence of the outcome we're interested in, e.g. the number of males); 
-    `n = ` the total number of trials (e.g., the number of males + number of females); `p = ` the expected probability 
-    to test against (the default is 0.5); and `alternative = ` a character string specifying your alternative hypothesis 
+    `x = ` the number of successes (the occurence of the outcome we're interested in, e.g. the number of males), 
+    `n = ` the total number of trials (e.g., the number of males + number of females), `p = ` the expected probability 
+    to test against (the default is 0.5), and `alternative = ` a character string specifying your alternative hypothesis 
     ('two.sided', 'greater', or 'lesser')."
 
 
