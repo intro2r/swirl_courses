@@ -577,6 +577,27 @@
   Output: "This displays the ANOVA table for the two-way model. It looks
     like there are significant differences among age class and sex."
 
+- Class: cmd_question
+  Output: "Now lets check if there's an interaction between age and sex by making the model multiplicative.
+  Asking whether age and sex interact is equivalent to asking whether the relationship between race time
+  and one of our predictors differs based on the value of the other predictor e.g. is the relationship between 
+  race time and age class the same or different depending on gender? Make the model again, assigning it to m2,
+  but this time create an interaction between predictors `Class * Sex`."
+  CorrectAnswer: m2 <- aov(Nettime_mins ~ Class * Sex, data = race)
+  AnswerTests: omnitest(correctExpr= "m2 <- aov(Nettime_mins ~ Class * Sex, data = race)")
+  Hint: Assign the model to m2. Make sure its multiplicative instead of additive. 
+
+- Class: cmd_question
+  Output: "Lets take a look at the output by using `summary()` on m2."
+  CorrectAnswer: summary(m2)
+  AnswerTests: omnitest(correctExpr= "summary(m2)")
+  Hint: Enter summary(m2)
+  
+ 
+- Class: text
+  Output: "The interaction term is represented generally as `var1:var2`, in this case `Class:Sex`. We can see that
+  there is a significant interaction between the two variables. This is all fine and good, but our test statistics dont
+  tell us precisely how our response variable is differing between groups."
 
 - Class: text
   Output: "### D3. Post-hoc tests: TukeyHSD"
@@ -591,8 +612,8 @@
     running multiple t-tests."
 
 - Class: cmd_question
-  Output: "To run a Tukey HSD test, use the function `TukeyHSD()` on the 
-    model object (in this case `m1`). Try that."
+  Output: "To run a Tukey HSD test, use the function `TukeyHSD()` on our additive 
+    model (in this case `m1`). Try that."
   CorrectAnswer: TukeyHSD(m1)
   AnswerTests: omnitest("TukeyHSD(m1)")
   Hint: TukeyHSD(m1)
