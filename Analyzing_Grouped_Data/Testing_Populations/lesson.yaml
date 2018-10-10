@@ -82,7 +82,7 @@
   Output: "### The Shapiro-Wilk test"
 
 - Class: cmd_question
-  Output: "Check if the `$Pace` column in the race data is normally distributed using a Shapiro-Wilk test of 
+  Output: "Check if the runner's final position (the `$Place` column) in the race data is normally distributed using a Shapiro-Wilk test of 
   normality (we would expect not, given that it is a vector of integers from 1 to 2655 giving the final place 
   in the race of each runner)."
   CorrectAnswer: shapiro.test(race$Place)
