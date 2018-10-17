@@ -1,5 +1,5 @@
 - Class: meta
-  Course: fes720_Statistics
+  Course: Analyzing_Continuous_Data
   Lesson: Testing_Associations
   Author: Simon Queenborough
   Type: Standard
@@ -7,12 +7,12 @@
   Version: 0.0.1
 
 - Class: text
-  Output: "Welcome to the third lesson in the FES720 Statistics series! In this series of lessons, we are
+  Output: "Welcome to the Analyzing Continuous Data Unit! In this series of lessons, we are
     looking at how to do various common statistical tests in R, leading to more complex 
     data and modelling approaches."
 
 - Class: text
-  Output: "So far we have looked at solely categorical data (Testing Ratios) and continuous 
+  Output: "In the previous Unit, we have looked at solely categorical data (Testing Ratios) and continuous 
     data from categories (Testing Populations)."
 
 - Class: text
