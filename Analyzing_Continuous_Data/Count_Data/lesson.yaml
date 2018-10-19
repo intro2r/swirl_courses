@@ -222,11 +222,11 @@
 
 - Class: cmd_question
   Output: "Run a chi-squared goodness of fit test on the 
-    residuals of m1. Make sure that you extract the deviance
-    and degrees of freedom from the model, rather than 
-    entering the values manually."
-  CorrectAnswer: pchisq(m1$deviance, m1$df.residual, lower.tail = FALSE)
-  AnswerTests: omnitest(correctExpr = "pchisq(m1$deviance, m1$df.residual, lower.tail = FALSE)")
+    residuals of m1, using `pchisq()`. Make sure that you extract the deviance
+    and degrees of freedom from the model (df.residual), rather than 
+    entering the values manually."https://github.com/intro2r/swirl_courses
+  CorrectAnswer: pchisq(m1$deviance, m1$df.residual)
+  AnswerTests: omnitest(correctExpr = "pchisq(m1$deviance, m1$df.residual)")
   Hint: You can extract the deviance with `m1$deviance`.
 
 - Class: cmd_question
@@ -245,7 +245,7 @@
     Use the `anova()` function, with `test = 'Chisq'` to compare models
     m1 and m2."
   CorrectAnswer: anova(m2, m1, test = "Chisq")
-  AnswerTests: omnitest(correctExpr = "anova(m2, m1, test = 'Chisq')")
+  AnswerTests: any_of_exprs("anova(m2, m1, test = 'Chisq')", "anova(m1, m2, test = 'Chisq')" )
   Hint: anova(m2, m1, test = "Chisq")
 
 - Class: text
@@ -296,10 +296,9 @@
   Output: "Now, we can plot the data points (adding some jitter to the
     counts, because there will be some overlapping points), and then 
     add the predicted lines. First, plot jittered `$num_awards` as a function
-    of `math_score`. Use `pch = 20`, and the argument `col = ` to colour each point
-    depending on the program."
+    of `math_score`. Use `pch = 20`, and the argument `col = ` to your factor, program. 
   CorrectAnswer: plot(jitter(num_awards) ~ math_score, data = awards2, col = program, pch = 20)
-  AnswerTests: omnitest(correctExpr = "plot(jitter(num_awards) ~ math_score, data = awards2, col = program, pch = 20)")
+  AnswerTests: omnitest(correctExpr = "plot(jitter(num_awards) ~ math_score, data = awards2, pch = 20, col = program)")
   Hint: plot(jitter(num_awards) ~ math_score, data = awards2, col = program, pch = 20)
 
 - Class: cmd_question
