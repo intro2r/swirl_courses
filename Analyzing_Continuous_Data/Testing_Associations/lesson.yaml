@@ -45,19 +45,22 @@
 
 - Class: cmd_question
   Output: "Let's generate some random data that we can use to test this function. Use the function
-    `rnorm()` to generate 50 values drawn randomly from a normal distribution. Remember that `rnorm()` requires
+    `rnorm()` to generate 50 values drawn randomly from a normal distribution. `rnorm()` requires
     the number of samples (`n = `). You can also change the mean and standard deviation. In this case,
-    just generate 50 values with the defaults. Assign this to `x`."
+    just generate 50 values with the defaults (mean of 0 and sd of 1). Assign this to `x`."
   CorrectAnswer: x <- rnorm(50)
-  AnswerTests: any_of_exprs('x <- rnorm(50)', 'x <- rnorm(n = 50)')
+  AnswerTests: any_of_exprs('x <- rnorm(50)', 'x <- rnorm(n = 50)', 'x <- rnorm(n = 50, mean = 0, sd = 1', 'x <- rnorm(50, mean = 0, sd = 1)')
   Hint: Plop 50 into rnorm()
     
 - Class: cmd_question
-  Output: "Now, generate a vector or 50 values from a _uniform_ distribution, and
+  Output: "Now, generate a vector of 50 values from a _uniform_ distribution using `runif()`, and
     assign this to `y`."
   CorrectAnswer: y <- runif(50)
   AnswerTests: any_of_exprs('y <- runif(50)', 'y <- runif(n = 50)')
   Hint: If in doubt, look at the help file for runif().
+  
+- Class: text
+  Output: "Feel free to use `hist()` at any point if you're curious how a normal and uniform distribution vary."
     
 - Class: cmd_question
   Output: "The `ks.test()` function takes `x = ` and `y = `. Put our two new
@@ -100,23 +103,23 @@
   
 - Class: text
   Output: "In the New Haven Road Race data, it would seem sensible that Net time
-    and Pace are correlated. They are both measures of how long each person
-    spent running, but a faster Pace does not cause a faster net time."
+    and Pace are correlated."
 
 - Class: cmd_question
-  Output: "The race data are loaded with the lesson. Calculate the 
+  Output: "The race data are loaded with the lesson as `race`. Calculate the 
     correlation coefficient of Net time and Pace."
   CorrectAnswer: cor(x = race$Nettime_mins, y = race$Pace_mins)
   AnswerTests: any_of_exprs('cor(x = race$Nettime_mins, y = race$Pace_mins)', 
     'cor(race$Nettime_mins, race$Pace_mins)', 'cor(race$Pace_mins, race$Nettime_mins)',
     'cor(x = race$Pace_mins, y= race$Nettime_mins)')
-  Hint: use cor().
+  Hint: Use cor().
 
 - Class: cmd_question
-  Output: "Now test if this correlation coefficient is greater than 0."
+  Output: "Now test if this correlation coefficient is greater than 0 with `cor.test()`."
   CorrectAnswer: cor.test(x = race$Nettime_mins, y = race$Pace_mins)
-  AnswerTests: omnitest(correctExpr=' cor.test(x = race$Nettime_mins, y = race$Pace_mins)')
-  Hint: cor.test() ...
+  AnswerTests: any_of_exprs('cor.test(x = race$Nettime_mins, y = race$Pace_mins)', 'cor.test(y = race$Pace_mins, x = race$Nettime_mins)',
+  'cor.test(race$Nettime_mins, race$Pace_mins)')
+  Hint: Use cor.test, where your x is race net time and your y is pace.
 
 - Class: text
   Output: "As usual, you can assign this to an object, and extract the various parts
@@ -126,9 +129,8 @@
   Output: "## Simple Linear Regression"
   
 - Class: text
-  Output: "Ok, now we are coming to the statistical model that you will probably use 
-    most of all. If we think that one variable/s is driving variation in the other, 
-    we should use regression rather than correlation."
+  Output: "Ok, now we are coming to one of the most commonly used statistical models. If we think that one 
+  variable/s is driving variation in the other, we should use regression rather than correlation."
 
 - Class: text
   Output: "The function `lm()` is used to develop linear models. 
@@ -145,8 +147,8 @@
     
 - Class: text
   Output: "The response variable is fitted *as a function of* the predictor variable. 
-    The *tilde* symbol (`~`) signifies 'as a function of', and separates the response 
-    and predictor variables. Adding further predictor variables to the right hand side
+    You have used this already with the *tilde* symbol (`~`), which signifies 'as a function of', 
+    and separates the response and predictor variables. Adding further predictor variables to the right hand side
     is also possible (see [Formulae](../statistics/formulae.html))."
 
 - Class: text
@@ -247,7 +249,7 @@
     unexplained variation, R2 values, and F tests."
     
     
-- Class: text
+- Class: cmd_question
   Output: " The other useful parts of the model that you may want to 
     look at, at least for model-checking, are the residuals, using either
     `m0$residuals` or the generic function `residuals()`. Try either of those."
@@ -266,12 +268,12 @@
 - Class: text
   Output: "We have our plot, we have our model; now we want to combine them.
     Usually, you would not add non-significant fitted regression lines to a plot.
-    This model was significant, so we can feel doing so. The function to 
+    This model was significant, so we can feel ok doing so. The function to 
     add a *straight* line to a plot is `abline()` (which I think is supposed
     to be pronounced 'a-b-line', but 'ab-line' rolls off the tongue much more
     easily to me ...)."
     
-- Class: text
+- Class: cmd_question
   Output: "`abline()` can take a variety of inputs. For plotting a fitted line, 
     you would either provide `coef = ` (a vector 
     of length two giving the intercept and slope), or `a = ` and `b = ` (the intercept 
@@ -282,13 +284,14 @@
   AnswerTests: omnitest(correctExpr="abline(m0)")
   Hint: abline(m0)
     
-- Class: text
+- Class: cmd_question
   Output: "If you look at the help page for `abline()`, you will
     see that it has elipses (...)  as its final argument. You can 
     therefore access all the plotting commands that would affect
     the appearance of the line from within the call to `abline()`.
-    Make another call to `abline()`, but make the line twice as wide,
-    and red."
+    Lets start modifying our plotting arguments. Make another call to 
+    `abline()`, but make the line twice as wide with `lwd = 2`, and 
+    the color red, with col = `red`."
   CorrectAnswer: abline(m0, lwd = 2, col = 'red')
   AnswerTests: any_of_exprs("abline(m0, lwd = 2, col = 'red')", "abline(m0, col = 'red', lwd = 2)")
   Hint: Remember that line width is specified with lwd =, and colour with col =
@@ -298,7 +301,7 @@
 
 - Class: text
   Output: "In the ANOVA and simple regression models that we have run 
-    so far, they have all had single response/dependent variable as a 
+    so far, they have all had a single response/dependent variable as a 
     function of a single predictor/independent variable. 
     But in many cases we know that there are several things that could 
     reasonably influence the response variable. For example, species and 
@@ -341,7 +344,7 @@
     `summary()` function, to output the result table in one line of code."
   CorrectAnswer: summary(lm(Head ~ Sex, data = sparrow))
   AnswerTests: omnitest(correctExpr="summary(lm(Head ~ Sex, data = sparrow))")
-  Hint: summary(lm( ... ))
+  Hint: summary(lm( ... )), and be sure to use the `data =` argument
   
 - Class: text
   Output: "This model suggest that male sparrows have larger heads than 
@@ -357,7 +360,7 @@
     The only real effect will be how things like `summary()` work. To look at 
     the ANOVA table after a call to `lm()`, you would need to use `summary.aov()`;
     to look at the linear model table after a call to `aov()`, you would
-    need to use `summary.lm()`. Simples ... )"
+    need to use `summary.lm()`. Simple ... )"
     
 - Class: text
   Output: "However, we could reasonably assume that larger sparrows in general
@@ -423,7 +426,8 @@
     the ` + ` in the model formula with a ` * `. Try that, modifying your
     previous model that used `lm()`, still within `summary()`."
   CorrectAnswer: summary(lm(Head ~ Sex * Tarsus, data = sparrow))
-  AnswerTests: omnitest("summary(lm(Head ~ Sex * Tarsus, data = sparrow))")
+  AnswerTests: any_of_exprs("summary(lm(Head ~ Sex * Tarsus, data = sparrow))",
+  "summary(lm(Head ~ Tarsus * Sex, data = sparrow))")
   Hint: Scroll up and change + to *!
     
 - Class: text
@@ -446,7 +450,7 @@
     size of females is shown in the row indicated by `SexMale`. The test
     is whether this difference is 0 (here, there is no significant difference).
     To obtain the actual mean value of male Head size, you need to add the 
-    estimate for males to the estimate for females: 15.725 + 1.215."
+    estimate for males to the estimate for females i.e. the intercept: 15.725 + 1.215."
     
 - Class: text
   Output: "The other two rows in the results table describe the slopes of the 
@@ -462,7 +466,7 @@
     and add this difference (0.76 + -0.057)."
     
 - Class: cmd_question
-  Output: "Now, let's plot! Make a plot of Head on Tarsus."
+  Output: "Now, let's plot! Make a plot of Head on Tarsus. Use the `data =` argument."
   CorrectAnswer: plot(Head ~ Tarsus, data = sparrow)
   AnswerTests: omnitest(correctExpr="plot(Head ~ Tarsus, data = sparrow)")
   Hint: plot(y ~ x, data = ???)
@@ -473,7 +477,8 @@
     them from the model output. Make a new model, m1, using `lm()` to model
     Head as a function of the interaction between Sex and Tarsus."
   CorrectAnswer: m1 <- lm(Head ~ Sex * Tarsus, data = sparrow)
-  AnswerTests: omnitest("m1 <- lm(Head ~ Sex * Tarsus, data = sparrow)")
+  AnswerTests: any_of_exprs("m1 <- lm(Head ~ Sex * Tarsus, data = sparrow)",
+  "m1 <- lm(Head ~ Tarsus * Sex, data = sparrow)")
   Hint: m1 <- lm(Head ~ Sex * Tarsus, data = sparrow)
     
 - Class: cmd_question
@@ -510,8 +515,13 @@
     call to `abline()`, add in the calculation to obtain the absolute 
     values for males to plot the fitted line. Make the line red."
   CorrectAnswer: abline(a = (coef(m1)['(Intercept)'] + coef(m1)['SexMale']), b = (coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus']), col = 'red')
-  AnswerTests: omnitest(correctExpr = "abline(a = (coef(m1)['(Intercept)'] + coef(m1)['SexMale']), b = (coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus']), col = 'red')")
+  AnswerTests: any_of_exprs("abline(a = (coef(m1)['(Intercept)'] + coef(m1)['SexMale']), b = (coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus']), col = 'red')",
+  "abline(a = coef(m1)['(Intercept)'] + coef(m1)['SexMale'], b = coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus'], col = 'red')")
   Hint: a = (coef(m1)['(Intercept)'] + coef(m1)['SexMale'])
+
+- Class: text
+  Output: "Here we can see that there is a slight (but not statistically significant) difference in the relationship
+  between Tarsus and head size between males and females."
 
 - Class: text
   Output: "## Multiple regression with continuous predictors"
