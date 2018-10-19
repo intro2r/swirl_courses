@@ -64,7 +64,7 @@
 
 - Class: cmd_question
   Output: "Now let's plot the data. First, plot
-  `$incidence` as a function of `$distance`." 
+  `incidence` as a function of `distance`." 
   CorrectAnswer: plot(incidence ~ distance, data = isolation)
   AnswerTests: omnitest(correctExpr = "plot(incidence ~ distance, data = isolation)")
   Hint: Plot() incidence as a function of distance.
@@ -76,7 +76,7 @@
     values of distance."
 
 - Class: cmd_question
-  Output: "Now make a similar plot for `$area`."
+  Output: "Now make a similar plot where `area` is our predictor."
   CorrectAnswer: plot(incidence ~ area, data = isolation)
   AnswerTests: omnitest(correctExpr = "plot(incidence ~ area, data = isolation)")
   Hint: Plot() incidence as a function of area.
@@ -86,11 +86,19 @@
     we see fewer 0's and more 1's.  Let's test these relationships 
     using a generalized linear model."
 
-- Class: cmd_question
+- Class: text
   Output: "We can begin examining these patterns in more detail
     by fitting a model of incidence as a function of area and distance. 
-    We will first consider the additive model (i.e., area and distance are independent).
-    Use `glm()` to run this model, and call it `m0`. Remember to use a
+    We will first consider the additive model (i.e., area and distance are independent)."
+ 
+- Class: text
+  Output: "To do this, we'll need to run a more flexible form of a linear model, called a 
+  generalized linear model. Simply, this lets us fit a linear model with error terms from
+  other, non-normal distributions. In this case, we assume our binomial response has errors 
+  following a bernoulli distribution."
+  
+- Class: cmd_question
+  Output: "Use `glm()`, which stands for generalized linear model, and call it `m0`. Use a
     formula, set the `data = ` argument, *and* the `family = binomial` argument."
   CorrectAnswer: m0 <- glm(incidence ~ area + distance, family = binomial, data = isolation)
   AnswerTests: omnitest(correctExpr = "m0 <- glm(incidence ~ area + distance, family = binomial, data = isolation)")
@@ -105,7 +113,7 @@
 - Class: cmd_question
   Output: "Ok, what if we think that there is an interaction between area and distance, i.e., 
     the slope of each variable varies as well as the intercept? Run the model of an
-    interaction between area and distance, called `m2`."
+    interaction between area and distance, called `m1`."
   CorrectAnswer: m1 <- glm(incidence ~ area * distance, family = binomial, data = isolation)
   AnswerTests: omnitest(correctExpr = "m1 <- glm(incidence ~ area * distance, family = binomial, data = isolation)")
   Hint: Remember that `*` indicates an interaction.`
@@ -162,7 +170,7 @@
     in the log odds for each level compared to the base level."
 
 - Class: cmd_question
-  Output: "As usual, confidence intervals around the coefficient
+  Output: "Confidence intervals around the coefficient
     estimates can be calculated with the function `confint()`.
     Calculate the CIs for `m0`."
   CorrectAnswer: confint(m0) 
@@ -196,7 +204,7 @@
 - Class: text
   Output: "Thus, for **categorical predictors**, an odds ratio of > 1 suggests a positive
     difference between levels and the base level (the exponential of a positive number 
-    is greater than 1), i.e., the base level has a lower odds and the level has a 
+    is greater than 1), i.e., the base level has a lower odds and the treatment level has a 
     higher odds. An odds ratio of < 1 suggests a negative difference (the exponential 
     of a negative number lies between 0 and 1)."
 
@@ -234,8 +242,8 @@
 
 - Class: text
   Output: "We can generate predicted probabilities for both continuous and
-    categorical variables. We can generate predicted probabilities for each
-    row in the original dataset, just by calling the `predict()` function."
+    categorical variables. To do this, we call the `predict()` function, which can 
+    generate predictions for each row in the original data set."
 
 - Class: text
   Output: "Setting `type = 'link'` returns the logits; setting `type = 'response'`
@@ -243,8 +251,8 @@
 
 - Class: cmd_question
   Output: "Add an extra column to the dataset for the predicted logits,
-     called 'logits'. 
-    Remember that to add a column we just need to call the data object,
+     called 'logit' by using the `predict()` function on m0 and setting the correct type. 
+     Remember that to add a column we just need to call the data object,
     and add the new column name with a dollar sign."
   CorrectAnswer: isolation$logit <- predict(m0, type = 'link')
   AnswerTests: omnitest(correctExpr = "isolation$logit <- predict(m0, type = 'link')")
@@ -283,7 +291,7 @@
     make two separate individual logistic regressions and make predictions from those."
 
 - Class: cmd_question
-  Output: "Make a model for incidence as a function of area, called `ma`."
+  Output: "Make a logistic model for incidence as a function of area, called `ma`."
   CorrectAnswer: ma <- glm(incidence ~ area, family = binomial, data = isolation)
   AnswerTests: omnitest(correctExpr = "ma <- glm(incidence ~ area, family = binomial, data = isolation)")
   Hint: ma <- glm(incidence ~ area, family = binomial, data = isolation)
@@ -299,9 +307,9 @@
 
 
 - Class: cmd_question
-  Output: "Now generate the vector of predicted y values of the log odds (call it `yv`).
-    Remember to include the model object (ma), the new data (yv, as a dataframe), 
-    and the type (`response`)."
+  Output: "Now generate the vector of predicted y values of the log odds using `predict` (call it `yv`).
+    Include `object =` for your model, `newdata =` (a dataframe of xv, in which xv is named as your predictor, in this case area), 
+    and `type =` (`response`)."
   CorrectAnswer: yv <- predict(object = ma, newdata = data.frame(area = xv), type = "response")
   AnswerTests: omnitest(correctExpr = "yv <- predict(object = ma, newdata = data.frame(area = xv), type = 'response')")
   Hint: yv <- predict(object = ma, newdata = data.frame(area = xv), type = "response")
@@ -311,10 +319,9 @@
     (predicted) line."
 
 - Class: cmd_question
-  Output: "Add this fitted line to the plot of incidence on area, using the `lines()`
-    or `points()` function."
+  Output: "Add this fitted line to the plot of incidence on area, using the `lines()` function."
   CorrectAnswer: lines(xv, yv)
-  AnswerTests: any_of_exprs("lines(xv, yv)", "points(xv, yv, type = 'l')")
+  AnswerTests: any_of_exprs("lines(xv, yv)", "lines(x = xv, y = yv)")
   Hint: Check the graphics pages if you have forgotten how to use these two functions.
 
 - Class: cmd_question
@@ -349,7 +356,8 @@
   Hint: Plot() incidence as a function of distance.
 
 - Class: cmd_question
-  Output: "And, add the line. This time make the line blue, dashed, and four times as wide."
+  Output: "And, add the line. This time make the line blue with `col =`, dashed by changing the line type with `lty = 2`, 
+  and four times as wide with `lwd = 4`."
   CorrectAnswer: lines(xv, yv, col = 'blue', lty = 2, lwd = 4)
   AnswerTests: any_of_exprs("lines(xv, yv, col = 'blue', lty = 2, lwd = 4)", "points(xv, yv, type = 'l', col = 'blue', lty = 2, lwd = 4)")
   Hint: Check the graphics pages if you have forgotten how to set these parameters.
@@ -397,7 +405,7 @@
   Hint: xv2$y <- predict(m0, newdata = xv2, type = 'response') 
 
 - Class: cmd_question
-  Output: "Add this new line to the graph."
+  Output: "Add this new line to the graph, referencing your x and y values in the xv2."
   CorrectAnswer: lines(xv2$distance, xv2$y)
   AnswerTests: any_of_exprs("lines(xv2$distance, xv2$y)", "lines(xv, xv2$y)", "points(xv2$distance, xv2$y, type = 'l')", "points(xv, xv2$y, type = 'l')")
   Hint: Check the graphics pages if you have forgotten how to set these parameters.
@@ -448,7 +456,7 @@
   Output: "As above, we use `glm()` with `family = 'binomial'`. In contrast to the
     binomial response, in the case of proportion data our response data is a matrix
     of two columns, one column of successes and one of failures. This matrix must
-    be a single object (i.e., you could use `cbind()` to stick two columns together),
+    be a single object (e.g., you could use `cbind()` to stick two columns together),
     which in most cases we will call `y`."
 
 - Class: cmd_question
@@ -468,8 +476,9 @@
   Output: "First calculate the actual proportion of males in each 
     population. Make a new column for this vector, called `$p`"
   CorrectAnswer: sexratio$p <- sexratio$males/(sexratio$males + sexratio$females)
-  AnswerTests: omnitest(correctExpr = "sexratio$p <- sexratio$males/(sexratio$males + sexratio$females)")
-  Hint: sexratio$p <- sexratio$males/(sexratio$males + sexratio$females)
+  AnswerTests: any_of_exprs("sexratio$p <- sexratio$males/(sexratio$males + sexratio$females)",
+  "sexratio$p <- sexratio$males/sexratio$total")
+  Hint: sexratio$p <- sexratio$males/sexratio$total
   
 - Class: cmd_question
   Output: "To model proportion data, R requires a unique form of the response 
@@ -523,7 +532,7 @@
   Output: "## Plotting proportion data"
 
 - Class: cmd_question
-  Output: "We can plot the proportion of males (`$p`) as a function of the log(total) 
+  Output: "We can plot the proportion of males (`p`) as a function of the log(total) 
     as normal, using `plot()`."
   CorrectAnswer: plot(p ~ log(total), data = sexratio)
   AnswerTests: omnitest(correctExpr = "plot(p ~ log(total), data = sexratio)")
@@ -543,8 +552,9 @@
     because our model (m3) is of log(total), not log(log(total)). Call this
     new vector `yv` as before."
   CorrectAnswer: yv <- predict(m3, data.frame(total = exp(xv)), type = "response")
-  AnswerTests: omnitest(correctExpr = "yv <- predict(m3, data.frame(total = exp(xv)), type = 'response')")
-  Hint: yv <- predict(m3, data.frame(total = exp(xv)), type = "response")
+  AnswerTests: any_of_exprs("yv <- predict(m3, data.frame(total = exp(xv)), type = 'response')",
+  "yv <- predict(object = m3, newdata = data.frame(total = exp(xv)), type = 'response')")
+  Hint: yv <- predict(object = m3, newdata = data.frame(total = exp(xv)), type = "response")
 
 - Class: cmd_question
   Output: "Now add the fitted line to the plot, in red and twice the width."
