@@ -426,7 +426,7 @@
     previous model that used `lm()`, still within `summary()`."
   CorrectAnswer: summary(lm(Head ~ Sex * Tarsus, data = sparrow))
   AnswerTests: any_of_exprs("summary(lm(Head ~ Sex * Tarsus, data = sparrow))", "summary(lm(Head ~ Tarsus * Sex, data = sparrow))")
-  Hint: Scroll up and change + to *!
+  Hint: Scroll up and change the plus to a star.
     
 - Class: text
   Output: "Let's walk through these results. As before, we have the model
