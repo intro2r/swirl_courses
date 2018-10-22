@@ -49,7 +49,7 @@
     the number of samples (`n = `). You can also change the mean and standard deviation. In this case,
     just generate 50 values with the defaults (mean of 0 and sd of 1). Assign this to `x`."
   CorrectAnswer: x <- rnorm(50)
-  AnswerTests: any_of_exprs('x <- rnorm(50)', 'x <- rnorm(n = 50)', 'x <- rnorm(n = 50, mean = 0, sd = 1', 'x <- rnorm(50, mean = 0, sd = 1)')
+  AnswerTests: any_of_exprs('x <- rnorm(50)', 'x <- rnorm(n = 50)', 'x <- rnorm(n = 50, mean = 0, sd = 1)', 'x <- rnorm(50, mean = 0, sd = 1)')
   Hint: Plop 50 into rnorm()
     
 - Class: cmd_question
