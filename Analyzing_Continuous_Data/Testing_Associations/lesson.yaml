@@ -425,8 +425,7 @@
     the ` + ` in the model formula with a ` * `. Try that, modifying your
     previous model that used `lm()`, still within `summary()`."
   CorrectAnswer: summary(lm(Head ~ Sex * Tarsus, data = sparrow))
-  AnswerTests: any_of_exprs("summary(lm(Head ~ Sex * Tarsus, data = sparrow))",
-  "summary(lm(Head ~ Tarsus * Sex, data = sparrow))")
+  AnswerTests: any_of_exprs("summary(lm(Head ~ Sex * Tarsus, data = sparrow))", "summary(lm(Head ~ Tarsus * Sex, data = sparrow))")
   Hint: Scroll up and change + to *!
     
 - Class: text
