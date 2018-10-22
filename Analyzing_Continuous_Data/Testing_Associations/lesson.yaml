@@ -475,8 +475,7 @@
     them from the model output. Make a new model, m1, using `lm()` to model
     Head as a function of the interaction between Sex and Tarsus."
   CorrectAnswer: m1 <- lm(Head ~ Sex * Tarsus, data = sparrow)
-  AnswerTests: any_of_exprs("m1 <- lm(Head ~ Sex * Tarsus, data = sparrow)",
-  "m1 <- lm(Head ~ Tarsus * Sex, data = sparrow)")
+  AnswerTests: any_of_exprs("m1 <- lm(Head ~ Sex * Tarsus, data = sparrow)", "m1 <- lm(Head ~ Tarsus * Sex, data = sparrow)")
   Hint: m1 <- lm(Head ~ Sex * Tarsus, data = sparrow)
     
 - Class: cmd_question
