@@ -117,8 +117,7 @@
 - Class: cmd_question
   Output: "Now test if this correlation coefficient is greater than 0 with `cor.test()`."
   CorrectAnswer: cor.test(x = race$Nettime_mins, y = race$Pace_mins)
-  AnswerTests: any_of_exprs('cor.test(x = race$Nettime_mins, y = race$Pace_mins)', 'cor.test(y = race$Pace_mins, x = race$Nettime_mins)',
-  'cor.test(race$Nettime_mins, race$Pace_mins)')
+  AnswerTests: any_of_exprs('cor.test(x = race$Nettime_mins, y = race$Pace_mins)', 'cor.test(y = race$Pace_mins, x = race$Nettime_mins)', 'cor.test(race$Nettime_mins, race$Pace_mins)')
   Hint: Use cor.test, where your x is race net time and your y is pace.
 
 - Class: text
@@ -515,8 +514,7 @@
     call to `abline()`, add in the calculation to obtain the absolute 
     values for males to plot the fitted line. Make the line red."
   CorrectAnswer: abline(a = (coef(m1)['(Intercept)'] + coef(m1)['SexMale']), b = (coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus']), col = 'red')
-  AnswerTests: any_of_exprs("abline(a = (coef(m1)['(Intercept)'] + coef(m1)['SexMale']), b = (coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus']), col = 'red')",
-  "abline(a = coef(m1)['(Intercept)'] + coef(m1)['SexMale'], b = coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus'], col = 'red')")
+  AnswerTests: any_of_exprs("abline(a = (coef(m1)['(Intercept)'] + coef(m1)['SexMale']), b = (coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus']), col = 'red')", "abline(a = coef(m1)['(Intercept)'] + coef(m1)['SexMale'], b = coef(m1)['Tarsus'] + coef(m1)['SexMale:Tarsus'], col = 'red')")
   Hint: a = (coef(m1)['(Intercept)'] + coef(m1)['SexMale'])
 
 - Class: text
