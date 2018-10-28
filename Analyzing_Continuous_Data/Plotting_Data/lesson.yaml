@@ -1,0 +1,334 @@
+- Class: meta
+  Course: Analyzing_Continuous_Data
+  Lesson: Plotting_Data
+  Author: Simon Queenborough
+  Type: Standard
+  Organization: Yale FES
+  Version: 0.0.1
+
+- Class: text
+  Output: "In this lesson, we will learn how to make simple plots of numeric and 
+    factorial data. We will begin to modify the defaults of these plots. As with most
+    stats software the default options are not great. Usually, you will want to modify
+    your plots, either to fit the publication requirements of a journal, or to make 
+    the plots objectively 'better', in line with recommended best practice."
+
+
+- Class: text
+  Output:  "We will be using the base plotting system and
+   talk more about how you can exploit all its many parameters to get 
+   the plot you want."
+   
+- Class: text
+  Output: "Moreover, we'll focus on using the base plotting system 
+   to create graphics on the screen device rather than another graphics device."
+
+- Class: text
+  Output: "The base system is very intuitive and easy to use. It is akin to drawing
+    a plot using a pencil and ruler, building up the elements piece by piece."
+  
+  
+- Class: text
+  Output: "You can't go backwards, though,
+    say, if you need to readjust margins or have misspelled a caption. To go 'backwards',
+    you would need to start drawing the whole plot again from scratch (i.e., re-running the 
+    code chunk---not normally a big deal). A finished plot will therefore be a series of R 
+    commands, so it will be difficult to translate a finished plot into a different system."
+
+- Class: text
+  Output: "Calling a basic routine such as plot(x, y) or hist(x)  launches a graphics device 
+    (if one is not already open) and draws a new plot on the device. A graphics 'device'
+    is just a general word for either the screen, or a graphics file such as .pdf or .png"
+
+
+- Class: cmd_question
+  Output: "Let's try our hand at some simple graphs using a small dataset on sparrow 
+    morphology. It is loaded with this lesson. Have a look at it. Type BirdData."
+  CorrectAnswer: BirdData
+  AnswerTests: omnitest(correctExpr='BirdData')
+  Hint: Type BirdData
+  
+- Class: text
+  Output: "We will start by using the generic plot() function, 
+    which does various things depending what data you input.
+    The function plot() is a wrapper for specific plot() functions
+    that take over if criteria (such as the class of the input data) are met."
+
+- Class: cmd_question
+  Output: "You can plot a single vector/column, and it will appear in the same 
+    order as the data. Use plot() to plot the $Head column."
+  CorrectAnswer: plot(BirdData$Head)
+  AnswerTests: omnitest(correctExpr='plot(BirdData$Head)')
+  Hint: Type plot(BirdData$Head)
+
+- Class: text
+  Output: "You can see that the value of each circle is given
+    along the y-axis. The axis has the label 'BirdData$Head'.
+    The points are also in order they appear
+    in the dataset, i.e., according to their 'index'."
+
+- Class: text
+  Output: "This figure illustrates many of the defaults in the 
+    base plotting system in R. Axes have labels based on the data
+    you feed in; everything is in the same font; labels and numbers 
+    run parallel to their axis; tick marks lie outside the lines; 
+    data points are empty circles."
+    
+- Class: text
+  Output: "We will come back to these defaults shortly. For now, 
+    let's see what happens when we input different data."
+
+- Class: cmd_question
+  Output: "How about if we wanted to arrange our data in order of their
+    $Head size, rather than the order they appear in the data? Use the
+    function sort() to display these data."
+  CorrectAnswer: sort(BirdData$Head)
+  AnswerTests: omnitest(correctExpr='sort(BirdData$Head)')
+  Hint: Type sort(BirdData$Head)
+  
+- Class: cmd_question
+  Output: "Now, plot a figure as before, but with the sorted data nested within
+    the call to plot()."
+  CorrectAnswer: plot(sort(BirdData$Head))
+  AnswerTests: omnitest(correctExpr='plot(sort(BirdData$Head))')
+  Hint: Type plot(sort(BirdData$Head))
+
+- Class: cmd_question
+  Output: "Plotting a single numeric variable plots each data
+    point. What does plotting a single categorical variable with
+    plot() do?
+    Try it out... use plot() on the $Species column."
+  CorrectAnswer: plot(BirdData$Species)
+  AnswerTests: omnitest(correctExpr='plot(BirdData$Species)')
+  Hint: Type plot(BirdData$Species)
+
+- Class: text
+  Output: "Plotting a factor results in counts of each level,
+    much like the function table(). It is a kind of _barplot_"
+
+
+- Class: text
+  Output: "Lovely. You can plot one variable! However, most
+    graphics are used to look at the relationships between
+    two or more variables."
+
+
+- Class: cmd_question
+  Output: "Let's try plotting two numeric columns first. 
+    Plot $Head as a function of $Tarsus. Use a formula
+    to do so: BirdData$Head ~ BirdData$Tarsus."
+  CorrectAnswer: plot(BirdData$Head ~ BirdData$Tarsus)
+  AnswerTests: omnitest(correctExpr='plot(BirdData$Head ~ BirdData$Tarsus)')
+  Hint: Type plot(BirdData$Head ~ BirdData$Tarsus)
+
+- Class: cmd_question
+  Output: "Plotting two numeric columns makes a _scatterplot_. What about a 
+    numeric variable as a function of a factor? Plot $Head as a function
+    of $Species."
+  CorrectAnswer: plot(BirdData$Head ~ BirdData$Species)
+  AnswerTests: omnitest(correctExpr='plot(BirdData$Head ~ BirdData$Species)')
+  Hint: Type plot(BirdData$Head ~ BirdData$Species)
+
+- Class: text
+  Output: "A numeric and a factor makes a _boxplot_."
+  
+- Class: text
+  Output: "Now that you can use plot() to make different
+    graphs depending on the input, let's explore the arguments to plot() in more detail."
+
+- Class: text
+  Output: "We have already used a formula structure to tell plot() what
+    data we want to plot. The tilde (~) in R formula notation means 'as a function of'.
+    The y variable goes to the left side, and the x variable on the right."
+
+
+- Class: text
+  Output: "If you look at the help page for plot(), you will see that the only two 
+    required arguments to use in plot() are `x` and `y`: the data arguments, i.e., 
+    the x- and y-axes. In fact, the y argument is optional. In the case of the 
+    formula, that takes the x argumment and so we do not need y."
+  
+- Class: cmd_question
+  Output: "However, in lieu of writing a formula these two arguments can be specified explicitly.
+    Set 'x' to BirdData$Species and 'y' to BirdData$Head."
+  CorrectAnswer: plot(x = BirdData$Species, y = BirdData$Head)
+  AnswerTests: omnitest(correctExpr='plot(x = BirdData$Species, y = BirdData$Head)')
+  Hint: Type plot(x = BirdData$Species, y = BirdData$Head)
+
+- Class: text
+  Output: "Note that in this case, R does not include axis labels."
+
+- Class: text
+  Output: "In many cases, using the formula approach will be slightly easier to understand
+    at a glance, because it is more obvious which variable is being plotted as a function
+    of the other."
+    
+- Class: cmd_question
+  Output: "We can make things even easier to read and understand if we use the 'data' argument.
+    Use the arrow keys to scroll up to the previous command that created the boxplot, using a
+    formula. Delete 'BirdData$' from before both 'Head' and 'Species'. Add the name of the data
+    object to the argument 'data = ', nested within the plot() function."
+  CorrectAnswer: plot(Head ~ Species, data = BirdData)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Species, data = BirdData)')
+  Hint: Type plot(Head ~ Species, data = BirdData)
+
+- Class: text
+  Output: "Wow! This code is almost understandable as a regular language! Ok, so here
+    it should be clear that we are plotting Head size as a function of Species, both
+    of which come from the BirdData data object."
+    
+- Class: text
+  Output: "This 'data = ' argument is only available if you use the formula approach to 
+    input data to plot(). The plot() function calls the plot.formula() function. Check the 
+    help pages if you want."
+    
+- Class: text
+  Output: "Another advantage of the 'data =' argument, apart from making the code a bit 
+    clearer, is that it then is easier to manipulate the data object from _within_ the 
+    call to plot()."
+
+- Class: text
+  Output: "For example, if we wanted to subset out the first four sparrows, we could 
+    either first create a new data object which is passed to plot:
+
+    BirdData1 <- BirdData[1:4, ]"
+    
+- Class: text
+  Output: "Or, we could subset both $Head and $Species individually:
+    plot(BirdData$Head[1:4] ~ BirdData$Species[1:4])."
+  
+- Class: text
+  Output: "Both these approaches create extra steps or require repetition, where errors could creep in.
+    It would be much better to use a single location where we subset that applies to both variables
+    that we want to plot."
+    
+- Class: cmd_question
+  Output: "Plot $Head as a function of $Tarsus, using the data argument of plot() to subset 
+  out the first four sparrows."
+  CorrectAnswer: plot(Head ~ Tarsus, dat = BirdData[1:4, ])
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, dat = BirdData[1:4, ])')
+  Hint: Type plot(Head ~ Tarsus, dat = BirdData[1:4, ])
+
+- Class: text
+  Output: "Alternatively, we could sort the whole dataframe by one of the columns, to plot the 
+    points in a different order. We used the function sort() to change the arrangement of a single
+    variable when we began this lesson. To sort an entire dataframe is a bit more complex."
+
+- Class: cmd_question
+  Output: "Instead of sort(), we would use the function order(). This function returns the 
+    indices of a variable, in ascending order of their value. Look at what happens when you 
+    run order() on BirdData$Tarsus."
+  CorrectAnswer: order(BirdData$Tarsus)
+  AnswerTests: omnitest(correctExpr='order(BirdData$Tarsus)')
+  Hint: Type order(BirdData$Tarsus)
+  
+  
+  
+- Class: cmd_question  
+  Output: "Now, try using this order expression inside [ ] square brackets to subset the original data."
+  CorrectAnswer: BirdData[order(BirdData$Tarsus), ]
+  AnswerTests: omnitest(correctExpr='BirdData[order(BirdData$Tarsus), ]')
+  Hint: Remember that you need to use square brackets and also a comma ...
+  
+- Class: text
+  Output: "Placing this ordered vector inside the brackets is a essentially subsetting all the data. It is akin
+    to one of the uses of sample(), where we sampled the entire vector without replacement, essentially shuffling
+    everything into a random order. However, with order(), we have a spceific order in mind. The indices of the 
+    vector (the column $Tarsus) then are used as the row numbers across the entire dataset."
+  
+- Class: text
+  Output: "You can see that the whole data object 'BirdData' is now sorted by the Tarsus column, 
+    which goes from 19.7 to 22.3, compared to the unsorted BirdData."
+
+- Class: cmd_question
+  Output: "Now plot this ordered dataset in a call to plot(), for Head size as
+    a function of Tarsus."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData[order(BirdData$Tarsus), ])
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData[order(BirdData$Tarsus), ])')
+  Hint: Type plot(Head ~ Tarsus, data = BirdData[order(BirdData$Tarsus), ])
+
+
+- Class: text
+  Output: "Coffee break ... tum te tum te tum ..."
+
+- Class: text
+  Output: "Now that you can create different types of plots with different parts of a data
+    object, let's look at modifying the default plot."
+
+- Class: text
+  Output: "The default plot in R is not too bad (better than Excel, at least!), 
+    but does require some modification for publication. Given that the default plot() 
+    only has two arguments, all subsequent arguments must be specified explicitly."
+
+- Class: text
+  Output: "With two numeric variables the default plot is a scatterplot. What if we wanted 
+    a line plot instead (i.e., a joined up line tht goes from each x-y point)? The argument
+    'type = ' can be used to set the kind of plot, including type  = 'l' (a line plot), 
+    type = 'b' (both points and lines), as well as type = 'n' (for no plotting)."
+
+- Class: cmd_question
+  Output: "Make a line plot of Head on Tarsus."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, type = 'l')
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, type = "l")')
+  Hint: plot(Head ~ Tarsus, data = BirdData, type = 'l')
+
+- Class: cmd_question
+  Output: "The line goes from point to point, in the order that the 
+    x and y coordinates appear in the dataframe. Now try a graph of points
+    joined by lines in between."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, type = 'b')
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, type = "b")')
+  Hint: plot(Head ~ Tarsus, data = BirdData, type = 'b')
+
+- Class: text
+  Output: "We can add text to this figure to describe the x and y-axes, as well as give
+    the plot a title. The arguments 'xlab', 'ylab', and 'main' correspond to these parts
+    of the graph, and all take text strings in quotes." 
+
+- Class: cmd_question
+  Output: "For a graph of sparrow head size as a function of species, set xlab to 'Species of Sparrow',
+    ylab to 'Head Size (mm)', and the graph title to 'A Boxplot of Sparrows'."
+  CorrectAnswer: plot(Head ~ Species, data = BirdData, xlab = 'Species of Sparrow', ylab = 'Head Size (mm)', main = 'A Boxplot of Sparrows')
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Species, data = BirdData, xlab = "Species of Sparrow", ylab = "Head Size (mm)", main = "A Boxplot of Sparrows")')
+  Hint: plot(Head ~ Species, data = BirdData, xlab = 'Species of Sparrow', ylab = 'Head Size (mm)', main = 'A Boxplot of Sparrows')
+
+- Class: text
+  Output: "A further thing you might wish to modify is the plotting characters themselves. Maybe
+    empty circles is just not doing it for you."
+    
+- Class: figure
+  Output: "This figure illustrates some of the plotting characters available to you. They are 
+    called by number, using the argument 'pch = '. Characters 21:25 can have two different colours specified and can be filled
+    with a colour different from the line. We will look at colour in the next lesson."
+  Figure: pch_fig.R
+  FigureType: new
+  
+- Class: text
+  Output: Finally, the size of almost anything in a plot can be altered using 
+    `cex = `, a number giving the magnification relative to the default. The default 
+    magnification changes depending on the layout of the plotting area, but starts as 1.
+
+- Class: text
+  Output: "The size of plotting text and symbols is given using 'cex = '. The size of axis labels
+  and the main title is changed using 'cex.lab = ' and 'cex.main = '. The size of the axis 
+  elements is changed using 'cex.axis = '."
+  
+- Class: cmd_question
+  Output: "Repeat the figure of Head on Tarsus size as before, but set the plotting symbols to three times
+    as large and upside-down triangles. There is no 
+    need to set different labels or a title. Remember that in RStudio you can use the arrow
+    buttons to move back and forth through all the Plots that were made in this session."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, pch = 6, cex = 3)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, pch = 6, cex = 3)')
+  Hint: plot(Head ~ Tarsus, data = BirdData, pch = 6, cex = 3)
+
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: That would be lovely, thank you.
+  CorrectAnswer: That would be lovely, thank you.
+  AnswerTests: submit_log()
+  Hint: hint
+
+
+
