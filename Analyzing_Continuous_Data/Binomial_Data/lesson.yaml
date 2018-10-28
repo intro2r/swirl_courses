@@ -476,8 +476,7 @@
   Output: "First calculate the actual proportion of males in each 
     population. Make a new column for this vector, called `$p`"
   CorrectAnswer: sexratio$p <- sexratio$males/(sexratio$males + sexratio$females)
-  AnswerTests: any_of_exprs("sexratio$p <- sexratio$males/(sexratio$males + sexratio$females)",
-  "sexratio$p <- sexratio$males/sexratio$total")
+  AnswerTests: any_of_exprs("sexratio$p <- sexratio$males/(sexratio$males + sexratio$females)", "sexratio$p <- sexratio$males/sexratio$total")
   Hint: sexratio$p <- sexratio$males/sexratio$total
   
 - Class: cmd_question
@@ -552,8 +551,7 @@
     because our model (m3) is of log(total), not log(log(total)). Call this
     new vector `yv` as before."
   CorrectAnswer: yv <- predict(m3, data.frame(total = exp(xv)), type = "response")
-  AnswerTests: any_of_exprs("yv <- predict(m3, data.frame(total = exp(xv)), type = 'response')",
-  "yv <- predict(object = m3, newdata = data.frame(total = exp(xv)), type = 'response')")
+  AnswerTests: any_of_exprs("yv <- predict(m3, data.frame(total = exp(xv)), type = 'response')", "yv <- predict(object = m3, newdata = data.frame(total = exp(xv)), type = 'response')")
   Hint: yv <- predict(object = m3, newdata = data.frame(total = exp(xv)), type = "response")
 
 - Class: cmd_question
