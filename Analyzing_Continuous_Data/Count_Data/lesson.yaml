@@ -224,7 +224,7 @@
   Output: "Run a chi-squared goodness of fit test on the 
     residuals of m1, using `pchisq()`. Make sure that you extract the deviance
     and degrees of freedom from the model (df.residual), rather than 
-    entering the values manually."https://github.com/intro2r/swirl_courses
+    entering the values manually."
   CorrectAnswer: pchisq(m1$deviance, m1$df.residual)
   AnswerTests: omnitest(correctExpr = "pchisq(m1$deviance, m1$df.residual)")
   Hint: You can extract the deviance with `m1$deviance`.
