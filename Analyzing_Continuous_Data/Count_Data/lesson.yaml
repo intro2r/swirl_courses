@@ -296,7 +296,7 @@
   Output: "Now, we can plot the data points (adding some jitter to the
     counts, because there will be some overlapping points), and then 
     add the predicted lines. First, plot jittered `$num_awards` as a function
-    of `math_score`. Use `pch = 20`, and the argument `col = ` to your factor, program. 
+    of `math_score`. Use `pch = 20`, and the argument `col = ` to your factor, program."
   CorrectAnswer: plot(jitter(num_awards) ~ math_score, data = awards2, col = program, pch = 20)
   AnswerTests: omnitest(correctExpr = "plot(jitter(num_awards) ~ math_score, data = awards2, pch = 20, col = program)")
   Hint: plot(jitter(num_awards) ~ math_score, data = awards2, col = program, pch = 20)
