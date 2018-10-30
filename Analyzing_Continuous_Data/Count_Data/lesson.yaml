@@ -298,7 +298,7 @@
     add the predicted lines. First, plot jittered `$num_awards` as a function
     of `math_score`. Use `pch = 20`, and the argument `col = ` to your factor, program."
   CorrectAnswer: plot(jitter(num_awards) ~ math_score, data = awards2, col = program, pch = 20)
-  AnswerTests: omnitest(correctExpr = "plot(jitter(num_awards) ~ math_score, data = awards2, pch = 20, col = program)")
+  AnswerTests: any_of_exprs('plot(jitter(num_awards) ~ math_score, data = awards2, pch = 20, col = program)', 'plot(jitter(num_awards) ~ math_score, pch = 20, col = program, data = awards2)', 'plot(jitter(num_awards) ~ math_score, data = awards2, col = program, pch = 20)')
   Hint: plot(jitter(num_awards) ~ math_score, data = awards2, col = program, pch = 20)
 
 - Class: cmd_question
