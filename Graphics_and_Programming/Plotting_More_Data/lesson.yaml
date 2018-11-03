@@ -1,0 +1,441 @@
+- Class: meta
+  Course: Graphics and Programming
+  Lesson: Plotting_More_Data
+  Author: Simon Queenborough
+  Type: Standard
+  Organization: Yale FES
+  Version: 0.0.1
+
+
+- Class: text
+  Output: "Welcome back :)  OK! We finished the last lesson using the arguments 'cex =' to change
+    the size of various parts of our plots of bird data."
+    
+- Class: text
+  Output: "Let's continue where we left off, and recreate that plot. We will begin this lesson by adding
+    some colour to the plot, and then look at the common arguments to par(), the function that 
+    sets all the graphical parameters."
+
+- Class: text
+  Output: "By the end of this lesson, you should be able to change the appearance of your
+    figures in many and various ways."
+    
+- Class: cmd_question
+  Output: "We will continue to use the same bird dataset as before, 'BirdData'. Look at the data 
+    again, type BirdData."
+  CorrectAnswer: BirdData
+  AnswerTests: omnitest(correctExpr='BirdData')
+  Hint: BirdData, BirdData, BirdData
+
+- Class: cmd_question
+  Output: "Ok, remember from the last lesson how to plot Head size as a function of
+    Tarsus? Just plot the data, don't worry about labels, but do use the formula notation
+    and 'data =' argument."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData)')
+  Hint: plot(Head ~ Tarsus, data = BirdData)
+
+- Class: text
+  Output: "We will look very briefly at the use of colours in figures now, before going into
+    colour in more detail in another lesson. We will also use colour to illustrate the usefulness
+    of using vectors as inputs."
+  
+- Class: text
+  Output: "Anyway, first things first. Colour is very useful for various things in graphics, 
+    mostly in terms of illustrating different groups of data. In the past, most journals 
+    were only printed in black and white, so different shades of grey were important."
+    
+- Class: text
+  Output: "R has 102 unique shades of grey. See this blogplost, if you want: 
+    https://www.r-bloggers.com/50-shades-of-grey-according-to-r/."
+
+- Class: text
+  Output: "R also has access to a very wide range of colours (including grey). Colours can be accessed 
+    in a variety of ways: (i) by number, e.g., 'col = 1' for black, or 'col = 2' for red;
+    (ii) by name, e.g., 'col = 'black''; (iii) by hexadecimal code, e.g., 'col = '#FF0000''; 
+    (iv) or RGB value, e.g., 'col = 'rgb(0,0,0)'. "
+
+- Class: cmd_question
+  Output: "Try changing the colour of the data points in the figure to red, using the name. The colours
+    will be more obvious if you also use a different plotting character, so use 'pch = 20'."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, pch = 20, col = 'red')
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, pch = 20, col = "red")')
+  Hint: plot(Head ~ Tarsus, data = BirdData, pch = 20, col = 'red')
+
+- Class: cmd_question
+  Output: "When used in a scatterplot, the argument 'col = ' changes the 
+    colours of the plotting symbols. What does this argument do when applied
+    to a boxplot? Add the color red to a plot of Head on Species." 
+  CorrectAnswer: plot(Head ~ Species, data = BirdData, col = 'red')
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Species, data = BirdData, col = "red")')
+  Hint: plot(Head ~ Species, data = BirdData, col = 'red')
+  
+- Class: text
+  Output: "Adding the argument 'col = 'red'' to a boxplot fills in the boxes."
+
+- Class: text
+  Output: "You can use `col.lab = `, `col.main = `, and `col.axis = ` to 
+    change the colour of these external parts of the plot, if needed."
+
+- Class: text
+  Output: "We will consider colour in more detail in a later lesson."
+  
+- Class: text
+  Output: "All of the parameters we have dealt with so far (colour, symbols, size, etc.)
+    can be changed using vectors, rather than addressing each individual element."
+    
+    
+
+- Class: cmd_question
+  Output: "For example, instead of specifying that *all* the points should be 
+    red, we can use a vector of colours to make each point a different colour. How
+    might we do this? Well, We have eight data points. We know that we can specify 
+    colours with a number. How about setting `col = 1:8` in our plot of Head on Tarsus?
+    Try that. (Remember to keep `pch = 20`; and also set `cex = 3` to make each point larger."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, col = 1:8, pch = 20, cex = 3)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, col = 1:8, pch = 20, cex = 3)')
+  Hint: plot(Head ~ Tarsus, data = BirdData, col = 1:8, pch = 20, cex = 2)
+
+- Class: text
+  Output: "Ok super. We can use a vector to set colours... how might this actually 
+    be useful?"
+
+- Class: cmd_question
+  Output: "We could use colour to indicate different groups. We know the species of each
+    sparrow in our data. This Species column is a factor variable, not numeric, but 
+    try setting `col = Species`, modifying the previous code."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, col = Species, pch = 20, cex = 3)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, col = Species, pch = 20, cex = 3)')
+  Hint: plot(Head ~ Tarsus, data = BirdData, col = Species, pch = 20, cex = 3)
+
+- Class: text
+  Output: "Woo hoo! Colours correspond to species. R converted the factors to 
+    integers according to their level (first level = 'A' = black; second level 
+    = 'B' = red) and coloured their points. Cool beans!"
+    
+    
+- Class: text
+  Output: "In the previous class, to modify elements of the graphic we added various arguments to the function `plot()`. "
+
+- Class: text
+  Output: "However, if you look at the help file (?plot), there are only three arguments specified, `x`, `y`, and `...`:
+    `plot(x, y, ...)`." 
+
+- Class: text
+  Output: "The elipses argument `...` is special and allows arguments for one function to be 
+    passed through another function. Remember that we discussed this issue briefly when we wrote our own 
+    functions, but for now, we can see that arguments such as `cex`, `pch`, etc. are not 
+    used directly by `plot()`. These arguments are actually arguments for the graphical parameters
+    function `par()`, that is used to modify the appearance and layout of graphics." 
+
+- Class: text
+  Output: "There are a **lot** of parameters that you can control. Some
+    you will use frequently, others will not be touched."
+
+- Class: cmd_question
+  Output: "All the arguments are listed on the `par()` help page ('?par'). 
+    You should spend some time looking over this page to see what options are available. Open it up now,
+    so you can refer to it as we progress through the lesson."
+  CorrectAnswer: ?par
+  AnswerTests: omnitest(correctExpr='?par')
+  Hint: Remember that you use the question mark to access the help files from the Console... ?par
+    
+ 
+- Class: text
+  Output: "As we said above, all the arguments discussed below can be placed within
+    a call to `par()`, e.g., `par(pch = 13, cex = 2)`."
+
+- Class: text
+  Output: "One important thing to note is that any changes to the defaults of `par()` will result in these changes being applied to 
+    *all* the subsequent plots that you create. " 
+
+- Class: text
+  Output: "There are several ways to reset the graphics window/s to the default parameters. Within RStudio, the easiest way is 
+    to go to the >Plots menu above, and select 'Clear All. This will close all the open plots windows and reset the graphics
+    parameters to their defaults."
+  
+- Class: text
+  Output: "In terms of working with and creating graphics, a useful way of working is to 
+    run code iteratively within the RStudio graphics windows to get the code to generate
+    you figure correct. Then, use a separate graphics device to create the final plot (more on 
+    this specific operation later!)."
+
+- Class: text
+  Output: "Alternatively, as we did in the previous lesson, these arguments can also be placed within the call 
+    to `plot()`, and will be passed to `par()` and have the same effect. In this lesson it will be
+    easier to put these arguments within `par()`."
+
+- Class: text
+  Output: "OK, let's get back to work ... First, we will look at some common modifications to the 
+    axes of plots. In many cases the default range of the axes, tick mark position and orientation, and
+    numbering scheme are not exactly what you (or your prefered publication) want., "
+
+- Class: cmd_question
+  Output: "We will use our example plot of Head on Tarsus again to illustrate these changes. First, remind
+    yourself of the basic code to make that plot using the formula approach and data argument ..."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData)')
+  Hint: plot(Head ~ Tarsus, data = BirdData)
+    
+- Class: cmd_question
+  Output: "Great. Look carefully at the axes. The tick marks (`tcl = 1`) point outwards from the plot, 
+    and their length is expressed as a fraction of the height of a line of text. 
+    The default is `tcl = -0.5`. 
+    You can flip the direction (i.e., have the tick marks point into the plot) by making that
+    value positive and also change the length of the tick marks. Try setting the tick marks
+    to the full height of a line of text and pointing inwards. Remember there is no
+    need to call `par()` first, just put the argument inside the main `plot()` call."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, tcl = 1)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, tcl = 1)')
+  Hint: plot(Head ~ Tarsus, data = BirdData, tcl = 1)
+    
+- Class: cmd_question
+  Output: "Another common modification is to change the orientation of the numbers 
+    along the axes. The default is that the numbers are parallel to their respective axis.
+    You can see this in the current plot that is displayed... along the x-axis the numbers are 
+    horizontal and along the y-axis the numbers are rotated 90 degrees anti-clockwise. You can 
+    change the style of these axis labels with the argument `las = `. 
+    The default is parallel to the axis (`las = 0`), but you may often want to set them to be
+    always horizontal (`las = 1`) or always perpendicular (`las = 2`), or even 
+    always vertical (`las = 3`). Try setting the axes to always horizontal, in a new call to our basic plot command."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, las = 1)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, las = 1)')
+  Hint: plot(Head ~ Tarsus, data = BirdData, las = 1)
+  
+- Class: cmd_question
+  Output: "Ok, now let's combine these two arguments and see what happens. Put the previous 
+    new values of `las` and `tcl` in our plot command."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1)')
+  Hint: plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1)
+    
+- Class: text
+  Output: "What do you see? We now have tick marks pointing inwards and horizontal tick labels. Doing these
+    operations has led to some extra white space appearing around the edges of our plot, where the tick marks 
+    used to be. For someone as persnickity about graphics as me, this does not look quite right ... 'How might
+    we decrease this space?' I hear you ask ... Well ..."
+    
+- Class: cmd_question
+  Output: "As you might expect, there is an argument for that. Within `par`, the argument `mgp =` is a 
+    vector of three elements that controls the number of lines out from the plot edge where the 
+    axis title (mgp[1]), axis labels (mgp[2]) and axis line itself (mgp[3]) are placed.
+    The default is `mgp = c(3, 1, 0)`. In our scenario, a more appealing distance between the axis labels
+    and the axis itself is `mgp = c(2.5, 0.5, 0)`. Try that, adding the mgp argument to the previous code."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1, mgp = c(2.5, 0.5, 0))
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1, mgp = c(2.5, 0.5, 0))')
+  Hint: plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1, mgp = c(2.5, 0.5, 0))
+
+- Class: text
+  Output: "Great, that moved the axes labels closer in, which (I think!) looks better. See what fine-scale control
+    you can have over the appearance of your figures? It's wonderful!"
+
+- Class: cmd_question
+  Output: "R generally sets the limits of the axes just wider than the data. There are several cases when
+    you may want to change this, for example to set the lower limit to 0, or make both sides wider if you
+    are plotting confidence limits and the default range is not wide enough. 
+    Setting the arguments `xlim = ` and `ylim = ` (x- and y axis limits) will resolve this issue. Try setting the 
+    x axis limits to 19 and 25. As with `mgp = `, you need to pass a vector here, in this case of only
+    two elements setting the min and max of the axis. Add this argument to the previous code."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1, mgp = c(2.5, 0.5, 0), xlim = c(19, 25))
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1, mgp = c(2.5, 0.5, 0), xlim = c(19, 25))')
+  Hint: plot(Head ~ Tarsus, data = BirdData, las = 1, tcl = 1, mgp = c(2.5, 0.5, 0), xlim = c(19, 25))
+
+- Class: text
+  Output: "As an aside, xlim and ylim are _not_ arguments to par; it would not make sense to have them apply to every 
+    subsequent plot. These two arguments are sent by the `plot()` function to the `plot.window()` function, which sets
+    up the coordinate system for that graphics window."
+
+- Class: text
+  Output: "R tries very hard to make the axes limits as pretty as possible. These are recomputed internally, so if 
+    you resize your graphics window, they may even change in number and position. In particular, if you 
+    make the window too narrow, R will drop some of the labels. Try playing with the size of the graphics
+    window now."
+    
+- Class: cmd_question
+  Output: "What if you wanted to ignore R, and decide on exactly *everything* about the axis labels,
+    including the position of the tick marks and what labels went there? You can do it! However,
+    first we would need remove the default axis and/or not have an axis plotted at all. We can 
+    suppress plotting the x axis with the argument `xaxt = 'n', and the y axis with `yaxt = 'n'.
+    Try suppressing the x axis of our default basic plot (i.e., ignoring all the recent additions)." 
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, xaxt = 'n')
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, xaxt = "n")')
+  Hint: plot(Head ~ Tarsus, data = BirdData, xaxt = 'n')
+
+- Class: text
+  Output: "Great.. this suppresses the axis tick marks and labels, but not the axis title.
+    To suppress the axis title, we have to modify the `xlab = ` argument in `plot()` You 
+    can do this by xlab = '' (i.e., a text string with nothing in it). Try that, too, adding to the 
+    previous code."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, xaxt = 'n', xlab = '')
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, xaxt = "n", xlab = '')')
+  Hint: plot(Head ~ Tarsus, data = BirdData, xaxt = 'n', xlab = '')
+
+- Class: cmd_question
+  Output: "Now we can add in the axis that we want. To do this, we actually need to call 
+    a separate function, `axis()`, which we would run as a new line in our plotting 
+    commands. It cannot be nested within `plot()` or `par()`. Anyway, a call to `axis()`
+    here will add an axis to the current plot. First, pull up the help file for axis"
+  CorrectAnswer: ?axis
+  AnswerTests: omnitest(correctExpr='?axis')
+  Hint: ?axis 
+
+- Class: cmd_question
+  Output: "To add an axis, you need to specify a minimum of two things. First, which
+    side of the plot you want to put the axis (1=below, 2=left, 3=above and 4=right).
+    Then, you need to provide where you want to put the ticks and labels, indicated by 
+    the argument `at = `. Let's add an axis to the x (bottom) side of our plot, with
+    numbers at 20, 21, and 22."
+  CorrectAnswer: axis(side = 1, at = c(20, 21, 22))
+  AnswerTests: omnitest(correctExpr='axis(side = 1, at = c(20, 21, 22))')
+  Hint: axis(side = 1, at = c(20, 21, 22))
+
+- Class: text
+  Output: "`axis()` has another useful argument, `labels = `, if you wanted to add
+    labels different to the values where the tick marks are located, for example some
+    text, the log of the values, or some other characters."
+    
+- Class: cmd_question
+  Output: "So now we have an axis, but no label. We can add text to any margin of a
+    plot using the function `mtext()`. Much like `axis()`, this function requires
+    a side, but also needs a margin line number (`line = `; recall our use of `mgp = ` above), 
+    and the actual text of the label (`text = `). 
+    Use `mtext()` to add a label to the x axis, with text = 'Tarsus (mm)', and `line = 2.5'."
+  CorrectAnswer: mtext(side = 1, text = 'Tarsus (mm)', line = 2.5)
+  AnswerTests: omnitest(correctExpr='mtext(side = 1, text = "Tarsus (mm)", line = 2.5)')
+  Hint: mtext(side = 1, text = 'Tarsus (mm)', line = 2.5) 
+    
+- Class: text
+  Output: "You can explore the other options for margin labels at your leisure.
+    We will leave axes in general there for now and move on to the other item folks often need/want to 
+    change, and that is fonts."
+
+- Class: text
+  Output: "Many journals require specific fonts in their graphics. Fonts in R (and other 
+    software) are often tricky, because each graphics device (e.g., pdf, png, ...) has its
+    own default fonts and system of dealing with fonts. Further, font can be specified in 
+    several different ways, and there is no universal system of naming or calling fonts
+    in computer operating systems. Yay ..."
+    
+- Class: cmd_question
+  Output: "However, there are some straightforward things we can do easily.
+    First, within `par()` we can decide whether to use a plain  (1, default), bold (2), italic (3), 
+    or bold italic font (4) for the title, axis labels, and axis tick labels. 
+
+    We can combine this argument with a call to `mtext()` (because mtext() also has an ellipsis
+    argument) to add a **bold** label to our x axis. Scroll up in the console and add
+    `font = 2` to your call to `mtext()`."
+  CorrectAnswer: mtext(side = 1, text = 'Tarsus (mm)', line = 2.5, font = 2)
+  AnswerTests: omnitest(correctExpr='mtext(side = 1, text = "Tarsus (mm)", line = 2.5, font = 2)')
+  Hint: mtext(side = 1, text = 'Tarsus (mm)', line = 2.5, font = 2) 
+      
+- Class: text
+  Output: "R overlays this second call to `mtext()` on top of the first, which does not look great, 
+    but you get the idea. This overlaying issue is also why you often need to re-run the entire
+    code that generates a figure if you decide to change some options."
+    
+- Class: text
+  Output: "You can change the font style (plain/bold/italic) for each part of a graphic
+    using `font.axis = `, `font.lab = `, `font.main = `, and `font.sub `."
+    
+- Class: text
+  Output: "In many graphics devices, you can also specify the family (serif (often [Times New Romas](https://en.wikipedia.org/wiki/Times_New_Roman)), 
+    san-serif (often [Helvetica](https://en.wikipedia.org/wiki/Helvetica)), monotype (often [Courier](https://en.wikipedia.org/wiki/Courier_(typeface)))) 
+    via the argument `family = 'serif'`,  `family = 'sans'`, or `family = 'mono'`."
+    
+    
+- Class: video
+  Output: "Recently, a new R package was released that allows you to access the majority 
+    of other fonts on your computer: the extrafonts package. Explore this if you want to 
+    add non-standard fonts to your graphics."
+  VideoLink: http://blog.revolutionanalytics.com/2012/09/how-to-use-your-favorite-fonts-in-r-charts.html
+
+
+- Class: text
+  Output: "OK, we can add extra labels to the margins, but what if we want to add extra elements or text 
+    to the plot itself? We can use either the `points()`, `lines()`, or `text()` functions to do just that.
+    In all three cases, we need to provide some coordinates (x and usually y), and then provide some specific
+    direction in terms of the plotting character (`pch = `), colour (`col = `), line width (`lwd = `) or 
+    size (`cex = `) for points; line type (`lty = `) or line width (`lwd = `) for lines; and labels (i.e., the 
+    text that goes at each coordinate, as for axis), size, colour, or font for text." 
+    
+- Class: cmd_question
+  Output: "Another useful function is `abline()`, which adds straight lines to your plot.
+    These lines can be specified either as an intercept and slope (therefore useful for plotting
+    linear regression lines), or as horizontal or vertical lines given a specific value along the
+    x or y axis. Look at the help file for abline, and add a dashed horizontal line to the current sparrow
+    plot at 31.5 along the y axis."
+  CorrectAnswer: abline(h = 31.5, lty = 2)
+  AnswerTests: omnitest(correctExpr='abline(h = 31.5, lty = 2)')
+  Hint: You also may need to check the help file for par, to get the value for dashed line to pass to lty =.
+
+
+
+- Class: text
+  Output: "Finally, so far we have just placed one plot or pane in each graphics window. 
+    However, in many cases you will want multiple similar plots side-by-side, or different
+    kinds of plots in the same overall figure. There are 
+    several ways to do this, but the easiest way to create a set of equal-size panels
+    is to use a call to `par()` again. There are two arguments here, `mfrow = ` and `mfcol = '."
+    
+- Class: text
+  Output: "You use one of these arguments to set up the grid of panels, which you then fill,
+    one-by-one, with separate uses of `plot()` (other which ever plotting function you want). 
+    **Note** If you plot more figures than the number of panels available, they will start to overwrite from the beginning."
+
+- Class: text
+  Output: "As we said, `par()` has two similar arguments: `mfrow` and `mfcol`. Both arguments take a vector of the
+    form `c(number of columns, number of rows)`."
+    
+- Class: text
+  Output: "Using `mfcol` fills this grid by colums, using `mfrow` fills by rows. For example,
+  `par(mfrow = c(2, 2))` creates a graphics window with four panels, in a 2 x 2 layout."
+  
+- Class: text
+  Output: "`par(mfcol = c(4, 1))` creates a column of four panels."
+  
+- Class: cmd_question
+  Output: "OK.. now for the finale. Our quest is to make a figure with two graphs, side-by-side, the first 
+    being a scatterplot and the second a boxplot. First, use a call to `par()` to set the plotting window
+    to a two-by-two pane grid. You can use either `mfrow` or `mfcol`."
+  CorrectAnswer: par(mfrow = c(2,2))
+  AnswerTests: any_of_exprs('par(mfrow = c(2,2))', 'par(mfcol = c(2,2))')
+  Hint: You need to pass a vector of two elements to one of mfrow or mfcol, within par().
+
+
+- Class: cmd_question
+  Output: "In theory, nothing should have changed in your plot window. R has secretly set up
+    the grid, but is waiting a call to `plot()`. Plot the first graph, which is our basic example
+    of Head on Tarsus. However, set the axis labels to bold font."
+  CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, font.lab = 2)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, font.lab = 2)')
+  Hint: plot(Head ~ Tarsus, data = BirdData, font.lab = 2)
+  
+- Class: text
+  Output: "For some reason that I cannot work out, swirl plots two figures each
+    time we call `plot()`, which does not happen in regular R. So, don't worry about that:
+    it's why we have a 2x2 grid!"
+
+- Class: text
+  Output: "If things do not look quite right, you may still end up with a plot. 
+    Running another call to `plot()` will add in the second pane, so you may need several 
+    tries to get things looking correct, and also to have that correct graph in the first pane.
+    That is fine.. you are learning to use R in an interactive and interative way; well done!"
+    
+- Class: cmd_question
+  Output: "Now, add the second pane, a boxplot of Head on Species, with the box colour set to red and
+    the y-axis numbers horizontal."
+  CorrectAnswer: plot(Head ~ Species, data = BirdData, col = 'red', las = 1)
+  AnswerTests: omnitest(correctExpr='plot(Head ~ Species, data = BirdData, col = "red", las = 1)')
+  Hint: plot(Head ~ Species, data = BirdData, col = 'red', las = 1)
+
+
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: Delighted, I'm sure.
+  CorrectAnswer: Delighted, I'm sure.
+  AnswerTests: submit_log()
+  Hint: hint
+
+
+
