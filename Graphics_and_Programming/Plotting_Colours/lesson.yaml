@@ -1,0 +1,322 @@
+- Class: meta
+  Course: Graphics_And_Programming
+  Lesson: Plotting_Colour
+  Author: Simon A. Queenborough
+  Type: Standard
+  Organization: F&ES
+  Version: 0.0.1
+
+
+- Class: text
+  Output: "'Previously in FES 720...' we considered briefly how to change the 
+    colour of points and bars from the default of black to red. We also mentioned
+    that there were several ways to refer to colours in R."
+
+- Class: text
+  Output: "In this lesson, we will consider colour in more detail."
+
+- Class: text
+  Output: "Most plotting functions, including the ones that we have used so far,  
+    have an argument for color (usually `col = `) that allows you to set the
+    color/s of whatever you are plotting. As we have saw before, the easiest way to 
+    specify colour in R is by name."
+
+- Class: cmd_question
+  Output: "Let's make a simple plot to illustrate the use of colours.
+    Plot a `y` of 1:10 on a `x` of 1:10. To make it easier to see the 
+    colours, set `pch = 20` (filled circles), and 
+    `cex = 4`, to make the points larger."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4)
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4)') 
+  Hint: plot(1:10, 1:10, pch = 20, cex = 4)
+
+- Class: cmd_question
+  Output: "The default colour is black. Make a new plot, but change the points to red."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = 'red')
+  AnswerTests: omnitest(correctExpr="plot(1:10, 1:10, pch = 20, cex = 4, col = 'red')")
+  Hint: Add the argument `col = 'red' to the previous call to plot().
+
+- Class: cmd_question
+  Output: "R has all the regularly-named colours, but also many others with more
+    interesting names, such as 'seashell', 'burlywood', and 'papayawhip'. You can see
+    all the named colours with the functions `colors()` and `colours()` (See, R is 
+    bilingual, at least in some instances ... ). Check them all out!"
+  CorrectAnswer: colours()
+  AnswerTests: any_of_exprs('colors()', 'colours()')
+  Hint: Type colours() (or colors(), if you must)
+
+- Class: text
+  Output: "Did you see how long that vector is? 657! That is a *lot* of colours.
+    However, there are not actually quite that many: As with colo[u]r, R also
+    uses 'gray' and 'grey' equally (there are over 100 colours with grey/gray in their name),
+    so these colour names are essentially duplicates. Even so, there are a lot."
+
+- Class: text
+  Output: "The colours and names are derived from the X-Window System (X11),
+    the GUI window system that most Macs and Linux OSs use. R uses the 
+    same colours on the MS Windows version of R, too" 
+
+- Class: cmd_question
+  Output: "We can use this vector of colours to randomly select a color for 
+    our points. Sample a single colour from the colors() vector for the
+    `col = ` argument in the previous plot."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 1))
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 1))')
+  Hint: col = sample(colors(), 1)
+
+- Class: cmd_question
+  Output: "Remember how we plotted each plot as a different colur in the Plotting_More_Data
+    lesson? (`col = 1:8`). Try that here."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = 1:8)
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = 1:8)')
+  Hint: Add the argument `col = 1:8 to the previous call to plot().
+
+- Class: cmd_question
+  Output: "We have ten points and eight colours. Once R goes through the eight 
+    colours 1:8, it recycles the vector and starts again at 1 (black).
+    Ok, how about we pull out 8 random colours from colors()? Try that."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 8))
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 8))')
+  Hint: col = sample(colors(), 8)
+
+- Class: text
+  Output: "Ok, so we have several hundred different colours to chouse from. What if your journal or book
+    publisher of choice only prints in black and white or grayscale? There is a handy-dandy
+    function to help you out: 'gray()'!"
+
+- Class: cmd_question
+  Output: "The function `gray()` takes two arguments, `level =`, which varies from 1 (totally white)
+    to 0 (totally black); and `alpha = `, which varies from 0 (totally transparent) to 1 (totlay opaque).
+    Use `seq()` to plot the points ranging evenly from almost white (level = 0.9) to black over the ten points."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 8)) )
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 8)) )')
+  Hint: plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 8)) )
+
+- Class: text
+  Output: "So far, we have used names that link to specific pre-defined colours. 
+    But colour is more complex than that. Humans perceive colour when cone cells in the 
+    eye are stimulated by electomagnetic radiation in the visible spectrum of light. 
+    Humans usually have three kinds of cone cells, sensitive to different wavelengths
+    of light: short (blue), medium (green), and long (red)."
+
+- Class: text
+  Output: "The color of any one thing therefore depends on the wavelength of light that is 
+    reflected by that object, and influenced by physical properties of
+    the object, such as its surface, transmission, and/or emission properties."
+
+- Class: text
+  Output: "'Spectral colours', therefore, are defined by a specific wavelength, ranging
+    from 400 nm (violet) to 700 nm (red). Reproducing specific wavelengths in print, photography,
+    television, and other media, would be incredibly technologically challenging and expensive."
+
+- Class: text
+  Output: "However, many light sources are defined not by single wavelength, but by a mixture
+    of wavelengths of light. The human eye cannot distinguish these mixtures from single-wavelength
+    sources. Thus, red and green mixed in the right proportions stimulates human eye cone cells
+    identically to the spectral color orange."
+
+- Class: text
+  Output: "Most human color perceptions can therefore be generated with a mixture of the three *primary* colors: either 
+    red, green, and blue (for additive colouring, used on TVs and computer screens), or yellow, magenta, cyan
+    and black (under subtractive coloring, used in printing)."
+
+- Class: text
+  Output: "For example, in a computer, a color is a mix between 3 main colors: Red, Green and Blue. Each
+    pixel on the screen is constituted with 3 points that are too small for the Human eye to see, one of each colors, 
+    each color being more or less strong."
+
+- Class: text
+  Output: "There are a number of different _color models_ used to define color. The RGB model is based on
+    the relative proportions of the three primary colours, red, green, and blue. The most common
+    implementation of the RGB model uses 256 levels of color each for red, green, and blue. Because
+    each of R, G, and B can have one of these 256 levels, the total number of colours available in this system
+    is 256 × 256 × 256 ≈ 16.7 million colors. That's a few more than 657 named colours in R ..."
+
+- Class: text
+  Output: "However, each named colour in the 657 available colours *is* defined by a specific RGB 
+    value."
+
+- Class: cmd_question
+  Output: "The R function `col2rgb()` can be used to extract the RGB components of a named color.
+    Try that for the named colour 'yellow'."
+  CorrectAnswer: col2rgb('yellow')
+  AnswerTests: omnitest(correctExpr="col2rgb('yellow')")
+  Hint: col2rgb('yellow')
+
+- Class: cmd_question
+  Output: "And 'papayawhip' ..."
+  CorrectAnswer: col2rgb('papayawhip')
+  AnswerTests: omnitest(correctExpr="col2rgb('papayawhip')")
+  Hint: col2rgb('papayawhip')
+
+- Class: text
+  Output: "Because this RGB notation is not very user-friendly, computer scientists
+    decided to use an even less user-friendly system, based on hexidecimal (a 
+    numbering system with a base of 16, in contrast to our *decimal* numbering system
+    with base 10)."
+
+- Class: text
+  Output: "Each three-digit color value (000--256) is represented by a two-digit hexidecimal
+    number ranging from 00 to FF. So, the nine-digit RGB value can be represented by a six-digit
+    'hex triplet'. "
+
+- Class: cmd_question
+  Output: "This hex triplet is returned if we use the `rgb()` function to generate the color yellow. 
+    The `rgb()` requires the `r`, `g`, and `b` values, and also the `maxColorValue = ` set to 255. Try that now."
+  CorrectAnswer: rgb(255, 255, 0, maxColorValue = 255)
+  AnswerTests: omnitest(correctExpr='rgb(255, 255, 0, maxColorValue = 255)')
+  Hint: rgb(255, 255, 0, maxColorValue = 255)
+
+- Class: text
+  Output: "Many of the lists of R colours you will find online list their names,
+    hex triplet, and RGB values. This one is a good example: http://research.stowers.org/mcm/efg/R/Color/Chart/ColorChart.pdf."
+#  VideoLink: http://research.stowers.org/mcm/efg/R/Color/Chart/ColorChart.pdf
+
+- Class: text
+  Output: "You can also define any one of the 16 million other colours you like ... 
+    But how on earth do you go about doing that?"
+
+- Class: cmd_question
+  Output: "Luckily, as described in the lecture, some folks have made up some
+    nice _palettes_ of colours. A palette is essentially a vector of colours defined
+    as a special `palette` object.
+    We will begin by looking at the default palette that is loaded when R starts up.
+    Type `palette()` in the Console."
+  CorrectAnswer: palette()
+  AnswerTests: omnitest(correctExpr='palette()')
+  Hint: palette()
+
+- Class: text
+  Output: "This gives you a vector of eight colours, 
+    that match the colors plotted in our previous use of `col = 1:8`.
+    Because this palette is loaded in R, we can access the colours within it
+    using numbers (i.e., we can index the palette)."
+
+- Class: text
+  Output: "The default palette is not that exciting, although it does illustrate all 
+    the colours of the RGB and CYMK colours."
+
+- Class: cmd_question
+  Output: "We can define a palette of any colors that we like. Using the `palette()`
+    function, set a palette of red, papayawhip, seashell, and burlywood."
+  CorrectAnswer: palette(c('red', 'papayawhip', 'seashell', 'burlywood'))
+  AnswerTests: omnitest(correctExpr="palette(c('red', 'papayawhip', 'seashell', 'burlywood'))")
+  Hint: palette(c('red', 'papayawhip', 'seashell', 'burlywood'))
+
+- Class: cmd_question
+  Output: "Now use numbers to pass these colours to the points in the example plot. 
+    You will need to change the maximum value from 8 to 4 (because we only have 4
+    colours in the new palette)."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = 1:4)
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = 1:4)')
+  Hint: Add the argument `col = 1:4 to the previous call to plot().
+
+- Class: cmd_question
+  Output: "Changing the default palette applies to all future palettes.
+    To reset to the default palette, run `palette('default')`."
+  CorrectAnswer: palette('default')
+  AnswerTests: omnitest(correctExpr="palette('default')")
+  Hint: palette('default')
+
+- Class: cmd_question
+  Output: "Now, we could instead assign our new palette to another
+    object name, such as pal_new. Try that."
+  CorrectAnswer: pal_new <- palette(c('red', 'papayawhip', 'seashell', 'burlywood'))
+  AnswerTests: omnitest(correctExpr="pal_new <- palette(c('red', 'papayawhip', 'seashell', 'burlywood'))")
+  Hint: pal_new <- palette(c('red', 'papayawhip', 'seashell', 'burlywood'))
+
+- Class: cmd_question
+  Output: "Now was can access this new palette by passing the palette name to the `col = ` 
+    argument of `plot()`. Try that, reversing the order of colors, from 4:1, so that the 
+    plot looks different to the previous one."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = pal_new[4:1])
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = pal_new[4:1])')
+  Hint: plot(1:10, 1:10, pch = 20, cex = 4, col = pal_new[4:1])
+  
+- Class: text
+  Output: "Great, so you can set up a palette of a set of colours. These colours can either be
+    the pre-defined named colours, or s vector of hex-triplets."
+
+- Class: text
+  Output: "However, what about if you want to actually generate a series of colours
+    that follow a specific pattern, or are not in the pre-defined named list?"
+
+- Class: figure
+  Output: "R has several pre-defined palettes from which you can generate a set of 
+    colours. These palettes include `rainbow()`, `heat.colors()`, `topo.colors()`, and 
+    `terrain.colors(), as illustrated  in the figure."
+  Figure: palette_fig.R
+  FigureType: new
+    
+- Class: cmd_question
+  Output: "These palettes can be used simply to generate the required number of colours
+    by setting the `n = ` argument within each palette function. Set each colour in our
+    example plot to one of a sequence of 10 colours from `heat.colors()`. You could
+    create these colours first and then pass that object to the `col = ` argument of plot(),
+    but try and keep it all in one line of code."
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = heat.colors(10))
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = heat.colors(10))')
+  Hint: plot(1:10, 1:10, pch = 20, cex = 4, col = heat.colors(10))
+  
+  
+- Class: text
+  Output: "There are several other packages that provide palettes available. The
+    Wes Anderson color palettes are derived from the color schemes of various
+    movies directed by Wes Anderson ... https://github.com/karthik/wesanderson#wes-anderson-palettes  "
+#  VideoLink: https://github.com/karthik/wesanderson#wes-anderson-palettes  
+    
+
+- Class: text
+  Output: "As we discussed in the lecture, color schemes that visualize data in a 
+    clear and distinguishable manner, where the colours indicate properties of the
+    data can be useful."
+    
+- Class: text
+  Output: "The R ColorBrewer package contains three different kinds of palettes
+    that are designed to provide information about the underlying data: 
+    qualitative, diverging, and sequential. http://www.colorbrewer2.org"
+#  VideoLink: http://www.colorbrewer2.org
+    
+- Class: text
+  Output: "The palettes are composed of 8--12 distinct colors, but if you have
+    more than 12 categories to plot, you can use the `colorRampPalette()` 
+    function with any of the sequential or diverging palettes. This ramps
+    the color at the necessary interval to create as many hues as your data calls for."
+    
+- Class: figure
+  Output: "**Qualitative** palettes employ different hues to create visual
+    differences between classes, but provide little or no suggestion of 
+    order or sequence. These palettes are suggested for nominal 
+    or categorical data sets."
+  Figure:  rcolbrewer_qual_fig.R
+  FigureType: new
+
+- Class: figure
+  Output: "**Sequential** palettes move from light to dark. Light colors 
+    represent low data values and dark 
+    colors represent high data values."
+  Figure:  rcolbrewer_seq_fig.R
+  FigureType: new
+    
+- Class: figure
+  Output: "**Diverging** palettes are composed of darker colors of 
+    contrasting hues on the high and low extremes and lighter 
+    colors in the middle."
+  Figure:  rcolbrewer_div_fig.R
+  FigureType: new
+    
+
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: Yup!
+  CorrectAnswer: Yup!
+  AnswerTests: submit_log()
+  Hint: hint
+
+    
+
+
+
+
+  
