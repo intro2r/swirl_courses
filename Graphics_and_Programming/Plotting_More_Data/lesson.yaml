@@ -94,7 +94,7 @@
     Try that. (Remember to keep `pch = 20`; and also set `cex = 3` to make each point larger."
   CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, col = 1:8, pch = 20, cex = 3)
   AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, col = 1:8, pch = 20, cex = 3)')
-  Hint: plot(Head ~ Tarsus, data = BirdData, col = 1:8, pch = 20, cex = 2)
+  Hint: plot(Head ~ Tarsus, data = BirdData, col = 1:8, pch = 20, cex = 3)
 
 - Class: text
   Output: "Ok super. We can use a vector to set colours... how might this actually 
@@ -261,7 +261,7 @@
   AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, xaxt = "n")')
   Hint: plot(Head ~ Tarsus, data = BirdData, xaxt = 'n')
 
-- Class: text
+- Class: cmd_question
   Output: "Great.. this suppresses the axis tick marks and labels, but not the axis title.
     To suppress the axis title, we have to modify the `xlab = ` argument in `plot()` You 
     can do this by xlab = '' (i.e., a text string with nothing in it). Try that, too, adding to the 
