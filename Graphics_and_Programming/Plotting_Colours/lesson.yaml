@@ -58,8 +58,9 @@
 
 - Class: cmd_question
   Output: "We can use this vector of colours to randomly select a color for 
-    our points. Sample a single colour from the colors() vector for the
-    `col = ` argument in the previous plot."
+    our points. To do this, use the sample() function, which takes a random sample 
+    from a vector, with colors() as your first argument and 1 as your second 
+    (for number of samples). See the hint if necessary."
   CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 1))
   AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 1))')
   Hint: col = sample(colors(), 1)
@@ -74,7 +75,8 @@
 - Class: cmd_question
   Output: "We have ten points and eight colours. Once R goes through the eight 
     colours 1:8, it recycles the vector and starts again at 1 (black).
-    Ok, how about we pull out 8 random colours from colors()? Try that."
+    Ok, how about we pull out 8 random colours from colors()? Try that,
+    using sample() again."
   CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 8))
   AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 8))')
   Hint: col = sample(colors(), 8)
@@ -88,9 +90,9 @@
   Output: "The function `gray()` takes two arguments, `level =`, which varies from 1 (totally white)
     to 0 (totally black); and `alpha = `, which varies from 0 (totally transparent) to 1 (totlay opaque).
     Use `seq()` to plot the points ranging evenly from almost white (level = 0.9) to black over the ten points."
-  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 8)) )
-  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 8)) )')
-  Hint: plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 8)) )
+  CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 10)) )
+  AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 10)) )')
+  Hint: plot(1:10, 1:10, pch = 20, cex = 4, col = gray(level = seq(0.9, 0, length.out = 10)) )
 
 - Class: text
   Output: "So far, we have used names that link to specific pre-defined colours. 
