@@ -267,7 +267,7 @@
     can do this by xlab = '' (i.e., a text string with nothing in it). Try that, too, adding to the 
     previous code."
   CorrectAnswer: plot(Head ~ Tarsus, data = BirdData, xaxt = 'n', xlab = '')
-  AnswerTests: omnitest(correctExpr='plot(Head ~ Tarsus, data = BirdData, xaxt = "n", xlab = '')')
+  AnswerTests: omnitest(correctExpr="plot(Head ~ Tarsus, data = BirdData, xaxt = 'n', xlab = '')")
   Hint: plot(Head ~ Tarsus, data = BirdData, xaxt = 'n', xlab = '')
 
 - Class: cmd_question
