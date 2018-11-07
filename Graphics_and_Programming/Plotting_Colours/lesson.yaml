@@ -63,7 +63,7 @@
     (for number of samples). See the hint if necessary."
   CorrectAnswer: plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 1))
   AnswerTests: omnitest(correctExpr='plot(1:10, 1:10, pch = 20, cex = 4, col = sample(colors(), 1))')
-  Hint: "Change col = 'red' to col = sample(colors(), 1)"
+  Hint: "Change col = 'red' to col = sample(colors(), 1), in your previous plot command."
 
 - Class: cmd_question
   Output: "Remember how we plotted each plot as a different colur in the Plotting_More_Data
