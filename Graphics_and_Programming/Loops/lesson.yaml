@@ -1,0 +1,179 @@
+- Class: meta
+  Course: Graphics_and_Programming
+  Lesson: Loops
+  Author: Simon Q. and Andrew M.
+  Type: Standard
+  Organization: FES
+  Version: 2018 11 03
+
+- Class: text
+  Output: "In this lesson you will learn the how and why of loops."
+
+
+- Class: text
+  Output: "## What Are Loops?"
+
+- Class: text
+  Output: "Looping is taking a multi-step process and automating it. 
+    It allows you to 'batch' sets of repeated parts of code and cycle 
+    through them. Loops are integral to all modern programming languages."
+
+- Class: text
+  Output: "There are two main types of loops: (1) The 'for' loop type 
+    which exeute for a prescribed number of times and are controlled by a 
+    counter or an index. (2) The 'while' or 'repeat' loop type are based on 
+    verifying a logical condition which is tested at the start and/or end of 
+    each loop."
+    
+- Class: text
+  Output: "### For loops"
+  
+- Class: text
+  Output: "Suppose you wanted to print out six sentences of the form
+    'The year is [i]', where [i] is one of 2010, 2011, 2012,
+    2013, 2014, and 2015."
+    
+- Class: cmd_question
+  Output: "We could do this with six lines of code, using the `print()` 
+    and `paste()` commands, as follows: `print(paste('The year is', 2010))`.
+    Try that out."
+  CorrectAnswer:  print(paste('The year is', 2010))
+  AnswerTests: omnitest(correctExpr = "print(paste('The year is', 2010))")
+  Hint: print(paste("The year is", 2010))  
+  
+- Class: text
+  Output: "What is this code doing? First, the function `print()` prints 
+    whatever is inside it to the console. If we ran `print('Hullo, Simon')`, 
+    we would get 'Hullo, Simon' displayed in the console."
+    
+- Class: text
+  Output: "Second, the function `paste()` is a very useful function
+    for sticking bits of text together with other things (which are
+    converted to text. In this case, `paste()` takes the text string
+    'The year is', concatenates it with the integer 2010, and gives a 
+    character/text string 'The year is 2010'."
+
+- Class: cmd_question
+  Output: "Great! Now you only have to do that five more times ... 
+    Repeat that code for the year 2011."
+  CorrectAnswer:  print(paste('The year is', 2011))
+  AnswerTests: omnitest(correctExpr = "print(paste('The year is', 2011))")
+  Hint: "print(paste('The year is', 2011))"
+
+- Class: cmd_question
+  Output: "Great! Now you only have to do that four more times ...
+    Repeat that code for the year 2012."
+  CorrectAnswer:  print(paste('The year is', 2012))
+  AnswerTests: omnitest(correctExpr = "print(paste('The year is', 2012))")
+  Hint: "print(paste('The year is', 2012))"
+
+- Class: text
+  Output: "Great! Now you only have ... just joking. But, you can see
+    that it can get pretty tedious writing out the same thing/s over
+    and over again, and just making one of two small changes."
+    
+- Class: text
+  Output: "This is where the idea of the loop comes in. It allows
+    us to automate this process, which makes our lives a little less tedious,
+    and also removes another step where human error can creep in."
+    
+- Class: text
+  Output: "One of the principles of programming is D.R.Y.: Don't 
+    Repeat Yourself.  If we can avoid repetition, all is well.
+    So, how do we construct a loop?"
+
+- Class: text
+  Output: "There are at minimum three steps to creating a loop: 
+    an object to loop through, a counter, and the code that is 
+    executed at each step or loop.
+    First, we need a vector which we can cycle over or move through
+    at each step. This vector is the part of the code that is changing 
+    every time."
+    
+- Class: cmd_question    
+  Output: "In this example, we are changing the year at every step.
+    So, we need a vector of years, that goes from 2010 to 2015.  
+    Create that now, but do not assign it to anything."
+  CorrectAnswer: 2010:2015
+  AnswerTests: any_of_exprs("2010:2015", "c(2010, 2011, 2012, 2013, 2014, 2015)")
+  Hint: "The easiest way is to use ` : `" 
+
+- Class: text
+  Output: "Great, so you have a vectors of 6 years. How do we put that into
+    our statement 'The year is'?
+    We need to use the function `for()`. This function contains the counter
+    that loops through the vector of years."
+    
+- Class: cmd_question
+  Output: "Let's try that. To ensure the code runs, 
+    we also need to add a pair of curly brackets. Type: for(i in 2010:2015){}"
+  CorrectAnswer: for(i in 2010:2015){}
+  AnswerTests: omnitest(correctExpr = 'for(i in 2010:2015){}')
+  Hint: Type what we told you ...
+  
+- Class: text
+  Output: "What did we do there? Well, we have the vector we created earlier,
+    of years. We also added the extra object `i`, which acts as an index. 
+    We use this to link the
+    counter, vector, and code we will run inside the loop. Because we are trying
+    to automate the printing of years, we need some term to stand in for each year.
+    We therefore use the object 'i'. The 'in' part of the code is the 
+    bit that steps through each element of the vector of years."
+
+    
+- Class: text
+  Output: "The function `for()` also allows you to add code after it. This 
+    code will be the code that is run for each step of the loop.
+    To ensure that R knows that this code is contained in the loop, it 
+    should be nested within curly brackets: {}."
+    
+- Class: cmd_question
+  Output: "Modify the code we used previously to print one year to the screen, 
+    but instead of using an integer, put the
+    letter 'i' (without quotes). This will link with the previous use of
+    'i' inside the function `for()`.
+    (And for now, do not put this code inside the curly brackets)"
+  CorrectAnswer: print(paste('The year is', i))
+  AnswerTests: omnitest(correctExpr = "print(paste('The year is', i))")
+  Hint: "Remember {print(paste('The year is', i))}"
+    
+    
+- Class: cmd_question
+  Output: "Great! So, now we can build the whole loop. Put all those pieces 
+    together, and see what happens!"
+  CorrectAnswer: for(i in 2010:2015) {print(paste('The year is', i))}
+  AnswerTests: omnitest(correctExpr = "for(i in 2010:2015) {print(paste('The year is', i))}")
+  Hint: Put all the pieces together.
+
+- Class: text
+  Output: "Let's explain that again in real words. 
+    For each 'year' that is in the sequence 2010 to 2015,
+    run the code chunk 
+    `print(paste('The year is', i))`. 
+    Once the for loop has executed the code chunk for every year (i)
+    in the vector, the loop stops and goes to the first instruction 
+    after the loop block."
+
+- Class: cmd_question
+  Output: "Ok, so now try this on your own. Create a simple loop that prints
+    the integers 1 to 10 to the screen. First, make a vector of integers 1 
+    through 10."
+  CorrectAnswer: 1:10
+  AnswerTests: any_of_exprs("1:10", "c(1,2,3,4,5,6,7,8,9,10)")
+  Hint: "1:10"
+
+- Class: cmd_question
+  Output: "Now, put that in a call to `for()`, cycle through it, and 
+    print each element. In other words, make the loop."
+  CorrectAnswer: for(i in 1:10){print(i)}
+  AnswerTests: omnitest(correctExpr = "for(i in 1:10){print(i)}") 
+  Hint: "Remember the three elements: the for(), the vector, and the code in 
+    curly brackets."
+
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: Sure thing!
+  CorrectAnswer: Sure thing!
+  AnswerTests: submit_log()
+  Hint: hint
