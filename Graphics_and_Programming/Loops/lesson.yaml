@@ -299,8 +299,8 @@
     It makes the code more (i) compact, (ii) readable, and (iii) maintainable and you may save some typing."
     
 - Class: text
-   Output: "However, once you spend enough time with and reading about R, you 
-     will frequently hear advice to avoid using loops."
+  Output: "However, once you spend enough time with and reading about R, you 
+     will frequently hear advice to avoid the use of loops."
      
 - Class: text
   Output: "This is because R can do something that few programming
