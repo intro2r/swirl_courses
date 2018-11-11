@@ -294,6 +294,20 @@
 - Class: text
   Output: "Great work! You can now write loops that access real data, and
     assign the output to positions in empty objects such as vectors."
+    
+- Class: text
+  Output: "A quick note on using loops to fill empty objects (like vectors). One of the great things
+  about using loops in this way is that we don't need to know the final dimensions of our object - we 
+  can keep adding to it so long as our looping conditions are met."
+  
+- Class: text
+  Output: "However, it is always much faster computationally to predefine the size of our object if 
+  we know the final size needed, i.e. create the initial vector with all elements in place rather than 
+  starting with an empty vector. Otherwise, R has to recreate the object in every iteration of the loop 
+  as it becomes larger, which can take a lot of time if you need to loop 1,000, 10,000 or even 1,000,000+ times."
+  
+- Class: text
+  Output: "Just something to keep in mind if you find your computer hanging on loops."
  
 - Class: text
   Output: "You probably also appreciate the fact that `tapply()` is a much more useful 
