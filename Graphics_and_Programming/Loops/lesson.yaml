@@ -288,7 +288,7 @@
 - Class: text
   Output: "Great work! You can now write loops that access real data, and
     assign the output to positions in empty objects such as vectors."
-     "
+ 
 - Class: text
   Output: "You probably also appreciate the fact that `tapply()` is a much more useful 
     and easier to use function than maybe you thought!"
@@ -298,7 +298,7 @@
     then a loop *may* serve you better for several reasons:
     It makes the code more (i) compact, (ii) readable, and (iii) maintainable and you may save some typing."
     
- - Class: text
+- Class: text
    Output: "However, once you spend enough time with and reading about R, you 
      will frequently hear advice to avoid using loops."
      
