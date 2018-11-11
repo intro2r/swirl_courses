@@ -169,7 +169,126 @@
   AnswerTests: omnitest(correctExpr = "for(i in 1:10){print(i)}") 
   Hint: "Remember the three elements: the for(), the vector, and the code in 
     curly brackets."
+    
+- Class: text
+  Output: "Now that you can write simple loops, we can start expanding 
+    on what they can do."
+    
+- Class: text
+  Output: "The first thing to note is that, when you write 
+    your own loops, the curly brackets can enclose many lines of code."
 
+- Class: text
+  Output: "Second, loops can be nested in loops can be nested in
+    loops can be .. Much like lists, you can nest loops within loops."
+
+- Class: text
+  Output: "Third, a very useful aspect of loops is that you can use
+    them to fill results into an empty vector or matrix."
+    
+- Class: cmd_question
+  Output: "Let's try out your new skills on a real dataset. The Michigan
+    tree plot data are loaded with this lesson, called `trees`. Look at the head of the 
+    dataset to remind yourself."
+  CorrectAnswer: head(trees)
+  AnswerTests: omnitest(correctExpr = 'head(trees)')
+  Hint: head(trees)
+  
+- Class: text
+  Output: "Your task is to calculate the mean DBH for each species.
+    Remember that we could do this easily with the function `tapply()`.
+    We are essentially going to try and replicate that function here, 
+    with a loop."
+    
+- Class: cmd_question
+  Output: "First, we need to set our vector to loop over. 
+    This will be the names of the six different species
+    in the data. Use `levels()` to obtain these, and 
+    assign this vector to the object `spp`."
+  CorrectAnswer: spp <- levels(trees$species)
+  AnswerTests: omnitest(correctExpr = 'spp <- levels(trees$species)')
+  Hint: Use levels(trees$species) and assign this to the object spp
+  
+- Class: cmd_question
+  Output: "Check that you got all the species. Type: spp."
+  CorrectAnswer: spp
+  AnswerTests: omnitest(correctExpr = 'spp')
+  Hint: spp
+  
+- Class: cmd_question
+  Output: "Now we need to work out the code we will run 
+    to calculate the mean dbh. We will build this up in 
+    steps. First, write code to calculate the mean
+    dbh of White Oak, subsetting the trees data within 
+    the call to `mean()`."
+  CorrectAnswer: mean(trees$dbh[trees$species == 'whiteoak'])
+  AnswerTests: omnitest(correctExpr = "mean(trees$dbh[trees$species == 'whiteoak'])")
+  Hint: "Remember that you need to calculate the mean of 
+    the dbh column, subset by the species column."
+
+- Class: cmd_question
+  Output: "Now, we want to replace with actual name of whiteoak 
+    with its' index. First, use the correct index number on 
+    the spp vector to return 'whiteoak'."
+  CorrectAnswer: spp[6]
+  AnswerTests: omnitest(correctExpr = 'spp[6]')
+  Hint: "Look at spp to find the position of whiteoak."
+  
+- Class: cmd_question
+  Output: "Now replace the hard-coded species name with 
+    that call to the index in spp in the previous call to `mean()`."
+  CorrectAnswer: mean(trees$dbh[trees$species == spp[6]])
+  AnswerTests: omnitest(correctExpr = "mean(trees$dbh[trees$species == spp[6]])")
+  Hint: "whiteoak is spp[6]."
+
+- Class: cmd_question
+  Output: "Ok, so now we can reference the spp vector to pull out 
+    any particular species by index and calculate its' mean dbh.
+    The next step is to store this value somewhere. Make an empty
+    vector called `x`."
+  CorrectAnswer: x <- vector()
+  AnswerTests: any_of_exprs('x <- vector()', 'x <- vector(length = 6)')
+  Hint: You need to use the function `vector()` There is no need to 
+    specify how long.
+
+- Class: cmd_question
+  Output: "Now, assign the mean dbh of white oak to the first element
+    of this new vector, using the previous code."
+  CorrectAnswer: x[1] <- mean(dat$dbh[dat$species == spp[6]])
+  AnswerTests: omnitest(correctExpr = "x[1] <- mean(dat$dbh[dat$species == spp[6]])")
+  Hint: "You will need to index x."
+  
+- Class: text
+  Output: "Hopefully you can now see how we can pull all these 
+    parts together to create the loop that will give us a vector (x)
+    of the mean dbh values for all six tree species. For this code to
+    run across all species, we can index both sides by the counter index (`i`) 
+    rather than the specific species index."
+
+- Class: cmd_question
+  Output: "To acheive this, you will also need to know how to 
+    count along the spp vector. The best way is to use the 
+    function `length()`. How might you use this function
+    to count from 1 to the number of species?"
+  CorrectAnswer: 1:length(spp)
+  AnswerTests: omnitest(correctExpr = "1:length(spp)")
+  Hint: 1:length(spp)
+
+- Class: cmd_question
+  Output: "Now we have our vector to loop over (`spp`), the counter
+    (`1:length(spp)`) and the code 
+    (`x[i] <- mean(dat$dbh[dat$species == spp[i]])`).
+    Put these parts together to loop over all size tree
+    species and return the vector x that contains their mean
+    dbh values."
+  CorrectAnswer: for(i in 1:length(spp)){x[i] <- mean(dat$dbh[dat$species == spp[i]])}
+  AnswerTests: omnitest(correctExpr = "for(i in 1:length(spp)){x[i] <- mean(dat$dbh[dat$species == spp[i]])}")
+  Hint: "Look back at how we constructed the loop in the first two examples."
+
+- Class: text
+  Output: "Great work! You can now write loops that access real data, and
+    assign the output to positions in empty objects such as vectors."
+    
 - Class: mult_question
   Output: Please submit the log of this lesson to Google Forms so
     that Simon may evaluate your progress.
