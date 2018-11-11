@@ -284,6 +284,12 @@
   CorrectAnswer: for(i in 1:length(spp)){x[i] <- mean(trees$dbh[trees$species == spp[i]])}
   AnswerTests: omnitest(correctExpr = "for(i in 1:length(spp)){x[i] <- mean(trees$dbh[trees$species == spp[i]])}")
   Hint: "Look back at how we constructed the loop in the first two examples."
+  
+- Class: cmd_question
+  Output: "Finally, check the result of all your work, and look at `x`."
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctExpr = 'x')
+  Hint: x.
 
 - Class: text
   Output: "Great work! You can now write loops that access real data, and
