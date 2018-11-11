@@ -254,8 +254,8 @@
 - Class: cmd_question
   Output: "Now, assign the mean dbh of white oak to the first element
     of this new vector, using the previous code."
-  CorrectAnswer: x[1] <- mean(dat$dbh[dat$species == spp[6]])
-  AnswerTests: omnitest(correctExpr = "x[1] <- mean(dat$dbh[dat$species == spp[6]])")
+  CorrectAnswer: x[1] <- mean(trees$dbh[trees$species == spp[6]])
+  AnswerTests: omnitest(correctExpr = "x[1] <- mean(trees$dbh[trees$species == spp[6]])")
   Hint: "You will need to index x."
   
 - Class: text
@@ -277,17 +277,63 @@
 - Class: cmd_question
   Output: "Now we have our vector to loop over (`spp`), the counter
     (`1:length(spp)`) and the code 
-    (`x[i] <- mean(dat$dbh[dat$species == spp[i]])`).
+    (`x[i] <- mean(trees$dbh[trees$species == spp[i]])`).
     Put these parts together to loop over all size tree
     species and return the vector x that contains their mean
     dbh values."
-  CorrectAnswer: for(i in 1:length(spp)){x[i] <- mean(dat$dbh[dat$species == spp[i]])}
-  AnswerTests: omnitest(correctExpr = "for(i in 1:length(spp)){x[i] <- mean(dat$dbh[dat$species == spp[i]])}")
+  CorrectAnswer: for(i in 1:length(spp)){x[i] <- mean(trees$dbh[trees$species == spp[i]])}
+  AnswerTests: omnitest(correctExpr = "for(i in 1:length(spp)){x[i] <- mean(trees$dbh[trees$species == spp[i]])}")
   Hint: "Look back at how we constructed the loop in the first two examples."
 
 - Class: text
   Output: "Great work! You can now write loops that access real data, and
     assign the output to positions in empty objects such as vectors."
+     "
+- Class: text
+  Output: "You probably also appreciate the fact that `tapply()` is a much more useful 
+    and easier to use function than maybe you thought!"
+    
+- Class: text
+  Output: "In summary, if you need to perform an action (say) three times or more,
+    then a loop *may* serve you better for several reasons:
+    It makes the code more (i) compact, (ii) readable, and (iii) maintainable and you may save some typing."
+    
+ - Class: text
+   Output: "However, once you spend enough time with and reading about R, you 
+     will frequently hear advice to avoid using loops."
+     
+- Class: text
+  Output: "This is because R can do something that few programming
+    languages can do: vectorization."
+    
+- Class: text
+  Output: "**Vectorization** is the conversion of 
+    repeated operations on simple numbers (“scalars”) into single operations
+    on vectors or matrices."
+
+- Class: text
+  Output: "We have encountered this many times before, but not made note of it.
+    For example, if you add to vectors of equal length (e.g., columns in a 
+    data frame) you are vectorizing because R sums the two elements in each row.
+    Similarly, the function `colSums()` adds up all the elements in the first 
+    column before 'looping' to the next."
+
+- Class: text
+  Output: "Many instances where a loop is *required* in another programming 
+    language, R will vectorize instead, or the problem can be vectorized."
+    
+- Class: text
+  Output: "This benefit is partly because R passes all these calculations to 
+    a lower-level language (C), which is much faster than the higher-level R; 
+    partly because R treats even single integers as single-element vectors."
+
+- Class: text
+  Output: "Check this website for more details on vectorization: 
+    http://www.noamross.net/blog/2014/4/16/vectorization-in-r--why.html"
+    
+- Class: text
+  Output: "Either way, you will almost certainly encounter situations where
+    you will need a loop."
     
 - Class: mult_question
   Output: Please submit the log of this lesson to Google Forms so
