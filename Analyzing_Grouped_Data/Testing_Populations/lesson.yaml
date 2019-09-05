@@ -296,8 +296,8 @@
 - Class: cmd_question
   Output: "Check if males ran faster than females using a t-test, using subsetting to pull out 
     males for `x` and females for `y`."
-  CorrectAnswer: t.test(race$Nettime_mins[race$Sex == 'M'], race$Nettime_mins[race$Sex == 'F'], alternative = 'less', var.equal = TRUE)
-  AnswerTests: any_of_exprs("t.test(race$Nettime_mins[race$Sex == 'M'], race$Nettime_mins[race$Sex == 'F'], alternative = 'less', var.equal = TRUE)", "t.test(x = race$Nettime_mins[race$Sex == 'M'],y = race$Nettime_mins[race$Sex == 'F'], alternative = 'less', var.equal = TRUE)")
+  CorrectAnswer: t.test(race$Nettime_mins[race$Sex == 'M'], race$Nettime_mins[race$Sex == 'F'], alternative = 'greater', var.equal = TRUE)
+  AnswerTests: any_of_exprs("t.test(race$Nettime_mins[race$Sex == 'M'], race$Nettime_mins[race$Sex == 'F'], alternative = 'greater', var.equal = TRUE)", "t.test(x = race$Nettime_mins[race$Sex == 'M'],y = race$Nettime_mins[race$Sex == 'F'], alternative = 'greater', var.equal = TRUE)")
   Hint: remember to subset the sexes and set var.equal to TRUE
   
 - Class: text
