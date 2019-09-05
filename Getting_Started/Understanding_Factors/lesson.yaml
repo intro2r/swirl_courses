@@ -192,7 +192,7 @@
 
 - Class: cmd_question
   Output: "We can remove unused levels with the function `droplevels()`. 
-    Try that on the Gender variable."
+    Try that on the Gender variable, reassigning the modified variable to your Gender variable."
   CorrectAnswer: Gender <- droplevels(Gender)
   AnswerTests: omnitest(correctExpr='Gender <- droplevels(Gender)')
   Hint: Use the function droplevels() on the variable Gender.Make sure to reassign this to the Gender variable.
