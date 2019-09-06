@@ -27,7 +27,7 @@
   
 - Class: cmd_question
   Output: "OK, so we just made a simple vector. Now, we can create a list very easily with 
-    the list() function. Try listc(1, 2, 3)."
+    the list() function. Try list(1, 2, 3)."
   CorrectAnswer: list(1, 2, 3)
   AnswerTests: omnitest(correctExpr='list(1, 2, 3)')
   Hint: "Type: list(1, 2, 3)"
