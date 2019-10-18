@@ -46,10 +46,17 @@
   Hint: Enter the object name sparrow
 
 - Class: text
-  Output: "Base R (in the stats package) has two functions to calculate a Principle Components Analysis (PCA), prcomp() and princomp()." 
+  Output: "Base R (in the stats package) has two functions to calculate a Principle Components Analysis (PCA), `prcomp()` and `princomp()`." 
+
+- Class: text
+  Output: "Most multivariate analyses also require you to decide whether you want to scale the variables or not. As with 
+           multiple regression, this makes it easier to make direct comparisons between variables. In the case of `prcomp()`, 
+           the argument `scale = ` takes a logical value indicating whether the variables should be
+          scaled to have unit variance before the analysis takes place. The default is ‘FALSE’ for consistency with S, but in general
+          scaling is advisable."
 
 - Class: cmd_question
-  Output: Now run prcomp on your the 3rd through the 8th columns of your sparrow data, and assign it to the object pca1. Be sure to set the scale argument to TRUE so that our variables have roughly equal variance. 
+  Output: Now run prcomp on the 3rd through the 8th columns of the sparrow data, and assign it to the object pca1. Be sure to set the scale argument to TRUE so that our variables have roughly equal variance. 
   CorrectAnswer: pca1 <- prcomp(sparrow[, 3:8], scale = TRUE)
   AnswerTests: omnitest(correctExpr='pca1 <- prcomp(sparrow[, 3:8], scale = TRUE)')
   Hint: Subset the sparrow dataset for the columns 3 through 8 i.e. 3:8, and be sure to set your scale argument to TRUE. 
@@ -82,12 +89,12 @@
   variables, and thus highly correlated." 
   
 - Class: text
-  Output: "We could use PCA1 (and maybe PCA2) as predictors in a regular lm() or glm() instead of a single anatomical variable, to 
-  account for correlation between all the variables (this is often done for soil nutrient data)." 
+  Output: "We could use the columns PC1 (and maybe PC2) as predictors in a regular `lm()` or `glm()` instead of a single
+           anatomical variable, to account for correlation between all the variables (this is often done for soil nutrient data)." 
 
 - Class: text
   Output: "Often, a plot of the first two principle components axes is an effective way to represent the multi-dimensional correlation
-  of our variables. The function biplot() depicts PCA1 and PCA2 points for each sparrow and adds arrows corresponding to the 
+  of our variables. The function `biplot()` depicts PC1 and PC2 points for each sparrow and adds arrows corresponding to the 
   direction and strength of each variable." 
 
 - Class: cmd_question
@@ -107,7 +114,7 @@
 
 - Class: text
   Output: "We can also visualize these data using just points, and color-coding the species. In this instance, we need to use 
-  scores() to extract the pca axes from the object." 
+  `scores()` to extract the PC axes from the object." 
   
 - Class: cmd_question
   Output: Load the vegan library. Note that you may need to install the vegan package first.  
@@ -116,14 +123,14 @@
   Hint: Use the library() function to load the vegan package. If the package is not installed, use install.packages() to do so. 
   
 - Class: cmd_question
-  Output: Now enter 'plot(scores(pca1), col = sparrow$Species)'. We're using the scores() function to extract the points for each axis, while plot() only plots the first two axes. 
+  Output: Now enter 'plot(scores(pca1), col = sparrow$Species)'. We're using the `scores()` function to extract the points for each axis, while plot() only plots the first two axes. 
   CorrectAnswer: plot(scores(pca1), col = sparrow$Species)
   AnswerTests: omnitest(correctExpr='plot(scores(pca1), col = sparrow$Species)')
   Hint: Enter the code plot(scores(pca1), col = sparrow$Species)
   
 - Class: text
   Output: "The 'col = dat$Species' argument is telling R to change the color of each point to its factor level for species. We can see
-  that each species is clearly distinguished in our PCA, primarily along PC1 (i.e. strong horizontal but weaker vertical separation)."
+  that each species is clearly distinguished in our PCA, primarily along PC1 (i.e., strong horizontal but weaker vertical separation)."
   
 - Class: text
   Output: "This is telling us roughly the same information as our biplot, but does a better job of distinguishing key groups in variable
@@ -145,25 +152,26 @@
   Output: "It is a large species x site matrix of vegetation from Bryce Canyon, a famous US National Park."
   
 - Class: text
-  Output: "Labdsv uses its own function 'pca()', as a wrapper for base R's 'prcomp()'."
+  Output: "Labdsv uses its own function `pca()`, as a wrapper for base R's `prcomp()`."
   
 - Class: cmd_question
-  Output: Create a new object, pca2, using pca() on bryce, setting the cor argument to TRUE, and the dim argument to 10 (to return 10 PCA axes). 
+  Output: Create a new object, pca2, using `pca()` on bryce, setting the `cor = ` argument to TRUE, and the `dim =` argument to 10 (to return 10 PCA axes). 
   CorrectAnswer: pca2 <- pca(bryce, cor = TRUE, dim = 10)
   AnswerTests: omnitest(correctExpr='pca2 <- pca(bryce, cor = TRUE, dim = 10)')
   Hint: pca2 <- pca(bryce, cor = TRUE, dim = 10)
   
 - Class: text
-  Output: "You can access the scores and loading of this PCA by name from the pca2 object (e.g. pca2$scores)"
+  Output: "You can access the scores and loading of this PCA by name from the pca2 object (e.g., `pca2$scores`)."
   
 - Class: cmd_question
-  Output: We can use plot on pca2 to plot the first two axes. Do so now.  
+  Output: Similar to vegan, we can use `plot()` on the object pca2 to plot the first two axes. Do so now.  
   CorrectAnswer: plot(pca2)
   AnswerTests: omnitest(correctExpr='plot(pca2)')
   Hint: Use the plot function to look at the first two axes of our pca2 object. 
   
 - Class: cmd_question
-  Output: We'll now use our pca of species at each plot to model elevation by site at Bryce Canyon. Look at the head of the 'site' variable, loaded with this lesson. 
+  Output: "We'll now use our PCA of species at each site to model elevation by site at Bryce Canyon. 
+          Look at the head of the 'site' variable, loaded with this lesson. "
   CorrectAnswer: head(site)
   AnswerTests: omnitest(correctExpr='head(site)')
   Hint: head(site)
@@ -184,7 +192,8 @@
   Hint: Use the summary function with your new model. 
   
 - Class: text
-  Output: "We can see that both PC1 and PC2 are significant predictors of elevation. Lets plot the model to see what this looks like." 
+  Output: "We can see that both PC1 and PC2 are significant predictors of elevation. 
+          Let's plot the model to see what this looks like." 
 
   
 - Class: cmd_question
@@ -212,11 +221,11 @@
   Hint: contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)
   
 - Class: text
-  Output: "Its obvious from the fitted values compared to the real values that our model should be quadratic, not linear. Lets make a 
+  Output: "You can see from the fitted values compared to the real values that our model should be quadratic, not linear. Let's make a 
   second model with squared predictors in addition to our normal predictors." 
   
 - Class: cmd_question
-  Output: Create the model elev.glm2 from the following code, glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))
+  Output: "Create the model elev.glm2 from the following code, `glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))`."
   CorrectAnswer: elev.glm2 <- glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))
   AnswerTests: omnitest(correctExpr='elev.glm2 <- glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))')
   Hint: elev.glm2 <- glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))
@@ -225,7 +234,7 @@
   Output: "Lets see which model fits better - the linear model or the quadratic model." 
   
 - Class: cmd_question
-  Output: Using anova(), compare the elev.glm to elev.glm2. Set the test argument to 'Chi'.
+  Output: Using `anova()`, compare the elev.glm to elev.glm2. Set the test argument to 'Chi'.
   CorrectAnswer: anova(elev.glm, elev.glm2, test = "Chi")
   AnswerTests: omnitest(correctExpr='anova(elev.glm, elev.glm2, test = "Chi")')
   Hint: Using anova(), past elev.glm and elev.glm2 as the first two arguments. Set the test argument to 'Chi'.
@@ -240,7 +249,7 @@
   Hint: plot(pca2)
   
 - Class: cmd_question
-  Output: Now added the contours, this time fitted from the quadratic version of our model. You can adjust the code from the linear model to do this. 
+  Output: Now add the contours, this time fitted from the quadratic version of our model. You can adjust the code from the linear model to do this. 
   CorrectAnswer: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)
   AnswerTests: omnitest(correctExpr='contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)')
   Hint: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)
