@@ -1,5 +1,5 @@
 - Class: meta
-  Course: FES720 Intro to R: Analyzing Continuous Data
+  Course: FES720 Intro to R Analyzing Continuous Data
   Lesson: Ordination
   Author: Simon Queenborough & Andrew Muehleisen
   Type: Standard
@@ -7,25 +7,25 @@
   Version: 2.2.0
 
 - Class: text
-  Output: "In this lesson, we'll cover ordination methods. These are methods that help us summarize multivariate data, and detect 
-  potential associations between many variables."
+  Output: In this lesson, we'll cover ordination methods. These are methods that help us summarize multivariate data, and detect 
+          potential associations between many variables.
 
 - Class: text
-  Output: "We often have large data sets of different observations or measurements from the same sampling units or sites."
+  Output: We often have large data sets of different observations or measurements from the same sampling units or sites.
   
 - Class: text
-  Output: "For example, we may have a network of quadrats, plots, or sites with incidence or abundance data on taxa present at each 
-  site, along with environmental variables (soil nutrients, elevation, aspect, ...). Or, we may have measurements of many different 
-  variables from the same individuals or sampling units (e.g., individual sparrows)."
+  Output: For example, we may have a network of quadrats, plots, or sites with incidence or abundance data on taxa present at each 
+          site, along with environmental variables (soil nutrients, elevation, aspect, ...). Or, we may have measurements of many different 
+          variables from the same individuals or sampling units (e.g., individual sparrows).
   
 - Class: text
   Output: "There are several reasons to use ordination:"
 
 - Class: text
-  Output: "(1) Reducing the number of potentially correlated dependent variables (e.g., soil nutrients, multiple variables on the same individuals)."
+  Output: (1) Reducing the number of potentially correlated dependent variables (e.g., soil nutrients, multiple variables on the same individuals).
 
 - Class: text
-  Output: "(2) Modelling occurance of a large number of species that would be hard to model individually."
+  Output: (2) Modelling occurance of a large number of species that would be hard to model individually.
   
 - Class: text
   Output: "There are a large number of different ordination methods that are each slightly and subtley different, and best-used in 
@@ -34,32 +34,32 @@
   
 - Class: text
   Output: "Basic ordination methods are available in base R, and there are a number of specialist packages that extend these capabilities,
-  including the 'vegan' and 'labdsv' package."
+  including the `vegan` and `labdsv` package."
 
 - Class: text
-  Output: "Now, on to an actual example!"
+  Output: Now, on to an actual example!
   
 - Class: cmd_question
-  Output: First, look at the head of the sparrow dataframe we've loaded with the lesson for you. 
+  Output: First, look at the head of the `sparrow` dataframe we've loaded with the lesson for you. 
   CorrectAnswer: head(sparrow)
   AnswerTests: omnitest(correctExpr='head(sparrow)')
   Hint: Enter the object name sparrow
 
 - Class: text
-  Output: "Base R (in the stats package) has two functions to calculate a Principle Components Analysis (PCA), `prcomp()` and `princomp()`." 
+  Output: Base R (in the stats package) has two functions to calculate a Principle Components Analysis (PCA), `prcomp()` and `princomp()`.
 
 - Class: text
   Output: "Most multivariate analyses also require you to decide whether you want to scale the variables or not. As with 
            multiple regression, this makes it easier to make direct comparisons between variables. In the case of `prcomp()`, 
            the argument `scale = ` takes a logical value indicating whether the variables should be
-          scaled to have unit variance before the analysis takes place. The default is ‘FALSE’ for consistency with S, but in general
+          scaled to have unit variance before the analysis takes place. The default is `FALSE` for consistency with S, but in general
           scaling is advisable."
 
 - Class: cmd_question
   Output: Now run prcomp on the 3rd through the 8th columns of the sparrow data, and assign it to the object pca1. Be sure to set the scale argument to TRUE so that our variables have roughly equal variance. 
   CorrectAnswer: pca1 <- prcomp(sparrow[, 3:8], scale = TRUE)
   AnswerTests: omnitest(correctExpr='pca1 <- prcomp(sparrow[, 3:8], scale = TRUE)')
-  Hint: Subset the sparrow dataset for the columns 3 through 8 i.e. 3:8, and be sure to set your scale argument to TRUE. 
+  Hint: "Subset the sparrow dataset for the columns 3 through 8 i.e. 3:8, and be sure to set your scale argument to TRUE."
   
 - Class: text
   Output: "Lets visualize your PCA. We can do so in multiple ways. First, we can look at how much variance is explained by each axis, and what variables are driving that." 
@@ -79,7 +79,7 @@
   are explaining our data." 
 
 - Class: cmd_question
-  Output: Enter pca1 to see the weights of each of your variables in each principle components axis. 
+  Output: Enter `pca1` to see the weights of each of your variables in each principle components axis. 
   CorrectAnswer: pca1
   AnswerTests: omnitest(correctExpr='pca1')
   Hint: Type pca1
@@ -98,7 +98,7 @@
   direction and strength of each variable." 
 
 - Class: cmd_question
-  Output: Create a biplot of our pca1 object now. 
+  Output: Create a biplot of our `pca1` object now. 
   CorrectAnswer: biplot(pca1)
   AnswerTests: omnitest(correctExpr='biplot(pca1)')
   Hint: Use the biplot() function for our object pca1.
@@ -123,7 +123,7 @@
   Hint: Use the library() function to load the vegan package. If the package is not installed, use install.packages() to do so. 
   
 - Class: cmd_question
-  Output: Now enter 'plot(scores(pca1), col = sparrow$Species)'. We're using the `scores()` function to extract the points for each axis, while plot() only plots the first two axes. 
+  Output: Now enter 'plot(scores(pca1), col = sparrow$Species)'. We're using the `scores()` function to extract the points for each axis, while `plot()` only plots the first two axes. 
   CorrectAnswer: plot(scores(pca1), col = sparrow$Species)
   AnswerTests: omnitest(correctExpr='plot(scores(pca1), col = sparrow$Species)')
   Hint: Enter the code plot(scores(pca1), col = sparrow$Species)
@@ -155,16 +155,16 @@
   Output: "Labdsv uses its own function `pca()`, as a wrapper for base R's `prcomp()`."
   
 - Class: cmd_question
-  Output: Create a new object, pca2, using `pca()` on bryce, setting the `cor = ` argument to TRUE, and the `dim =` argument to 10 (to return 10 PCA axes). 
+  Output: Create a new object, `pca2`, using `pca()` on bryce, setting the `cor = ` argument to TRUE, and the `dim =` argument to 10 (to return 10 PCA axes). 
   CorrectAnswer: pca2 <- pca(bryce, cor = TRUE, dim = 10)
   AnswerTests: omnitest(correctExpr='pca2 <- pca(bryce, cor = TRUE, dim = 10)')
   Hint: pca2 <- pca(bryce, cor = TRUE, dim = 10)
   
 - Class: text
-  Output: "You can access the scores and loading of this PCA by name from the pca2 object (e.g., `pca2$scores`)."
+  Output: "You can access the scores and loading of this PCA by name from the `pca2` object (e.g., `pca2$scores`)."
   
 - Class: cmd_question
-  Output: Similar to vegan, we can use `plot()` on the object pca2 to plot the first two axes. Do so now.  
+  Output: Similar to vegan, we can use `plot()` on the object `pca2` to plot the first two axes. Do so now.  
   CorrectAnswer: plot(pca2)
   AnswerTests: omnitest(correctExpr='plot(pca2)')
   Hint: Use the plot function to look at the first two axes of our pca2 object. 
@@ -180,7 +180,7 @@
   Output: "The model we will now make lets us determine whether species assemblages are predicting elevation." 
   
 - Class: cmd_question
-  Output: Create a GLM of the elev variable (in site) as a function of both the first two pca axes. You can subset them by position in pca2$scores. Assign this model to elev.glm
+  Output: Create a GLM of the `$elev` variable (in `site`) as a function of both the first two pca axes. You can subset them by position in `pca2$scores`. Assign this model to elev.glm
   CorrectAnswer: elev.glm <- glm(site$elev ~ pca2$scores[,1] + pca2$scores[,2])
   AnswerTests: omnitest(correctExpr='elev.glm <- glm(site$elev ~ pca2$scores[,1] + pca2$scores[,2])')
   Hint: site$elev should be your response variable, while PC1 and PC2 from pca2$scores should be your predictors. 
@@ -203,20 +203,20 @@
   Hint: Use the plot function with pca2.
   
 - Class: cmd_question
-  Output: We are now going to plot elevation contours. To do so, we need the 'interp()' function from the 'akima' package to interpolate values where we have none. Load the 'akima' package now (install it first if needed). 
+  Output: We are now going to plot elevation contours. To do so, we need the `interp()` function from the 'akima' package to interpolate values where we have none. Load the 'akima' package now (install it first if needed). 
   CorrectAnswer: library(akima)
   AnswerTests: omnitest(correctExpr='library(akima)')
   Hint: library(akima). Be sure to install the package if you haven't already with install.packages()
   
 - Class: cmd_question
-  Output: Add contour lines with the following code, contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)
-  CorrectAnswer: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)
+  Output: Add contour lines with the following code, `contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)`.
+  CorrectAnswer: plot(pca2); contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)
   AnswerTests: omnitest(correctExpr='contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)')
   Hint: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)
 
 - Class: cmd_question
-  Output: We have just added the predicted elevation contours from our model. Now add the real lines with this code, contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)
-  CorrectAnswer: contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)
+  Output: "We have just added the predicted elevation contours from our model. Now add the real lines with this code: `contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)`."
+  CorrectAnswer: plot(pca2); contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)
   AnswerTests: omnitest(correctExpr='contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)')
   Hint: contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)
   
@@ -225,7 +225,7 @@
   second model with squared predictors in addition to our normal predictors." 
   
 - Class: cmd_question
-  Output: "Create the model elev.glm2 from the following code, `glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))`."
+  Output: "Create the model elev.glm2 from the following code: `glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))`."
   CorrectAnswer: elev.glm2 <- glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))
   AnswerTests: omnitest(correctExpr='elev.glm2 <- glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))')
   Hint: elev.glm2 <- glm(site$elev ~ pca2$scores[,1] + I(pca2$scores[,1]^2) + pca2$scores[,2] + I(pca2$scores[,2]^2))
@@ -234,7 +234,7 @@
   Output: "Lets see which model fits better - the linear model or the quadratic model." 
   
 - Class: cmd_question
-  Output: Using `anova()`, compare the elev.glm to elev.glm2. Set the test argument to 'Chi'.
+  Output: Using `anova()`, compare the elev.glm to elev.glm2. Set the `test = ` argument to 'Chi'.
   CorrectAnswer: anova(elev.glm, elev.glm2, test = "Chi")
   AnswerTests: omnitest(correctExpr='anova(elev.glm, elev.glm2, test = "Chi")')
   Hint: Using anova(), past elev.glm and elev.glm2 as the first two arguments. Set the test argument to 'Chi'.
@@ -250,7 +250,7 @@
   
 - Class: cmd_question
   Output: Now add the contours, this time fitted from the quadratic version of our model. You can adjust the code from the linear model to do this. 
-  CorrectAnswer: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)
+  CorrectAnswer: plot(pca2); contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)
   AnswerTests: omnitest(correctExpr='contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)')
   Hint: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)
 
@@ -268,3 +268,4 @@
   CorrectAnswer: As you wish
   AnswerTests: submit_log()
   Hint: hint
+
