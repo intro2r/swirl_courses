@@ -210,13 +210,13 @@
   
 - Class: cmd_question
   Output: Add contour lines with the following code, `contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)`.
-  CorrectAnswer: plot(pca2); contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)
+  CorrectAnswer: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)
   AnswerTests: omnitest(correctExpr='contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)')
   Hint: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm)), add = TRUE, col = 2, labcex = 0.8)
 
 - Class: cmd_question
   Output: "We have just added the predicted elevation contours from our model. Now add the real lines with this code: `contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)`."
-  CorrectAnswer: plot(pca2); contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)
+  CorrectAnswer: contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)
   AnswerTests: omnitest(correctExpr='contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)')
   Hint: contour(interp(pca2$scores[,1], pca2$scores[,2], site$elev), add = TRUE, col = 3)
   
@@ -250,7 +250,7 @@
   
 - Class: cmd_question
   Output: Now add the contours, this time fitted from the quadratic version of our model. You can adjust the code from the linear model to do this. 
-  CorrectAnswer: plot(pca2); contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)
+  CorrectAnswer: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)
   AnswerTests: omnitest(correctExpr='contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)')
   Hint: contour(interp(pca2$scores[,1], pca2$scores[,2], fitted(elev.glm2)), add = TRUE, col = 2, labcex = 0.8)
 
