@@ -1,0 +1,206 @@
+- Class: meta
+  Course: Graphics
+  Lesson: Adding To Plots
+  Author: Simon Queenborough & Andrew Muehleisen
+  Type: Standard
+  Organization: Yale FES
+  Version: 0.0.1
+
+
+- Class: text
+  Output: "Up until now, we have explored how to modify the parameters of graphs themselves, but what if we want to add extra elements 
+    or text to the plot?"
+    
+- Class: text
+  Output: "We can use many functions, including the `points()`, `lines()`, or `text()` functions to do just that.
+    In all three cases, we need to provide some coordinates (x and usually y), and then provide some specific
+    direction in terms of the plotting character (`pch = `), colour (`col = `), line width (`lwd = `) or 
+    size (`cex = `) for points; line type (`lty = `) or line width (`lwd = `) for lines; and labels (i.e., the 
+    text that goes at each coordinate, as for axis), size, colour, or font for text." 
+    
+- Class: text
+  Output: "Before we can use these functions, however, we first need to intialize a plot to which these elements can be added."  
+  
+- Class: cmd_question
+  Output: "Using the state dataset we loaded in this lesson for you, plot Income as a function of Illiteracy using the 'data' argument,
+  but set the plot type to 'n'."
+  CorrectAnswer: plot(Income ~ Illiteracy, data = state, type = 'n')
+  AnswerTests: any_of_exprs('plot(Income ~ Illiteracy, data = state, type = "n")','plot(Income ~ Illiteracy, type = "n", data = state)')
+  Hint: "Be sure to set the data = argument to your dataset so you don't have to reference the data for your variables, and set the type = 'n'"
+  
+- Class: text
+  Output: "We currently have a blank canvas---let's use the `points()` function to begin filling it in."
+  
+- Class: cmd_question
+  Output: "The syntax of the `points()` function works largely like the plot function. Go ahead and add points to the plot, specifying 
+  Income as a function Illiteracy with the data argument, but subset the data such that we're only plotting points where HS_grad is
+  less than 50. Make these points 'red'."
+  CorrectAnswer: points(Income ~ Illiteracy, data = state[state$HS_grad < 50,], col = "red")
+  AnswerTests: any_of_exprs('points(Income ~ Illiteracy, data = state[state$HS_grad < 50,], col = "red")','points(Income ~ Illiteracy, col = "red", data = state[state$HS_grad < 50,])')
+  Hint: "Use the data argument to pass your data subsetted for HS_grad < 50. Be sure to make the points red."
+  
+- Class: cmd_question
+  Output: "Now do the same thing, but instead add points for HS_grad greater than or equal to 50. Make these points blue."
+  CorrectAnswer: points(Income ~ Illiteracy, data = state[state$HS_grad >= 50,], col = "blue")
+  AnswerTests: any_of_exprs('points(Income ~ Illiteracy, data = state[state$HS_grad >= 50,], col = "blue")','points(Income ~ Illiteracy, col = "blue", data = state[state$HS_grad >= 50,])')
+  Hint: "Use the data argument to pass your data subsetted for HS_grad >= 50. Be sure to make the points blue."
+  
+- Class: text
+  Output: "Now we can see a bit more information on our graph. Specifically, how different levels of high school graduation rates interact
+  with income and illiteracy. This is one way to code colors in your figures. You will learn another in the next lesson."
+  
+- Class: cmd_question
+  Output: "Let's now model this relationship and add a line (you've done this before). First create a linear model of Income as a 
+  function of Illiteracy, being sure to set the data argument. Set this to the object m1."
+  CorrectAnswer: m1 <- lm(Income ~ Illiteracy, data = state)
+  AnswerTests: omnitest(correctExpr = 'm1 <- lm(Income ~ Illiteracy, data = state)')
+  Hint: "m1 <- lm(Income ~ Illiteracy, data = state)"
+  
+- Class: cmd_question
+  Output: "Now, use 'abline()' with your model to add a regression line. Set the line width to 3, and the color to 'orange'."
+  CorrectAnswer: abline(m1, lwd = 3, col = "orange")
+  AnswerTests: any_of_exprs('abline(m1, lwd = 3, col = "orange")','abline(m1, col = "orange", lwd = 3)')
+  Hint: "Make sure you pass m1 as the first arguement, and set the 'lwd' and 'col' arguments."
+  
+- Class: text
+  Output: "A definite trend, but it can often be helpful to visualize just how far from zero our slope is. Lets add another abline 
+  to our plot, this time creating a horizontal line across our plot as a reference. Instead of giving the function an intercept and 
+  slope, we can instead specify either an 'h' or 'v' argument, meaning horizontal or vertical respectively. This will create a 
+  straight line on either the y or x axis, at the value specified."
+  
+- Class: cmd_question
+  Output: "Using `abline()`, set a horizontal line at the mean of our Income variable (do this programatically). Set the line width to 
+  3 again, and the change the line type to a dashed line (check the par help file to see how)."
+  CorrectAnswer: abline(h = mean(state$Income), lwd = 3, lty = 2)
+  AnswerTests: any_of_exprs('abline(h = mean(state$Income), lwd = 3, lty = 2)','abline(h = mean(state$Income), lty = 2, lwd = 3)')
+  Hint: "Remember that we can find the mean directly with mean(state$Income). Check the 'lty' argument in par() to create a dashed line."
+
+- Class: text
+  Output: "Nice! There will be many times in your figure-making career when you might want to add a useful visual baseline or reference
+  to emphasize a trend."
+  
+- Class: text
+  Output: "Suppose we really want to visualize where one state in particular, maybe Connecticut,
+  lies in this relationship. We can do so by adding text at the location of the point associated with CT."
+  
+- Class: text
+  Output: "At its simplest, the `text()` function takes a label (your text), and places it at a specified
+  x,y coordinate on the plot."
+  
+- Class: cmd_question
+  Output: "Lets do it! Using a subset of 'state', assign to the object 'x' the Illiteracy value
+  for Connecticut."
+  CorrectAnswer: x <- state$Illiteracy[state$state_name == "Connecticut"]
+  AnswerTests: any_of_exprs('x <- state$Illiteracy[state$state_name == "Connecticut"]','x <- state[state$state_name == "Connecticut", "Illiteracy"]')
+  Hint: "Use a subset of 'state' to extract the value. Be sure that you're subsetting the row for the 
+  state Connecticut, and calling the Illiteracy column."
+  
+- Class: cmd_question
+  Output: "Now do the same for 'y', creating the object from the Income value for Connecticut (by 
+  subsetting 'state')."
+  CorrectAnswer: y <- state$Income[state$state_name == "Connecticut"]
+  AnswerTests: any_of_exprs('y <- state$Income[state$state_name == "Connecticut"]','y <- state[state$state_name == "Connecticut", "Income"]')
+  Hint: "Use a subset of 'state' to extract the value. Be sure that you're subsetting the row for the 
+  state Connecticut, and calling the Income column."
+  
+- Class: cmd_question
+  Output: "Now, call the 'text' function, giving it x, y, and your label 'Connecticut'. Scale the text 
+  down by 0.75."
+  CorrectAnswer: text(x, y, 'Connecticut', cex = 0.75)
+  AnswerTests: any_of_exprs('text(x, y, "Connecticut", cex = 0.75)','text(x, y, labels = "Connecticut", cex = 0.75)','text(x = x, y = y, labels = "Connecticut", cex = 0.75)')
+  Hint: "text(x, y, 'Connecticut', cex = 0.75)"
+
+- Class: text
+  Output: "Nice work! Lets add one more detail to the graph. We happen to know what the colors of each
+  point represents, but someone else reviewing your figure might not, so lets include a legend."
+  
+- Class: text
+  Output: "The 'legend' function, much like the other functions we've been playing around with,
+  adds elements to a figure after the initial figure has been drawn."
+  
+- Class: cmd_question
+  Output: "Enter the following code: legend('topright', legend = c('HS Grad Rate < 50', 'HS Grad Rate >= 50'), col = c('red','blue'), pch = 1, cex = 0.75, bty = 'n')"
+  CorrectAnswer: legend('topright', legend = c('HS Grad Rate < 50', 'HS Grad Rate >= 50'), col = c('red','blue'), pch = 1, cex = 0.75, bty = 'n')
+  AnswerTests: omnitest(correctExpr = 'legend("topright", legend = c("HS Grad Rate < 50", "HS Grad Rate >= 50"), col = c("red","blue"), pch = 1, cex = 0.75, bty = "n")')
+  Hint: legend('topright', legend = c('HS Grad Rate < 50', 'HS Grad Rate >= 50'), col = c('red','blue'), pch = 1, cex = 0.75, bty = 'n')
+
+- Class: text
+  Output: "While we could specify an exact x,y location of the legend, the function accepts some handy keywords that
+  automatically justify it to generalized location in your plot, like topleft, topright, etc... The 'legend' 
+  argument represents the name of each legend entry, col and pch are the styles for each entry, and 'bty = 'n' 
+  tells R that we don't want a box around the legend."
+
+- Class: text
+  Output: "Finally, so far we have just placed one plot or pane in each graphics window. 
+    However, in many cases you will want multiple similar plots side-by-side, or different
+    kinds of plots in the same overall figure. There are 
+    several ways to do this, but the easiest way to create a set of equal-size panels
+    is to use a call to `par()`. There are two arguments here, `mfrow = ` and `mfcol = '."
+    
+- Class: text
+  Output: "You use one of these arguments to set up the grid of panels, which you then fill,
+    one-by-one, with separate uses of `plot()` (other which ever plotting function you want). 
+    **Note** If you plot more figures than the number of panels available, they will start to overwrite from the beginning."
+
+- Class: text
+  Output: "As we said, `par()` has two similar arguments: `mfrow` and `mfcol`. Both arguments take a vector of the
+    form `c(number of rows, number of columns)`."
+    
+- Class: text
+  Output: "Using `mfcol` fills this grid by colums, using `mfrow` fills by rows. For example,
+  `par(mfrow = c(2, 2))` creates a graphics window with four panels, in a 2 x 2 layout."
+  
+- Class: text
+  Output: "`par(mfcol = c(4, 1))` creates a column of four panels."
+  
+- Class: cmd_question
+  Output: "OK.. now for the finale. Our quest is to make a figure with two graphs, side-by-side, the first 
+    being a scatterplot and the second a boxplot. First, use a call to `par()` to set the plotting window
+    to a two-by-two pane grid. You can use either `mfrow = ` or `mfcol =`."
+  CorrectAnswer: par(mfrow = c(2,2))
+  AnswerTests: any_of_exprs('par(mfrow = c(2,2))', 'par(mfcol = c(2,2))')
+  Hint: You need to pass a vector of two elements to one of mfrow or mfcol, within par().
+
+
+- Class: cmd_question
+  Output: "In theory, nothing should have changed in your plot window. R has secretly set up
+    the grid, but is waiting a call to `plot()`. Plot the first graph, which in this case is Income
+    as a function of Illiteracy. Plot this normally (dont supress the output with 'type'). 
+    However, set the axis labels to bold font."
+  CorrectAnswer: plot(Income ~ Illiteracy, data = state, font.lab = 2)
+  AnswerTests: omnitest(correctExpr='plot(Income ~ Illiteracy, data = state, font.lab = 2)')
+  Hint: Be sure to use the data argument, and check ?par if you need helping changing the label font.
+  
+- Class: text
+  Output: "For some reason that we cannot work out, swirl plots two figures each
+    time we call `plot()`, which does not happen in regular R. So, don't worry about that:
+    it's why we have a 2x2 grid!"
+
+- Class: text
+  Output: "If things do not look quite right, you may still end up with a plot. 
+    Running another call to `plot()` will add in the second pane, so you may need several 
+    tries to get things looking correct, and also to have that correct graph in the first pane.
+    That is fine.. you are learning to use R in an interactive and interative way; well done!"
+    
+- Class: cmd_question
+  Output: "Now, add the second pane, a boxplot of HS_grad, with the box colour set to red and
+    the y-axis numbers horizontal."
+  CorrectAnswer: boxplot(state$HS_grad, col = 'red', las = 1)
+  AnswerTests: omnitest(correctExpr='boxplot(state$HS_grad, col = "red", las = 1)')
+  Hint: boxplot(state$HS_grad, col = 'red', las = 1)
+
+
+- Class: text
+  Output: "Well done! Learning to modify graphics is even more detailed than regular R, and usually
+    requires extensive use of the help files. Check this page for more details and examples
+    of graphics and sparrows: http://www.simonqueenborough.info/R/explore/advanced-graphics"
+  
+
+- Class: mult_question
+  Output: Please submit the log of this lesson to Google Forms so
+    that Simon may evaluate your progress.
+  AnswerChoices: Delighted, I'm sure.
+  CorrectAnswer: Delighted, I'm sure.
+  AnswerTests: submit_log()
+  Hint: hint
+
