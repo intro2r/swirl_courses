@@ -19,4 +19,9 @@ state <- as.data.frame(state.x77)
 colnames(state)[c(4,6)] <- c("Life_Exp", "HS_grad")
 state$state_name <- rownames(state)
 rownames(state) <- NULL
+state$Murder_qual <- as.factor(ifelse(state$Murder < 8, "Low", "High"))
+
+std_error <- function(x){
+  return(sd(x)/sqrt(length(x)))
+}
 
