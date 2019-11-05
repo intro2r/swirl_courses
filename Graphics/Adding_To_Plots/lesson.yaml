@@ -129,6 +129,50 @@
   automatically justify it to generalized location in your plot, like topleft, topright, etc... The 'legend' 
   argument represents the name of each legend entry, col and pch are the styles for each entry, and 'bty = 'n' 
   tells R that we don't want a box around the legend."
+  
+- Class: text
+  Output: "Lets practice once more with the `segments()` function. You will need this function 
+  frequently in any scenario in which you need to display error bars (often with bar charts and strip charts)."
+  
+- Class: cmd_question
+  Output: "We have a variable in state called 'Murder_qual', representing whether the murder rate in each state
+  is qualitatively considered high or low. Create an object called bar1 using `tapply()` to find the mean number
+  of frost days using 'Murder_qual' as the index."
+  CorrectAnswer: bar1 <- tapply(state$Frost, state$Murder_qual, mean)
+  AnswerTests: any_of_exprs('bar1 <- tapply(state$Frost, state$Murder_qual, mean)','bar1 <- tapply(X = state$Frost, INDEX = state$Murder_qual, FUN = mean)')
+  Hint: Remember tapply takes three primary arguments, X is your data, INDEX is the variable you wish to split your data on, and FUN is the function to use. 
+
+- Class: cmd_question
+  Output: "Now use `barplot()` to plot 'bar1', but set the y-axis range from 0 to 180 to leave room for our error bars.
+  Save the plot as an object called 'bar_loc' (to save the x locations of each bar)."
+  CorrectAnswer: bar_loc <- barplot(bar1, ylim = c(0,180))
+  AnswerTests: omnitest(correctExpr = 'bar_loc <- barplot(bar1, ylim = c(0,180))')
+  Hint: bar_loc <- barplot(bar1, ylim = c(0,180))
+
+- Class: cmd_question
+  Output: "Now we need to calculate our sample standard error. R does not have a base function for this, but
+  we have created our own with this lesson called `std_error()`. Use `tapply()` on the same data and index, but find
+  the standard error instead of the mean. Call the object 'bar1_se'."
+  CorrectAnswer: bar1_se <- tapply(state$Frost, state$Murder_qual, std_error)
+  AnswerTests: any_of_exprs('bar1_se <- tapply(state$Frost, state$Murder_qual, std_error)','bar1_se <- tapply(X = state$Frost, INDEX = state$Murder_qual, FUN = std_error)')
+  Hint: Remember tapply takes three primary arguments, X is your data, INDEX is the variable you wish to split your data on, and FUN is the function to use. 
+
+- Class: cmd_question
+  Output: "Now enter the following code: `segments(x0 = bar_loc, y0 = bar1 + bar1_se*2, x1 = bar_loc, y1 = bar1 - bar1_se*2)`"
+  CorrectAnswer: segments(x0 = bar_loc, y0 = bar1 + bar1_se*2, x1 = bar_loc, y1 = bar1 - bar1_se*2)
+  AnswerTests: omnitest(correctExpr = 'segments(x0 = bar_loc, y0 = bar1 + bar1_se*2, x1 = bar_loc, y1 = bar1 - bar1_se*2)')
+  Hint: segments(x0 = bar_loc, y0 = bar1 + bar1_se*2, x1 = bar_loc, y1 = bar1 - bar1_se*2)
+
+- Class: text
+  Output: "Segments requires 4 arguments, a starting x point (`x0 = `), a starting y point (`y0 = `), an ending x point (`x1 = `) and an
+  ending y point (`y1 = `). From these 4 values it can draw a line between the starting and ending coordinates. Further, if we give `segments()`
+  a vector of values for each of these arguments, it will draw a segment for each entry in the vector (as we've done
+  above)."
+  
+- Class: text
+  Output: "For each segment, the starting and ending x values of the segment are just the centers of each bar (bar_loc). 
+  The starting and ending points of the y values are plus and minus 2 standard errors of our sample (2 standard 
+  errors correspond roughly to the 95% confidence interval)."
 
 - Class: text
   Output: "Finally, so far we have just placed one plot or pane in each graphics window. 
