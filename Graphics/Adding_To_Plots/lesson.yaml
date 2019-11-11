@@ -151,7 +151,7 @@
 
 - Class: cmd_question
   Output: "Now we need to calculate our sample standard error. R does not have a base function for this, but
-  we have created our own with this lesson called `std_error()`. Use `tapply()` on the same data and index, but find
+  we have created our own with this lesson called `std_error`. Use `tapply()` on the same data and index, but find
   the standard error instead of the mean. Call the object 'bar1_se'."
   CorrectAnswer: bar1_se <- tapply(state$Frost, state$Murder_qual, std_error)
   AnswerTests: any_of_exprs('bar1_se <- tapply(state$Frost, state$Murder_qual, std_error)','bar1_se <- tapply(X = state$Frost, INDEX = state$Murder_qual, FUN = std_error)')
