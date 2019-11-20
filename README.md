@@ -8,4 +8,6 @@
 
 4. Analyzing Continuous Data
 
-5. Advanced Graphics and Programming
+5. Graphics
+
+6. Programming
